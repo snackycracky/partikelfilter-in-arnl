@@ -1,4 +1,11 @@
 \documentclass{article}
+\usepackage[german]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{appendix}
+
 \title{Abschlussaufgabe V - Partikelfilter in ARNL}
 \author{Nils Petersohn, Matrikel: 20022749}
 \date{3. Feb. 2010}
@@ -13,21 +20,327 @@
 Es soll die monte-carlo-lokalisierung in Arnl untersucht werden. Durch Experimente und Recherche soll der genaue Ablauf des Partikelfilters und die Wirkung der Parameter dargestellt werden. Ausserdem soll geklaert werden wie die lokalisierung in eigenen programmen genutzt werden kann.
 
 
-\section{Ueberblick}
+\section{Einf\"uhrung}\label{einfuehrung}
 
 
 
+\subsection{ARIA}
+Die C++ Bibliothek ARIA ist eine API fuer alle MobileRobots/ActivMedia Plattformen. Mit der Hilfe von ARIA kann u.a. Geschwindigkeit, Richtung oder relative Richtung entweder durch einfache oder komplexe Anweisungen kontrolliert werden.
+%ARIA folgt dem Client-Server Paradigma. Der Roboter oder der Simulator sind Server. 
+\includegraphics{img/aria-arch.jpg}
 
-\subsection{ARIA Architektur}
-\subsection{ARNL}
+
+
 \subsection{ArNetworking}
 
+ArNetworking ist eine API in ARIA um eine client-server Architektur zwischen dem Robotter(Server) und dem entfernten Rechner(Client) ueber das Netzwerk aufzubauen. Der Client berechnet Bewegungsbefehle und sendet Anfragen an den Server welche dann vom Robotter ausgefuehrt werden. Der Robotter hingegen sendet u.a. seine Odometriedaten. 
+
+
+\subsection{MobileEyes}
+MobileEyes kann sich mit ARIA, ArNetworking und ARNL Server verbinden und dessen Umgebung also interne Karte anzeigen.
+Unter anderem kann man mit MobileEyes Bewegungskomandos an den Robotter schicken.\cite{whitbrook1}
+
+
+\subsection{ARNL}
+ARNL(Advanced Robotics Navigation and Localization System) ist eine Teilbibliothek in ARIA um Navigations und Lokalisationsschnittstellen zur Verf\"ugung zu stellen. Die Lokalisationskomponente bietet eine Schnittstelle um den angeschlossenen Roboter zu lokalisieren. Sensor und Odometriedaten des Roboters werden in Verbindung mit einer vorhanden Umgebungskarte verwendet um die wahrscheinlichste Position des Roboters in der Karte zu bestimmen. \cite{arnl} 
+Die ARNL Bibliothek beinhaltet die Klasse ArLocalizationTask. Diese Klasse kann Daten vom Laserscanner (ArSick) auswerten um die Lokalisierung durchzufuehren. Abgesehen vom ArLocalizationTask gibt es noch andere Klassen fuer die Lokalisierung. Die Elternklasse ist ArBaseLocalizationTask in der BaseARNL Bibliothek. \cite{arnl}
+Um den ArLocalizationTask zu instanzieren m\"ussen Pointer von Instanzen der Typen ArRobot, ArRangeDevice und ArMapInterface (ArMap) uerbgeben werden.
+\lstset{language=C++}
+\begin{lstlisting}
+#include "ArLocalizationTask.h"
+...
+ArRobot robot;
+...
+ArLaser *firstLaser = robot.findLaser(1);
+...
+ArMap map(fileDir);
+...
+ArLocalizationTask locTask(&robot, firstLaser, &map);
+\end{lstlisting}
+Um eine initiale Lokalierung durchzufuehren muss die Methode localizeRobotAtHomeBlocking ohne Parameter aufgerufen werden.
 
 
 
-\section{Theoretischer Hintergrund}\label{previous work}
 
+
+
+\section{Theoretischer Hintergrund}
+Das Lokalisierungsmodul von ARNL benutzt die Monte-Carlo-Lokalisierung. Diese basiert auf der Markov-Annahme welche wiederum auf die Bayes-Regel fundiert.
+
+
+
+
+\subsection{Probabilistische Lokalisierung}
+Um die Position eines Roboters zu berechnen, gibt es verschiedene Ansätze. Sie beruhen alle auf der Fusionierung von Daten, die durch die Odometrie und weitere Sensoren des Roboters geliefert werden. Gebräuchliche Sensoren für autonome Roboter sind Ultraschallsensoren oder Laserscanner.
+Diese Ansätze verwenden Methoden der Wahrscheinlichkeitsrechnung zur Bestimmung eine Wahrscheinlichkeitsverteilung über alle möglichen Positionen, an denen der Roboter sich befinden kann.
+
+
+
+\subsection{Beyes Filter}
+\subsection{Markov-Lokalisierung}
+Das Ziel der Markov Lokalisierung ist es, jeder möglichen Roboterposition einen
+Wahrscheinlichkeitswert zuzuordnen.
 \subsection{Partikelfilter}
+Bei der Lösung mittels Partikel-Filern wird die Pose des Roboters über eine Partikelwolke repräsentiert. Jeder Partikel stellt eine mögliche Pose des Roboters dar. Über den Partikelfilter wird jeder Partikel, also jede dadurch repräsentierte Pose, auf ihre Plausibilität überprüft. Die Wahrscheinlichkeit plausibler Partikel wird heraufgesetzt, die Wahrscheinlichkeit wenig plausibler Partikel wird reduziert. Fallen Partikel unter einen bestimmten Wahrscheinlichkeits-Schwellwert, werden sie verworfen.
+
+\subsection{Monte-Carlo-Lokalisierung}
+Der Vorteil des MCL - Ansatzes ist, dass zur Laufzeit die Gr\"osse der
+Stichprobenmenge variabel sein kann. Je unsicherer die Roboterposition ist,
+desto größer fällt die Stichprobenmenge aus. In Analogie zur
+„Gitterbasierenden“ (grid-based) Methode, m\"usste bei einer hohen Sicherheit
+(belief) nur ein Teil des Zustandsraumes aktualisiert werden.\cite{delipetkos1}
+Der Grundgedanke bei der Monte Carlo Lokalisierung ist, das „Belief“
+(Vertrauen) mittels einer Stichprobenmenge, welche auch als „samples“ oder
+auch „particles“ bezeichnet wird, darzustellen. MCL ist ein iterativer Bayes´scher
+Filter, welcher als ein Schätzer für die zukünftige Wahrscheinlichkeitsverteilung
+der Roboterposition verwendet wird.
+
+
+
+
+\section{Experimente}
+
+In einem Beispielprogramm wird ARNL und ArNetworking verwendet um einen Server zu erstellen. Clients wie MobileEyes koennen sich mit diesem Server verbinden. MobileEyes sendet anfragen an den Server um den Robotter zu steuern, die aktuelle Karte abzufragen, Lokalisierungsparameter zu setzen, Sensordaten abzufragen und den Robotter manuell wieder neu zu lokalisieren.
+Die automatische lokalisierung des Robotters erfolgt durch eine Instanz von ArLocalizationTask welcher also Teil des Serverprograms ist. Wie in \ref{einfuehrung} deutlich gemacht wurde, ist das Monte-Carlo Verfahren in der Klasse ArLocalizationTask implementiert.
+Durch die Verwendung von MobileEyes kann eine Anpassung der Lokalisierungsparameter Einfluss auf den Partikelfilter genommen werden.
+Die Einstellungen befinden sich in MobileEyes unter Lokalisierungseinstellungen. Eine  liste und deren Beschreibung befinden sich in Appendix I.
+
+Drei Fehlerarten
+Entfernungsfehler: Fehler beim Zurücklegen einer geraden Strecke
+Drehfehler: Fehler beim Drehen des Roboters
+Driftfehler: Orientierungsfehler beim Zurücklegen einer geraden Strecke
+Bewegungsmodell in ARIA/ARNL bildet genau diese Fehler ab.
+\appendix
+\section{Appendix I}
+
+\paragraph{Map}                      Map of the environment we'll use to navigate
+
+\paragraph{NumSamples} 2000           minumum 0,  No of pose samples for MCL. The larger
+                          this number, the more computation will localization
+                          take. Too low a number will cause the robot to lose
+                          localization. This is also the maximum no of samples
+                          which will be used for localization if no of samples
+                          are varied along with the localization score.
+
+\paragraph{GridRes} 100               minimum 10,  The resolution of the occupancy grid
+                          representing the map in mm. Smaller resolution
+                          results in more accuracy but more computation.
+
+\paragraph{PassThreshold} 0.2         range [0, 1],  After MCL sensor correction, the
+                          sample with the maximum probablity will have a score
+                          based on the match between sensor and the map
+                          points. This is the minimum score out of 1.0 to be
+                          considered localized.
+
+\paragraph{KMmPerMm} 0.05             minimum 0,  When the robot moves linearly, the error
+                          in distance is proportional to the distance moved.
+                          This error is is given as a fraction in mm per mm
+
+\paragraph{KDegPerDeg} 0.05           minimum 0,  When the robot rotates, the error in the
+                          angle is proportional to the angle turned. This is
+                          expressed as a fraction in degs per deg.
+
+\paragraph{KDegPerMm} 0.0025          minimum 0,  When the robot moves linearly it can
+                          also affect its orientation. This drift can be
+                          expressed as a fraction in degs per mm.
+
+\paragraph{TriggerDistance} 200       minimum 0,  Since MCL localization is
+                          computationally expensive, it is triggered only when
+                          the robot has moved this far in mm.
+
+\paragraph{TriggerAngle} 5            minimum 0,  Since MCL localization is
+                          computationally expensive, it is triggered only when
+                          the robot has rotated this far in degs.
+
+\paragraph{TriggerTimeEnabled} false  This flag will decide if the localization will be
+                          called every 'TriggerTime' msecs. Once this flag is
+                          true the IdleTimeTrigger* parameters will take
+                          effect. This feature is meant to take care of cases
+                          when the robot has not moved much for a time and the
+                          position should be refined .
+
+\paragraph{TriggerTime} 10000         minimum 1500,  Once the TriggerTimeFlag is set to
+                          true this parameter will decide how long the robot
+                          has been idle in milli seconds before it starts a
+                          localization near the last known robot pose.
+
+\paragraph{IdleTimeTriggerX} 200      minimum 0,  When localization is triggered by idle
+                          time this parameter decides the range of the samples
+                          in X coords in mm.
+
+\paragraph{IdleTimeTriggerY} 200      minimum 0,  When localization is triggered by idle
+                          time this parameter decides the range of the samples
+                          in Y coords in mm.
+
+\paragraph{IdleTimeTriggerTh} 15      minimum 0,  When localization is triggered by idle
+                          time this parameter decides the range of the samples
+                          in Theta coords in degs.
+
+\paragraph{RecoverOnFail} false       If localization fails, this flag will decide if a
+                          static localization is attempted around last known
+                          robot pose. Such a reinitialization can cause the
+                          robot to be hopelessly lost if the actual robot is
+                          very different from its known pose
+
+\paragraph{FailedX} 300               minimum 0,  Range of the box in the X axis in mm to
+                          distribute samples after localization fails.
+
+\paragraph{FailedY} 300               minimum 0,  Range of the box in the Y axis in mm to
+                          distribute samples after localization fails.
+
+\paragraph{FailedTh} 45               minimum 0,  Range of the angle in degs to distribute
+                          samples after localization fails.
+
+\paragraph{PeturbX} 10                minimum 0,  After sensor correction and resampling
+                          the chosen pose is perturbed to generate a new
+                          sample. This parameter decides the range to peturb
+                          the X axis in mm.
+
+\paragraph{PeturbY} 10                minimum 0,  After sensor correction and resampling
+                          the chosen pose is perturbed to generate a new
+                          sample. This parameter decides the range to peturb
+                          the Y axis in mm.
+
+\paragraph{PeturbTh} 1                minimum 0,  After sensor correction and resampling
+                          the chosen pose is perturbed to generate a new
+                          sample. This parameter decides the range to peturb
+                          the angle in degs.
+
+\paragraph{PeakStdX} 10               minimum 0,  Extent of the ellipse in the X axis in
+                          mm beyond which the sample poses will be considered
+                          multiple localizations after resampling.
+
+\paragraph{PeakStdY} 10               minimum 0,  Extent of the ellipse in the X axis in
+                          mm beyond which the sample poses will be considered
+                          multiple localizations after resampling.
+
+\paragraph{PeakStdTh} 1               minimum 0,  Extent of the angle in degs beyond which
+                          the sample poses will be considered multiple
+                          localizations after resampling.
+
+\paragraph{PeakFactor} 1e-06          range [0, 1],  When a no of samples have non zero
+                          probabilities such as when there is ambiguities in a
+                          corridor. This is the threshold below the maximum
+                          probablity to be considered a valid hypothesis.
+
+\paragraph{StdX} 400                  minimum 0,  The standard deviation of the gaussian
+                          ellipse in X axis in mm at start of localization.
+
+\paragraph{StdY} 400                  minimum 0,  The standard deviation of the gaussian
+                          ellipse in Y axis in mm at start of localization.
+
+\paragraph{StdTh} 30                  minimum 0,  The standard deviation of the gaussian
+                          angle in degs at start of localization.
+
+\paragraph{SensorBelief} 0.9          range [0, 1],  Probablility that a range reading
+                          from the laser is valid. This is used in the
+                          correction of the probablities of the samples using
+                          the sensor.
+
+\paragraph{OccThreshold} 0.1          range [0, 1],  The threshold value of the occupancy
+                          grid to consider as occupied.
+
+\paragraph{AngleIncrement} 0          range [0, 180],  Only the laser readings which are
+                          this many degrees apart are used for the
+                          localization. The lower limit is decided by the
+                          LaserIncrement setting
+
+\paragraph{DiscardThreshold} 0.33     range [0.33, 1],  A robot sample pose lying inside
+                          an occupancy grid cell with a value above this will
+                          be usually discarded Useful in cases where robot may
+                          intersect map points such as during patrolbot
+                          docking
+
+\paragraph{FuseAllSensors} false      ARNL uses a Kalman filter which allows you to
+                          combine the data from the MCL localization, the
+                          movement from the encoder between cycles and
+                          reflectors if mapped and seen by the laser. This
+                          advanced feature can be disabled to revert to the
+                          basic MCL localization, using this flag
+
+\paragraph{ReflectorVariance} 10000   minimum 0,  This number will be used as the variance
+                          of the (x, y) coords of the center of the reflectors
+                          in the R matrix of the Kalman filter.
+
+\paragraph{Qxx} 100                   minimum 0,  This is the first element of the
+                          diagonal covariance matrix which will define the
+                          error in the kalman model for the X axis.
+
+\paragraph{Qyy} 100                   minimum 0,  This is the second element of the
+                          diagonal covariance matrix which will define the
+                          error in the kalman model for the Y axis.
+
+\paragraph{Qtt} 1                     minimum 0,  This is the third element of the
+                          diagonal covariance matrix which will define the
+                          error in the kalman model for the Theta axis.
+
+\paragraph{ReflectorMatchDist} 1000   minimum 0,  When finding the closest reflector in
+                          the map to an observed reflection, this is the
+                          maximum distance the system will search to find the
+                          closest reflector.
+
+\paragraph{ReflectorMaxRange} 32000   minimum 0,  This is the maximum distance that the
+                          SICK lrf is capable of seeing a reflector. (This is
+                          smaller than the max range of the regular SICK
+                          readings)
+
+\paragraph{ReflectorMaxAngle} 45      minimum 0,  This is the maximum angle of incidence
+                          that the SICK lrf is capable of seeing a reflector
+                          at. (This is much smaller than the angle that the
+                          regular SICK readings are capable of returning)
+
+\paragraph{UseReflectorCenters} true  The Kalman filter matches the returns from the laser
+                          reflectors to the reflectors in the map. When there
+                          are more than one ray from one reflector, this flag
+                          will bunch the rays into groups and match the center
+                          ray with the center of the reflector. If the flag is
+                          set to false, the rays are matched to the point on
+                          the reflector by line intersection. This involves
+                          more computation but may be more accurate.
+
+\paragraph{Triangulate} false         The regular Kalman filter tries to fuse the encoder
+                          pose and the data from the reflectors. This is an
+                          incremental process which will eventually converge
+                          to the right pose within a few iterations depending
+                          on the uncetainity models of the sensors. But, when
+                          the robot is lost, and it sees more than one
+                          reflector, the pose can be computed directly using a
+                          closed form solution. The key qualifier is that the
+                          curent pose of the robot is close enough to match
+                          the reflectors.
+
+\paragraph{TriangulateScoreThreshold} 0.5  When the map of the environment is very close
+                          to the actual environment the robot encounters, the
+                          triangulation using a few reflectors can actually
+                          worsen the localization. This is due to the fact
+                          that the uncertainity in combining the few
+                          reflectors and their location usually is worse than
+                          the uncertainity from using all the laser range
+                          values from the MCL.The triangulation will kick in
+                          only if the MCL score drops below this value.
+
+\paragraph{AdjustNumSamplesFlag} false  The number of samples is by default kept high to
+                          keep the robot from losing localization even after
+                          initialization. This number can be lowered during
+                          motion in places of the map where the localization
+                          score is high to reduce the computation load. Set
+                          this flag to true if you want to vary the number of
+                          samples with the localization score. (As the score
+                          drops the no of samples will rise)
+
+\paragraph{MinNumSamples} 200         minumum 0,  When the AdjustSamplesFlag is set to
+                          true the number of samples is reduced as the
+                          localization score rises. But, this will be the
+                          lowest number it will be reduced to.
+
+\paragraph{NumSamplesAngleFactor} 1   minimum 0,  When the AdjustSamplesFlag is set to
+                          true the number of samples is reduced as the
+                          localization score rises. But, when the robot has
+                          rotated significantly, it needs more samples than if
+                          it had only moved in translation. A bigger angle
+                          factor will cause the no of samples to not drop as
+                          fast when the localization is triggered due to
+                          rotation.
 
 
 
@@ -35,5 +348,19 @@ Es soll die monte-carlo-lokalisierung in Arnl untersucht werden. Durch Experimen
 
 \bibliographystyle{abbrv}
 \bibliography{main}
-
+\begin{thebibliography}{------}
+	\bibitem[Wiki-ARNL]{arnl} MobileRobots Inc, \emph{ARNL, SONARNL and MOGS},  wiki (9 September 2009), available at 
+		\url{http://robots.mobilerobots.com/wiki/ARNL,_SONARNL_and_MOGS}.
+	\bibitem[Delipetkos1]{delipetkos1} Fraunhofer Gesellschaft AIS.ARC, Particle Filter
+		Ein probabilistischer Ansatz zur Lokalisierung mobiler Roboter available at S. 12
+		\url{http://www.ais.fraunhofer.de/~delipetk}
+	\bibitem[ARNL-Ref]{arnl-ref} MobileRobots Inc, \emph{ARNL-Reference}, (1.7.0) available at 				
+	\url{http://vigir.missouri.edu/~gdesouza/Research/MobileRobotics/Software/ARNL-SONARNL/Arnl-1.7.0+gcc41/docs/ARNL-Reference/index.html}.
+	\bibitem[Whitbrook1]{whitbrook1}
+		Dr. Amanda Whitbrook.
+		{\em Programming Mobile Robots with Aria and Player}.
+		Springer-Verlag London Limited , 2010, S. 50
+	
+		http://www.ais.fraunhofer.de/~delipetk
+\end{thebibliography}
 \end{document}
