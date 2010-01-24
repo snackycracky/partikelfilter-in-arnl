@@ -92,7 +92,7 @@ desto größer fällt die Stichprobenmenge aus. In Analogie zur
 Der Grundgedanke bei der Monte Carlo Lokalisierung ist, das „Belief“
 (Vertrauen) mittels einer Stichprobenmenge, welche auch als „samples“ oder
 auch „particles“ bezeichnet wird, darzustellen. MCL ist ein iterativer Bayes´scher
-Filter, welcher als ein Schätzer für die zukünftige Wahrscheinlichkeitsverteilung
+Filter, welcher als ein Schätzer f\"ur die zuk\"unftige Wahrscheinlichkeitsverteilung
 der Roboterposition verwendet wird.
 
 
@@ -104,16 +104,30 @@ In einem Beispielprogramm wird ARNL und ArNetworking verwendet um einen Server z
 Die automatische lokalisierung des Robotters erfolgt durch eine Instanz von ArLocalizationTask welcher also Teil des Serverprograms ist. Wie in \ref{einfuehrung} deutlich gemacht wurde, ist das Monte-Carlo Verfahren in der Klasse ArLocalizationTask implementiert.
 Durch die Verwendung von MobileEyes kann eine Anpassung der Lokalisierungsparameter Einfluss auf den Partikelfilter genommen werden.
 Die Einstellungen befinden sich in MobileEyes unter Lokalisierungseinstellungen. Eine  liste und deren Beschreibung befinden sich in Appendix I.
+Der Monte Carlo Filter verlaesst sich unter anderem auf die Odometriedaten die von den Raedern kommen. Dabei kann bestimmt werden wie weit der Robotter gefahren ist oder wenn sich die Raeder unterschiedlich bewegen, wie weit sich der Robotter um seine Achse gedreht hat. wenn man die genaue Startposition des Robotters kennt und auch die Odometriedaten der Raeder, so kann man theoretisch die genaue Position des Robotters zum Zeitpunk t bestimmen. In der Praxis ist dies aber nur schwer zu realisieren. Die Unsicherheit
+wächst also mit zunehmender Entfernung vom Startpunkt. generell gibt es drei Fehlerarten:
+\begin{itemize}
+\item Entfernungsfehler: Fehler beim Zur\"ucklegen einer geraden Strecke
+\item Drehfehler: Fehler beim Drehen des Roboters
+\item Driftfehler: Orientierungsfehler beim Zur\"ucklegen einer geraden Strecke
+\end{itemize}
 
-Drei Fehlerarten
-Entfernungsfehler: Fehler beim Zurücklegen einer geraden Strecke
-Drehfehler: Fehler beim Drehen des Roboters
-Driftfehler: Orientierungsfehler beim Zurücklegen einer geraden Strecke
-Bewegungsmodell in ARIA/ARNL bildet genau diese Fehler ab.
+Das Bewegungsmodell in ARIA/ARNL bildet genau diese Fehler ab.
+Um die Bewegungsunschaerfe zu testen muessen verschiedene Initialalparameter verwendet werden:
+\begin{itemize}
+\item PassThreshold muss auf 0 gesetzt werden um zu vermeiden, dass der Roboter in den Lost Modus geht
+\item Um die Partikelwolke besser sichtbar zu machen wird der Wert NumSamples auf 5000 gesetzt
+\item PeturbX, PeturbY, PeturbTh sind Paramter um neue Samples zu generieren, da wir nur die 500 ......................
+\item per default wird die Neuberechnung der Position erst nach einer Bewegung von 20 cm gemacht. Eine Neuberechnung soll erst nach 2m stattfinden. Somit wird der Paramter Triggerdistance auf 2000 gesetzt 
+\item die neuberechnung nach einer drehnung soll nicht erst ab 5 Grad erfolgen sondern schon ab 0 Grad. Der PAramter \textbf{TriggerAngle} wird also auf 0 gesetzt.
+\end{itemize}
+
+
+
 \appendix
 \section{Appendix I}
 
-\paragraph{Map}                      Map of the environment we'll use to navigate
+\paragraph{Map}          Karte der Umgebung um zu Navigieren. 
 
 \paragraph{NumSamples} 2000           minumum 0,  No of pose samples for MCL. The larger
                           this number, the more computation will localization

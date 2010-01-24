@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.1.22)  24 JAN 2010 17:11
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.1.22)  24 JAN 2010 17:56
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -236,59 +236,47 @@ Missing character: There is no Â in font cmr10!
 Missing character: There is no ´ in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¤ in font cmr10!
-Missing character: There is no Ì in font cmr10!
-Missing character: There is no ˆ in font cmr10!
-Missing character: There is no Ì in font cmr10!
-Missing character: There is no ˆ in font cmr10!
-Missing character: There is no Ì in font cmr10!
-Missing character: There is no ˆ in font cmr10!
-Missing character: There is no Ì in font cmr10!
-Missing character: There is no ˆ in font cmr10!
-
-Overfull \hbox (2.69499pt too wide) in paragraph at lines 108--113
-\OT1/cmr/m/n/10 feh-ler beim Zu-ruck-le-gen ei-ner ge-ra-den Strecke Be-we-gung
-s-mo-dell in ARIA/ARNL
- []
-
-[4] [5] [6] [7] [8]
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no ¤ in font cmr10!
+ [4] [5] [6] [7] [8]
 No file final.bbl.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 355.
+(Font)              <7> on input line 367.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 355.
+(Font)              <5> on input line 367.
 
-Underfull \hbox (badness 10000) in paragraph at lines 359--361
+Underfull \hbox (badness 10000) in paragraph at lines 371--373
 \OT1/cmtt/m/n/10 / / vigir . missouri . edu / []gdesouza / Research / MobileRob
 otics /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 359--361
+Underfull \hbox (badness 10000) in paragraph at lines 371--373
 \OT1/cmtt/m/n/10 Software / ARNL-[]SONARNL / Arnl-[]1 . 7 . 0 + gcc41 / docs / 
 ARNL-[]Reference /
  []
 
-[9] (./final.aux) ) 
+[9] [10] (./final.aux) ) 
 Here is how much of TeX's memory you used:
- 3192 strings out of 493848
- 42972 string characters out of 3149207
+ 3193 strings out of 493848
+ 42986 string characters out of 3149207
  125429 words of memory out of 3000000
- 6467 multiletter control sequences out of 15000+200000
+ 6468 multiletter control sequences out of 15000+200000
  8409 words of font info for 30 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 32i,6n,58p,524b,1209s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbx12.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr12.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr17.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ti10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-t10.pfb>
-Output written on final.pdf (9 pages, 212925 bytes).
+ 32i,6n,58p,532b,1209s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2009/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmbx10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmbx12.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr12.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr17.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmti10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmtt10.pfb>
+Output written on final.pdf (10 pages, 214910 bytes).
 PDF statistics:
- 65 PDF objects out of 1000 (max. 8388607)
+ 68 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
