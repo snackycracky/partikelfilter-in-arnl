@@ -10,6 +10,7 @@
 \oddsidemargin 0.0in 
 \evensidemargin 1.0in
 \textwidth 6.0in 
+\DeclareMathSizes{12}{20}{14}{10}
 \title{Abschlussaufgabe V - Partikelfilter in ARNL}
 \author{Nils Petersohn, Matrikel: 20022749}
 \date{3. Feb. 2010}
@@ -168,6 +169,8 @@ Der Parameter KMmPerMm betrifft die unsicherheit der Odometriedaten der Raeder. 
 \end{figure}
 
 Durch eine einfache Winkelfunktionsrechnung in Abbildung \ref{Winkelfunktionen} laesst sich der Winkel bestimmen. 
+Zuerst wird der mittelwert der Abweichung durch das Arithmetische Mittel bestimmt siehe Formel \ref{getY}
+
 
 \begin{figure}
   \centering
@@ -176,6 +179,69 @@ Durch eine einfache Winkelfunktionsrechnung in Abbildung \ref{Winkelfunktionen} 
   \label{Winkelfunktionen}
 \end{figure}
 
+\begin{figure}
+	\begin{equation}\label{getY}	
+		\bar{y}=\frac{790+660}{2}=725mm
+	\end{equation}
+	\begin{equation}\label{getX}	
+		\theta_1=\sin x^{-1} \left( \frac{y}{r} \right) \cdot 2
+	\end{equation}
+	\begin{equation}\label{theta1}	
+		\theta_1=\sin x^{-1}\left(\frac{725}{1000} \right) \cdot 2 \approx 93^\circ
+	\end{equation}	
+  \caption{Berechnung fuer Abbildung \ref{KDegPerMm002}}
+  \label{KDegPerMm002Calc}
+\end{figure}
+
+\begin{figure}
+	\begin{equation}\label{get001Y}	
+		\bar{y}=\frac{430+320}{2}=375mm
+	\end{equation}
+	\begin{equation}\label{get001X}	
+		\theta_2=\sin x^{-1} \left( \frac{y}{r} \right) \cdot 2
+	\end{equation}
+	\begin{equation}\label{theta2}	
+		\theta_2=\sin x^{-1} \left( \frac{375}{1000} \right) \cdot 2 \approx 44^\circ
+	\end{equation}	
+  \caption{Berechnung fuer Abbildung \ref{KDegPerMm001}}
+  \label{KDegPerMm001Calc}
+\end{figure}
+
+\begin{figure}
+	\begin{equation}\label{get0005Y}	
+		\bar{y}=\frac{190+200}{2}=195mm
+	\end{equation}
+	\begin{equation}\label{get0005X}	
+		\theta_3=\sin x^{-1} \left( \frac{y}{r} \right) \cdot 2
+	\end{equation}
+	\begin{equation}\label{theta3}	
+		\theta_3=\sin x^{-1} \left( \frac{195}{1000} \right) \cdot 2 \approx 23^\circ
+	\end{equation}	
+  \caption{Berechnung fuer Abbildung \ref{KDegPerMm0005}}
+  \label{KDegPerMm0005Calc}
+\end{figure}
+
+Um die Rechnungen zu bestaetigen Rechnen wir den Wert aus welcher zu einem Fehlerwinkel von $180^\circ$ noetig ist und bilden dann davon das Arithmetische Mittel. Wenn dieses nicht sonderlich abweicht waren die Rechnungen richtig. Dies ist der Fall denn eine maximale Abweichung von weniger als 0.012 und eine Minimale Abweichung von 0.0009 ist anehmbar. 
+
+\begin{figure}
+	\begin{equation}\label{get0005Y}	
+		\frac{\theta}{KDegPerMm}=\frac{180^\circ}{x}
+	\end{equation}
+	\begin{equation}\label{get0005Y}	
+		{x_0}=\frac{180^\circ \cdot 0.005}{23}=0.0391
+	\end{equation}
+	\begin{equation}\label{get0005Y}	
+		{x_1}=\frac{180^\circ \cdot 0.01}{44}=0.0409
+	\end{equation}
+	\begin{equation}\label{get0005Y}	
+		{x_2}=\frac{180^\circ \cdot 0.02}{93}=0.0387
+	\end{equation}
+	\begin{equation}\label{get0005Y}
+		\bar{x}=\frac{x_0+x_1+x_2}{3} \approx 0.04
+	\end{equation}
+  \caption{Test der Berechnungen in Abbildung \ref{theta1},\ref{theta2},\ref{theta3}}
+  \label{KDegPerMm0005Calc}
+\end{figure}
 
 
 
@@ -450,6 +516,6 @@ Durch eine einfache Winkelfunktionsrechnung in Abbildung \ref{Winkelfunktionen} 
 		Springer-Verlag London Limited , 2010, S. 50
 		\url{http://www.ais.fraunhofer.de/~delipetk}
 
-
+\end{thebibliography}
 \listoffigures
 \end{document}
