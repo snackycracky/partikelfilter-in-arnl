@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.1.22)  24 JAN 2010 17:56
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.1.22)  31 JAN 2010 15:28
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -111,49 +111,82 @@ Package: appendix 2009/09/02 v1.2b extra appendix facilities
 \c@@ppsavesec=\count99
 \c@@ppsaveapp=\count100
 )
-(./final.aux)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2009/10/09 v3.1k Customizing captions (AR)
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2009/10/09 v3.1k caption3 kernel (AR)
+\captionmargin=\dimen110
+\captionmargin@=\dimen111
+\captionwidth=\dimen112
+\caption@indent=\dimen113
+\caption@parindent=\dimen114
+\caption@hangindent=\dimen115
+)
+\c@ContinuedFloat=\count101
+Package caption Info: listings package is loaded.
+)
+\c@KVtest=\count102
+\sf@farskip=\skip45
+\sf@captopadj=\dimen116
+\sf@capskip=\skip46
+\sf@nearskip=\skip47
+\c@subfigure=\count103
+\c@subfigure@save=\count104
+\c@lofdepth=\count105
+\c@subtable=\count106
+\c@subtable@save=\count107
+\c@lotdepth=\count108
+\sf@top=\skip48
+\sf@bottom=\skip49
+)
+(/usr/local/texlive/2009/texmf-dist/tex/latex/comment/comment.sty
+\CommentStream=\write3
+
+Excluding comment 'comment') (./final.aux)
 \openout1 = `final.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
 
 (/usr/local/texlive/2009/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count101
-\scratchdimen=\dimen110
+\scratchcounter=\count109
+\scratchdimen=\dimen117
 \scratchbox=\box28
-\nofMPsegments=\count102
-\nofMParguments=\count103
+\nofMPsegments=\count110
+\nofMParguments=\count111
 \everyMPshowfont=\toks16
-\MPscratchCnt=\count104
-\MPscratchDim=\dimen111
-\MPnumerator=\count105
+\MPscratchCnt=\count112
+\MPscratchDim=\dimen118
+\MPnumerator=\count113
 \everyMPtoPDFconversion=\toks17
 )
-\c@lstlisting=\count106
+\c@lstlisting=\count114
+Package caption Info: Begin \AtBeginDocument code.
+Package caption3 Info: subfig package 1.2 or 1.3 is loaded.
+LaTeX Info: Redefining \subref on input line 16.
+Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 13.
+(Font)              <12> on input line 17.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 13.
+(Font)              <8> on input line 17.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 13.
- <img/aria-arch.jpg, id=1, 282.05376pt x 276.03125pt>
-File: img/aria-arch.jpg Graphic file (type jpg)
- <use img/aria-arch.jpg>
-[1
-
-{/usr/local/texlive/2009/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(/usr/local/texlive/2009/texmf-dist/tex/latex/listings/lstlang1.sty
+(Font)              <6> on input line 17.
+ (/usr/local/texlive/2009/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/local/texlive/2009/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -161,13 +194,16 @@ File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/local/texlive/2009/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-) [2 <./img/aria-arch.jpg>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 54.
- (/usr/local/texlive/2009/texmf-dist/tex/latex/base/omscmr.fd
+) [1
+
+{/usr/local/texlive/2009/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 58.
+
+(/usr/local/texlive/2009/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 54.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 58.
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¤ in font cmr10!
 Missing character: There is no Ã in font cmr10!
@@ -200,8 +236,6 @@ Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¼ in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¼ in font cmr10!
-
-[3]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¶ in font cmr10!
 Missing character: There is no Ã in font cmr10!
@@ -236,47 +270,94 @@ Missing character: There is no Â in font cmr10!
 Missing character: There is no ´ in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¤ in font cmr10!
+ [2]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¤ in font cmr10!
- [4] [5] [6] [7] [8]
+ [3]
+<img/KMmPerMmTest.jpg, id=17, 603.25375pt x 89.33376pt>
+File: img/KMmPerMmTest.jpg Graphic file (type jpg)
+
+<use img/KMmPerMmTest.jpg>
+<img/KDegPerDegTest100.jpg, id=18, 144.54pt x 114.4275pt>
+File: img/KDegPerDegTest100.jpg Graphic file (type jpg)
+
+<use img/KDegPerDegTest100.jpg>
+<img/KDegPerDegTest050.jpg, id=19, 140.525pt x 111.41624pt>
+File: img/KDegPerDegTest050.jpg Graphic file (type jpg)
+
+<use img/KDegPerDegTest050.jpg>
+<img/KDegPerDegTest025.jpg, id=20, 123.46124pt x 113.42375pt>
+File: img/KDegPerDegTest025.jpg Graphic file (type jpg)
+
+<use img/KDegPerDegTest025.jpg> [4 <./img/KMmPerMmTest.jpg> <./img/KDegPerDegTe
+st100.jpg> <./img/KDegPerDegTest050.jpg> <./img/KDegPerDegTest025.jpg>]
+<img/KDegPerMm002.jpg, id=25, 219.82124pt x 292.09125pt>
+File: img/KDegPerMm002.jpg Graphic file (type jpg)
+
+<use img/KDegPerMm002.jpg>
+<img/KDegPerMm001.jpg, id=26, 370.38374pt x 281.05pt>
+File: img/KDegPerMm001.jpg Graphic file (type jpg)
+
+<use img/KDegPerMm001.jpg>
+<img/KDegPerMm0005.jpg, id=27, 453.695pt x 242.9075pt>
+File: img/KDegPerMm0005.jpg Graphic file (type jpg)
+
+<use img/KDegPerMm0005.jpg>
+<img/Winkelfunktionen_einheitskreis.jpg, id=28, 210.7875pt x 180.675pt>
+File: img/Winkelfunktionen_einheitskreis.jpg Graphic file (type jpg)
+
+<use img/Winkelfunktionen_einheitskreis.jpg>
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 175.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 175.
+ [5 <./img/KDegPerMm002.jpg> <./img/KDegPerMm001.jpg> <./img/KDegPerMm0005.jpg>
+] [6 <./img/Winkelfunktionen_einheitskreis.jpg>] [7] [8] [9]
 No file final.bbl.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 367.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 367.
 
-Underfull \hbox (badness 10000) in paragraph at lines 371--373
-\OT1/cmtt/m/n/10 / / vigir . missouri . edu / []gdesouza / Research / MobileRob
-otics /
+Underfull \hbox (badness 10000) in paragraph at lines 439--440
+[]\OT1/cmr/m/n/10 ullala.at/experiments $\OT1/cmtt/m/n/10 http : / / www . ulla
+la . at / experiments / movement / images / circ _ 1 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 371--373
-\OT1/cmtt/m/n/10 Software / ARNL-[]SONARNL / Arnl-[]1 . 7 . 0 + gcc41 / docs / 
-ARNL-[]Reference /
+Underfull \hbox (badness 10000) in paragraph at lines 443--445
+\OT1/cmtt/m/n/10 edu / []gdesouza / Research / MobileRobotics / Software / ARNL
+-[]SONARNL / Arnl-[]1 . 7 . 0 +
  []
 
-[9] [10] (./final.aux) ) 
+(./final.lof
+Overfull \hbox (1.76744pt too wide) in paragraph at lines 11--11
+ [][] []\OT1/cmr/m/n/10 Winkelfunktionen im Ein-heits-kreis $\OT1/cmtt/m/n/10 h
+ttp : / / www . ullala . at / experiments / movement / 
+ []
+
+)
+\tf@lof=\write4
+\openout4 = `final.lof'.
+
+ [10] (./final.aux) ) 
 Here is how much of TeX's memory you used:
- 3193 strings out of 493848
- 42986 string characters out of 3149207
- 125429 words of memory out of 3000000
- 6468 multiletter control sequences out of 15000+200000
+ 4357 strings out of 493848
+ 63970 string characters out of 3149207
+ 139207 words of memory out of 3000000
+ 7608 multiletter control sequences out of 15000+200000
  8409 words of font info for 30 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 32i,6n,58p,532b,1209s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/local/texlive/2009/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmbx10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmbx12.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr12.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr17.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmti10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmtt10.pfb>
-Output written on final.pdf (10 pages, 214910 bytes).
+ 44i,9n,58p,691b,1209s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2009/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmbx10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx12.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr12.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr17.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+i10.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt
+10.pfb>
+Output written on final.pdf (10 pages, 287156 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
+ 79 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

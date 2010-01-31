@@ -5,7 +5,11 @@
 \usepackage{url}
 \usepackage{listings}
 \usepackage{appendix}
-
+\usepackage{subfig}
+\usepackage{comment}
+\oddsidemargin 0.0in 
+\evensidemargin 1.0in
+\textwidth 6.0in 
 \title{Abschlussaufgabe V - Partikelfilter in ARNL}
 \author{Nils Petersohn, Matrikel: 20022749}
 \date{3. Feb. 2010}
@@ -27,7 +31,7 @@ Es soll die monte-carlo-lokalisierung in Arnl untersucht werden. Durch Experimen
 \subsection{ARIA}
 Die C++ Bibliothek ARIA ist eine API fuer alle MobileRobots/ActivMedia Plattformen. Mit der Hilfe von ARIA kann u.a. Geschwindigkeit, Richtung oder relative Richtung entweder durch einfache oder komplexe Anweisungen kontrolliert werden.
 %ARIA folgt dem Client-Server Paradigma. Der Roboter oder der Simulator sind Server. 
-\includegraphics{img/aria-arch.jpg}
+%\includegraphics{img/aria-arch.jpg}
 
 
 
@@ -105,7 +109,7 @@ Die automatische lokalisierung des Robotters erfolgt durch eine Instanz von ArLo
 Durch die Verwendung von MobileEyes kann eine Anpassung der Lokalisierungsparameter Einfluss auf den Partikelfilter genommen werden.
 Die Einstellungen befinden sich in MobileEyes unter Lokalisierungseinstellungen. Eine  liste und deren Beschreibung befinden sich in Appendix I.
 Der Monte Carlo Filter verlaesst sich unter anderem auf die Odometriedaten die von den Raedern kommen. Dabei kann bestimmt werden wie weit der Robotter gefahren ist oder wenn sich die Raeder unterschiedlich bewegen, wie weit sich der Robotter um seine Achse gedreht hat. wenn man die genaue Startposition des Robotters kennt und auch die Odometriedaten der Raeder, so kann man theoretisch die genaue Position des Robotters zum Zeitpunk t bestimmen. In der Praxis ist dies aber nur schwer zu realisieren. Die Unsicherheit
-wächst also mit zunehmender Entfernung vom Startpunkt. generell gibt es drei Fehlerarten:
+wächst also mit zunehmender Entfernung vom Startpunkt. generell gibt es drei Odometrie Fehlerarten:
 \begin{itemize}
 \item Entfernungsfehler: Fehler beim Zur\"ucklegen einer geraden Strecke
 \item Drehfehler: Fehler beim Drehen des Roboters
@@ -117,12 +121,70 @@ Um die Bewegungsunschaerfe zu testen muessen verschiedene Initialalparameter ver
 \begin{itemize}
 \item PassThreshold muss auf 0 gesetzt werden um zu vermeiden, dass der Roboter in den Lost Modus geht
 \item Um die Partikelwolke besser sichtbar zu machen wird der Wert NumSamples auf 5000 gesetzt
-\item PeturbX, PeturbY, PeturbTh sind Paramter um neue Samples zu generieren, da wir nur die 500 ......................
+\item PeturbX, PeturbY, PeturbTh sind Paramter um neue Samples samples nach dem resampling prozess hizuzuf\"ugen. Diese Streuwerte werden auf null gesetzt um den Rechenanspruch zu verrringern.
 \item per default wird die Neuberechnung der Position erst nach einer Bewegung von 20 cm gemacht. Eine Neuberechnung soll erst nach 2m stattfinden. Somit wird der Paramter Triggerdistance auf 2000 gesetzt 
-\item die neuberechnung nach einer drehnung soll nicht erst ab 5 Grad erfolgen sondern schon ab 0 Grad. Der PAramter \textbf{TriggerAngle} wird also auf 0 gesetzt.
+\item die neuberechnung nach einer drehnung soll nicht erst ab 5 Grad erfolgen sondern schon ab 0 Grad. Der Paramter \textbf{TriggerAngle} wird also auf 0 gesetzt.
 \end{itemize}
 
+Um den Entfernungsfehlerverhaeltnissparameter zu testen wird der Drehfehlerparameter und der Driftfehler zuerst ausgeschaltet. Um den Parameter zu untersuchen wird er auf 0.5 gesetzt. Dies soll bewirken, dass die Partikelwolke sich um die H\"alfte der zurueckgelegten Strecke ausdehnt. Der Roboter wird zuerst an einem Punkt lokalisiert. Mit einem Bewegungsbefehl wird der Robotter nun 1 Meter gerade aus bewegt. Wie angenommen hat die Partikelwolke nun eine L\"ange von 50 cm. 
 
+\begin{figure}[KMmPerMmTest]
+  \centering
+  \fbox{
+    \includegraphics[scale=0.55]{img/KMmPerMmTest.jpg}
+  }
+  \caption{KMmPerMm = 0.5}
+  \label{KMmPerMmTest}
+\end{figure}
+
+
+Dieser Parameter kann dazu verwendet werden um die Lokalisation in bezug auf die Oberflaechenbeschaffenheit anzupassen. In einem h\"ugligem Gel\"ande kann der Roboter eine Steigung hochfahren sich aber im eigentlichen Sinne nicht so schnell weiterbewegen wie die Odometriedaten es uebermitteln. Desshalb muss dieser Parameter erh\"oht werden.
+
+
+Mit dem Drehfehlerparameter kann nach der Dokumentation in Anhang \ref{KDegPerDegDoc} die Unsicherheit der Drehung beeinflusst werden. Wenn der Robotter sich z.B. auf einem leicht unebenen Untergrund dreht ist die Drehung nicht eindeutig an den Odometriedaten nachvollziehbar. 
+Um diesen zu testen wird der Parameter zuerst auf 1 gesetzt und Entfernungsfehlerverhaeltnissparameter wieder auf null.
+In Abbildung \ref{KDegPerDegTest100} wurde der Roboter um 360 Grad gedreht und dann 1cm gerade aus gefahren. Der Parameter wurde in Abbildung \ref{KDegPerDegTest050} und \ref{KDegPerDegTest025} stufenweise halbiert um den Winkel der Partikelstreuung zu erkennen. Dieser Entspricht demnach dem Verhaeltnis zwischen der Drehung in Grad und der KDegPerDeg Einstellung. Also bei einer Drehnung von 360 Grad und einer einstellung von 1 hat der Partikelfilter eine breite von auch ca. 360 Grad bei 0.5 von ca. 180 Grad und bei 0.25 von ca. 90 Grad. Wenn also der Untergrund h\"uglig ist, sollte die Unsicherheit also der KDegPerDeg Paramter hoeher eingestellt sein. 
+
+
+\begin{figure}
+  \centering
+  \subfloat[KDegPerDeg = 1]{\label{KDegPerDegTest100}\includegraphics[width=0.31\textwidth]{img/KDegPerDegTest100.jpg}}                
+  \ \subfloat[KDegPerDeg = 0.5]{\label{KDegPerDegTest050}\includegraphics[width=0.3\textwidth]{img/KDegPerDegTest050.jpg}}
+  \ \subfloat[KDegPerDeg = 0.25]{\label{KDegPerDegTest025}\includegraphics[width=0.29\textwidth]{img/KDegPerDegTest025.jpg}}
+  \caption{KDegPerDeg Parameter Test}
+  \label{KDegPerDegTestFigure}
+\end{figure}
+
+\newpage
+Der Parameter KMmPerMm betrifft die unsicherheit der Odometriedaten der Raeder. Bei einem differenziellem Antrieb koennen leichte unterschiede auftreten, wenn der Robotter sich gerade aus bewegt. Wenn der Robotter sich z.B. auf einem unebenen Boden fortbewegt, kann er nach links und rechts abdriften. Die Odometriedaten der Raeder geben aber ein stetiges geradeausfahren zurueck.
+
+\begin{figure}
+  \centering
+  \subfloat[KDegPerMm = 0.02]{\label{KDegPerMm002}\includegraphics[width=0.3\textwidth]{img/KDegPerMm002.jpg}}                
+  \ \subfloat[KDegPerMm = 0.01]{\label{KDegPerMm001}\includegraphics[width=0.45\textwidth]{img/KDegPerMm001.jpg}}
+  \ \subfloat[KDegPerMm = 0.005]{\label{KDegPerMm0005}\includegraphics[width=0.55\textwidth]{img/KDegPerMm0005.jpg}}
+  \caption{KDegPerMm Parameter Test}
+  \label{KDegPerMmTestFigure}
+\end{figure}
+
+Durch eine einfache Winkelfunktionsrechnung in Abbildung \ref{Winkelfunktionen} laesst sich der Winkel bestimmen. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{img/Winkelfunktionen_einheitskreis.jpg}               
+  \caption{Winkelfunktionen im Einheitskreis }\url{http://www.ullala.at/experiments/movement/images/circ_1.gif}
+  \label{Winkelfunktionen}
+\end{figure}
+
+
+
+
+%LLS = Laser Localization Score =
+%das aktuelle maximale Gewicht, d.h.
+%wie gut stimmt das beste Sample
+%mit der Sensorwahrnehmung
+%überein, Maximum 1.0
+\newpage
 
 \appendix
 \section{Appendix I}
@@ -150,7 +212,7 @@ Um die Bewegungsunschaerfe zu testen muessen verschiedene Initialalparameter ver
                           in distance is proportional to the distance moved.
                           This error is is given as a fraction in mm per mm
 
-\paragraph{KDegPerDeg} 0.05           minimum 0,  When the robot rotates, the error in the
+\paragraph{KDegPerDeg}\label{KDegPerDegDoc} 0.05           minimum 0,  When the robot rotates, the error in the
                           angle is proportional to the angle turned. This is
                           expressed as a fraction in degs per deg.
 
@@ -365,16 +427,29 @@ Um die Bewegungsunschaerfe zu testen muessen verschiedene Initialalparameter ver
 \begin{thebibliography}{------}
 	\bibitem[Wiki-ARNL]{arnl} MobileRobots Inc, \emph{ARNL, SONARNL and MOGS},  wiki (9 September 2009), available at 
 		\url{http://robots.mobilerobots.com/wiki/ARNL,_SONARNL_and_MOGS}.
+	
+	
+	
 	\bibitem[Delipetkos1]{delipetkos1} Fraunhofer Gesellschaft AIS.ARC, Particle Filter
-		Ein probabilistischer Ansatz zur Lokalisierung mobiler Roboter available at S. 12
-		\url{http://www.ais.fraunhofer.de/~delipetk}
+			Ein probabilistischer Ansatz zur Lokalisierung mobiler Roboter available at S. 12
+			\url{http://www.ais.fraunhofer.de/~delipetk}
+	
+	
+	
+	
+	
 	\bibitem[ARNL-Ref]{arnl-ref} MobileRobots Inc, \emph{ARNL-Reference}, (1.7.0) available at 				
 	\url{http://vigir.missouri.edu/~gdesouza/Research/MobileRobotics/Software/ARNL-SONARNL/Arnl-1.7.0+gcc41/docs/ARNL-Reference/index.html}.
+	
+	
+	
+	
 	\bibitem[Whitbrook1]{whitbrook1}
 		Dr. Amanda Whitbrook.
 		{\em Programming Mobile Robots with Aria and Player}.
 		Springer-Verlag London Limited , 2010, S. 50
-	
-		http://www.ais.fraunhofer.de/~delipetk
-\end{thebibliography}
+		\url{http://www.ais.fraunhofer.de/~delipetk}
+
+
+\listoffigures
 \end{document}
