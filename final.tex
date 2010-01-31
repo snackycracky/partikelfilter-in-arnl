@@ -47,6 +47,11 @@ Unter anderem kann man mit MobileEyes Bewegungskomandos an den Robotter schicken
 
 
 \subsection{ARNL}
+\begin{itemize}
+\item 4 Module:
+\item BaseArnl: Infrastukture, Pfadplanung, Pfadfolgen
+\item Lokalisierung mit Sonar (SonArnl), Laserscanner (Arnl) und GPS (Mogs)
+\end{itemize}
 ARNL(Advanced Robotics Navigation and Localization System) ist eine Teilbibliothek in ARIA um Navigations und Lokalisationsschnittstellen zur Verf\"ugung zu stellen. Die Lokalisationskomponente bietet eine Schnittstelle um den angeschlossenen Roboter zu lokalisieren. Sensor und Odometriedaten des Roboters werden in Verbindung mit einer vorhanden Umgebungskarte verwendet um die wahrscheinlichste Position des Roboters in der Karte zu bestimmen. \cite{arnl} 
 Die ARNL Bibliothek beinhaltet die Klasse ArLocalizationTask. Diese Klasse kann Daten vom Laserscanner (ArSick) auswerten um die Lokalisierung durchzufuehren. Abgesehen vom ArLocalizationTask gibt es noch andere Klassen fuer die Lokalisierung. Die Elternklasse ist ArBaseLocalizationTask in der BaseARNL Bibliothek. \cite{arnl}
 Um den ArLocalizationTask zu instanzieren m\"ussen Pointer von Instanzen der Typen ArRobot, ArRangeDevice und ArMapInterface (ArMap) uerbgeben werden.
@@ -79,7 +84,11 @@ Das Lokalisierungsmodul von ARNL benutzt die Monte-Carlo-Lokalisierung. Diese ba
 Um die Position eines Roboters zu berechnen, gibt es verschiedene Ansätze. Sie beruhen alle auf der Fusionierung von Daten, die durch die Odometrie und weitere Sensoren des Roboters geliefert werden. Gebräuchliche Sensoren für autonome Roboter sind Ultraschallsensoren oder Laserscanner.
 Diese Ansätze verwenden Methoden der Wahrscheinlichkeitsrechnung zur Bestimmung eine Wahrscheinlichkeitsverteilung über alle möglichen Positionen, an denen der Roboter sich befinden kann.
 
+in ARIA umgesetzt in ARNL
 
+leistungsfähiger, verbreiteter Ansatz
+vereint relative und absolute Postionierung als
+ Bewegungsmodellierung und Wahrnehmung der Umwelt
 
 \subsection{Beyes Filter}
 \subsection{Markov-Lokalisierung}
@@ -99,10 +108,30 @@ Der Grundgedanke bei der Monte Carlo Lokalisierung ist, das „Belief“
 auch „particles“ bezeichnet wird, darzustellen. MCL ist ein iterativer Bayes´scher
 Filter, welcher als ein Schätzer f\"ur die zuk\"unftige Wahrscheinlichkeitsverteilung
 der Roboterposition verwendet wird.
+Monte-Carlo-Lokalisierung
+\begin{itemize}
+\item MCL erlaubt elegante Fusion der Daten verschiedener Sensorik
+\item MCL skalierbar (Partikelanzahl)
+\item MCL effizient, bspw. dynamische Anpassung der Partikelanzahl (adaptiv)
 
-
-
-
+\item Particle filters are an implementation of recursive Bayesian filtering
+\item They represent the posterior by a set of weighted samples.
+\item In the context of localization, the particles are propagated according to the motion model.
+\item They are then weighted according to the likelihood of the observations.
+\item In a re-sampling step, new particles are drawn with a probability proportional to the likelihood of the observation.
+Monte Carlo Localization = Markov-Lokalisierung mit Abbildung der
+\item Wahrscheinlichkeit als Samplemenge (Partikelwolke)
+\item Sample = eine Position (x,y,θ)
+\item Prognose-Schritt: jedes Sample erzeugt ein neues Sample entsprechend
+unscharfem Bewegungsmodell -> neue Samplemenge bel‘
+\item Korekktur-Schritt:
+\item  Jedes Partikel aus bel‘ erhält ein Gewicht nach dem Sensormodell (wie eine
+Fitness, Übereinstimmung mit Wahrnehmung)
+\item  neue Samplemenge bel wird durch zufällige Selektion anhand der Fitness aus
+bel‘ erzeugt
+\item  ständige Evolution einer Partikelwolke anhand von Bewegungsbefehlen und
+Sensorwahrnehmung,
+\end{itemize}
 \section{Experimente}
 
 In einem Beispielprogramm wird ARNL und ArNetworking verwendet um einen Server zu erstellen. Clients wie MobileEyes koennen sich mit diesem Server verbinden. MobileEyes sendet anfragen an den Server um den Robotter zu steuern, die aktuelle Karte abzufragen, Lokalisierungsparameter zu setzen, Sensordaten abzufragen und den Robotter manuell wieder neu zu lokalisieren.
@@ -140,7 +169,6 @@ Um den Entfernungsfehlerverhaeltnissparameter zu testen wird der Drehfehlerparam
 
 
 Dieser Parameter kann dazu verwendet werden um die Lokalisation in bezug auf die Oberflaechenbeschaffenheit anzupassen. In einem h\"ugligem Gel\"ande kann der Roboter eine Steigung hochfahren sich aber im eigentlichen Sinne nicht so schnell weiterbewegen wie die Odometriedaten es uebermitteln. Desshalb muss dieser Parameter erh\"oht werden.
-
 
 Mit dem Drehfehlerparameter kann nach der Dokumentation in Anhang \ref{KDegPerDegDoc} die Unsicherheit der Drehung beeinflusst werden. Wenn der Robotter sich z.B. auf einem leicht unebenen Untergrund dreht ist die Drehung nicht eindeutig an den Odometriedaten nachvollziehbar. 
 Um diesen zu testen wird der Parameter zuerst auf 1 gesetzt und Entfernungsfehlerverhaeltnissparameter wieder auf null.
@@ -184,10 +212,10 @@ Zuerst wird der mittelwert der Abweichung durch das Arithmetische Mittel bestimm
 		\bar{y}=\frac{790+660}{2}=725mm
 	\end{equation}
 	\begin{equation}\label{getX}	
-		\theta_1=\sin x^{-1} \left( \frac{y}{r} \right) \cdot 2
+		\theta_1=\sin^{-1} \left( \frac{y}{r} \right) \cdot 2
 	\end{equation}
 	\begin{equation}\label{theta1}	
-		\theta_1=\sin x^{-1}\left(\frac{725}{1000} \right) \cdot 2 \approx 93^\circ
+		\theta_1=\sin^{-1}\left(\frac{725}{1000} \right) \cdot 2 \approx 93^\circ
 	\end{equation}	
   \caption{Berechnung fuer Abbildung \ref{KDegPerMm002}}
   \label{KDegPerMm002Calc}
@@ -198,10 +226,10 @@ Zuerst wird der mittelwert der Abweichung durch das Arithmetische Mittel bestimm
 		\bar{y}=\frac{430+320}{2}=375mm
 	\end{equation}
 	\begin{equation}\label{get001X}	
-		\theta_2=\sin x^{-1} \left( \frac{y}{r} \right) \cdot 2
+		\theta_2=\sin^{-1} \left( \frac{y}{r} \right) \cdot 2
 	\end{equation}
 	\begin{equation}\label{theta2}	
-		\theta_2=\sin x^{-1} \left( \frac{375}{1000} \right) \cdot 2 \approx 44^\circ
+		\theta_2=\sin^{-1} \left( \frac{375}{1000} \right) \cdot 2 \approx 44^\circ
 	\end{equation}	
   \caption{Berechnung fuer Abbildung \ref{KDegPerMm001}}
   \label{KDegPerMm001Calc}
@@ -212,11 +240,11 @@ Zuerst wird der mittelwert der Abweichung durch das Arithmetische Mittel bestimm
 		\bar{y}=\frac{190+200}{2}=195mm
 	\end{equation}
 	\begin{equation}\label{get0005X}	
-		\theta_3=\sin x^{-1} \left( \frac{y}{r} \right) \cdot 2
+		\theta_3=\sin^{-1} \left( \frac{y}{r} \right) \cdot 2
 	\end{equation}
 	\begin{equation}\label{theta3}	
-		\theta_3=\sin x^{-1} \left( \frac{195}{1000} \right) \cdot 2 \approx 23^\circ
-	\end{equation}	
+		\theta_3=\sin^{-1} \left( \frac{195}{1000} \right) \cdot 2 \approx 23^\circ
+	\end{equation}
   \caption{Berechnung fuer Abbildung \ref{KDegPerMm0005}}
   \label{KDegPerMm0005Calc}
 \end{figure}
@@ -243,6 +271,17 @@ Um die Rechnungen zu bestaetigen Rechnen wir den Wert aus welcher zu einem Fehle
   \label{KDegPerMm0005Calc}
 \end{figure}
 
+Die Bestaetigung liefert eine Einstellung von KDegPerMm = 0.04 welche eine $180^\circ$ ausgedehnte Partikelwolke aufspannt siehe Abbildung \ref{KDegPerMm004Test}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\textwidth]{img/KDegPerMm004.jpg}
+	\caption{KDegPerMm = 0.04}
+	  \label{KDegPerMm004Test}
+\end{figure}
+
+Somit laesst sich der Parameter nachvollziehen. Wenn man einen Winkel $\alpha$ erreichen will muss man Rechnen: $KDegPerMm = \alpha \cdot 2.22 \cdot 10^{-4}$
+Diese Rechnung ist nicht genau und wurde mit Rundungswerten ermittelt. 
 
 
 %LLS = Laser Localization Score =
@@ -251,6 +290,7 @@ Um die Rechnungen zu bestaetigen Rechnen wir den Wert aus welcher zu einem Fehle
 %mit der Sensorwahrnehmung
 %überein, Maximum 1.0
 \newpage
+
 
 \appendix
 \section{Appendix I}
@@ -392,99 +432,6 @@ Um die Rechnungen zu bestaetigen Rechnen wir den Wert aus welcher zu einem Fehle
                           be usually discarded Useful in cases where robot may
                           intersect map points such as during patrolbot
                           docking
-
-\paragraph{FuseAllSensors} false      ARNL uses a Kalman filter which allows you to
-                          combine the data from the MCL localization, the
-                          movement from the encoder between cycles and
-                          reflectors if mapped and seen by the laser. This
-                          advanced feature can be disabled to revert to the
-                          basic MCL localization, using this flag
-
-\paragraph{ReflectorVariance} 10000   minimum 0,  This number will be used as the variance
-                          of the (x, y) coords of the center of the reflectors
-                          in the R matrix of the Kalman filter.
-
-\paragraph{Qxx} 100                   minimum 0,  This is the first element of the
-                          diagonal covariance matrix which will define the
-                          error in the kalman model for the X axis.
-
-\paragraph{Qyy} 100                   minimum 0,  This is the second element of the
-                          diagonal covariance matrix which will define the
-                          error in the kalman model for the Y axis.
-
-\paragraph{Qtt} 1                     minimum 0,  This is the third element of the
-                          diagonal covariance matrix which will define the
-                          error in the kalman model for the Theta axis.
-
-\paragraph{ReflectorMatchDist} 1000   minimum 0,  When finding the closest reflector in
-                          the map to an observed reflection, this is the
-                          maximum distance the system will search to find the
-                          closest reflector.
-
-\paragraph{ReflectorMaxRange} 32000   minimum 0,  This is the maximum distance that the
-                          SICK lrf is capable of seeing a reflector. (This is
-                          smaller than the max range of the regular SICK
-                          readings)
-
-\paragraph{ReflectorMaxAngle} 45      minimum 0,  This is the maximum angle of incidence
-                          that the SICK lrf is capable of seeing a reflector
-                          at. (This is much smaller than the angle that the
-                          regular SICK readings are capable of returning)
-
-\paragraph{UseReflectorCenters} true  The Kalman filter matches the returns from the laser
-                          reflectors to the reflectors in the map. When there
-                          are more than one ray from one reflector, this flag
-                          will bunch the rays into groups and match the center
-                          ray with the center of the reflector. If the flag is
-                          set to false, the rays are matched to the point on
-                          the reflector by line intersection. This involves
-                          more computation but may be more accurate.
-
-\paragraph{Triangulate} false         The regular Kalman filter tries to fuse the encoder
-                          pose and the data from the reflectors. This is an
-                          incremental process which will eventually converge
-                          to the right pose within a few iterations depending
-                          on the uncetainity models of the sensors. But, when
-                          the robot is lost, and it sees more than one
-                          reflector, the pose can be computed directly using a
-                          closed form solution. The key qualifier is that the
-                          curent pose of the robot is close enough to match
-                          the reflectors.
-
-\paragraph{TriangulateScoreThreshold} 0.5  When the map of the environment is very close
-                          to the actual environment the robot encounters, the
-                          triangulation using a few reflectors can actually
-                          worsen the localization. This is due to the fact
-                          that the uncertainity in combining the few
-                          reflectors and their location usually is worse than
-                          the uncertainity from using all the laser range
-                          values from the MCL.The triangulation will kick in
-                          only if the MCL score drops below this value.
-
-\paragraph{AdjustNumSamplesFlag} false  The number of samples is by default kept high to
-                          keep the robot from losing localization even after
-                          initialization. This number can be lowered during
-                          motion in places of the map where the localization
-                          score is high to reduce the computation load. Set
-                          this flag to true if you want to vary the number of
-                          samples with the localization score. (As the score
-                          drops the no of samples will rise)
-
-\paragraph{MinNumSamples} 200         minumum 0,  When the AdjustSamplesFlag is set to
-                          true the number of samples is reduced as the
-                          localization score rises. But, this will be the
-                          lowest number it will be reduced to.
-
-\paragraph{NumSamplesAngleFactor} 1   minimum 0,  When the AdjustSamplesFlag is set to
-                          true the number of samples is reduced as the
-                          localization score rises. But, when the robot has
-                          rotated significantly, it needs more samples than if
-                          it had only moved in translation. A bigger angle
-                          factor will cause the no of samples to not drop as
-                          fast when the localization is triggered due to
-                          rotation.
-
-
 
 
 

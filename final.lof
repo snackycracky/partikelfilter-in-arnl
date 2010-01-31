@@ -1,15 +1,16 @@
 \select@language {german}
-\contentsline {figure}{\numberline {1}{\ignorespaces KMmPerMm = 0.5\relax }}{4}
-\contentsline {figure}{\numberline {2}{\ignorespaces KDegPerDeg Parameter Test\relax }}{4}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {KDegPerDeg = 1}}}{4}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {KDegPerDeg = 0.5}}}{4}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {KDegPerDeg = 0.25}}}{4}
-\contentsline {figure}{\numberline {3}{\ignorespaces KDegPerMm Parameter Test\relax }}{5}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {KDegPerMm = 0.02}}}{5}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {KDegPerMm = 0.01}}}{5}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {KDegPerMm = 0.005}}}{5}
-\contentsline {figure}{\numberline {4}{\ignorespaces Winkelfunktionen im Einheitskreis \relax }}{6}
-\contentsline {figure}{\numberline {5}{\ignorespaces Berechnung fuer Abbildung \ref {KDegPerMm002}\relax }}{6}
-\contentsline {figure}{\numberline {6}{\ignorespaces Berechnung fuer Abbildung \ref {KDegPerMm001}\relax }}{6}
-\contentsline {figure}{\numberline {7}{\ignorespaces Berechnung fuer Abbildung \ref {KDegPerMm0005}\relax }}{7}
-\contentsline {figure}{\numberline {8}{\ignorespaces Test der Berechnungen in Abbildung \ref {theta1},\ref {theta2},\ref {theta3}\relax }}{7}
+\contentsline {figure}{\numberline {1}{\ignorespaces KMmPerMm = 0.5\relax }}{5}
+\contentsline {figure}{\numberline {2}{\ignorespaces KDegPerDeg Parameter Test\relax }}{5}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {KDegPerDeg = 1}}}{5}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {KDegPerDeg = 0.5}}}{5}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {KDegPerDeg = 0.25}}}{5}
+\contentsline {figure}{\numberline {3}{\ignorespaces KDegPerMm Parameter Test\relax }}{6}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {KDegPerMm = 0.02}}}{6}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {KDegPerMm = 0.01}}}{6}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {KDegPerMm = 0.005}}}{6}
+\contentsline {figure}{\numberline {4}{\ignorespaces Winkelfunktionen im Einheitskreis \relax }}{7}
+\contentsline {figure}{\numberline {5}{\ignorespaces Berechnung fuer Abbildung \ref {KDegPerMm002}\relax }}{7}
+\contentsline {figure}{\numberline {6}{\ignorespaces Berechnung fuer Abbildung \ref {KDegPerMm001}\relax }}{7}
+\contentsline {figure}{\numberline {7}{\ignorespaces Berechnung fuer Abbildung \ref {KDegPerMm0005}\relax }}{8}
+\contentsline {figure}{\numberline {8}{\ignorespaces Test der Berechnungen in Abbildung \ref {theta1},\ref {theta2},\ref {theta3}\relax }}{8}
+\contentsline {figure}{\numberline {9}{\ignorespaces KDegPerMm = 0.04\relax }}{8}
