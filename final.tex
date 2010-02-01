@@ -262,6 +262,36 @@ Die Bestaetigung liefert eine Einstellung von KDegPerMm = 0.04 welche eine $180^
 Somit laesst sich der Parameter nachvollziehen. Wenn man einen Winkel $\alpha$ erreichen will muss man Rechnen: $KDegPerMm = \alpha \cdot 2.22 \cdot 10^{-4}$
 Diese Rechnung ist nicht genau und wurde mit Rundungswerten ermittelt. 
 
+\subsection{Globale Positionierung}
+Wenn die Initiale Position des Roboters nicht bekannt ist, dann werden Samples ausgestreut. Die Menge der ausgestreuten Samples und deren Verteilung wird u.a. durch die Parameter NumSamplesAtInit, StdX, StdY und StdTh eingestellt.
+Um diese Parameter zu testen werden Extremwerte verwendet. Die Parametereinstellung in Listing \ref{stdx4000stdy0stdth1Test},\ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} soll verdeutlichen welche Auswirkungen eine Eindimensionale Ausbreitung auf der X Achse fuer Konsequenzen mit sich ziehen. In Abbildung \ref{stdx4000stdy0stdth1Test} wird dies bestaetigt.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{img/stdx4000stdy0stdth1.png}
+	\caption{\\ NumSamplesAtInit = 20000, \\ StdX = 4000,\\ StdY = 0,\\ StdTh = 1}
+	\label{stdx4000stdy0stdth1Test}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{img/stdx2000stdy0stdth1.png}
+	\caption{\\ NumSamplesAtInit = 20000, \\ StdX = 2000,\\ StdY = 0,\\ StdTh = 1}
+	\label{stdx2000stdy0stdth1Test}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{img/stdx1000stdy0stdth1.png}
+	\caption{\\ NumSamplesAtInit = 20000, \\ StdX = 1000,\\ StdY = 0,\\ StdTh = 1}
+	\label{stdx1000stdy0stdth1Test}
+\end{figure}
+
+
+
+
+
 \section{Nutzung der Lokalisierung in eigenen Programmen}
 
 ARNL(Advanced Robotics Navigation and Localization System) ist eine Teilbibliothek in ARIA um Navigations und Lokalisationsschnittstellen zur Verf\"ugung zu stellen. Die Lokalisationskomponente bietet eine Schnittstelle um den angeschlossenen Roboter zu lokalisieren. Sensor und Odometriedaten des Roboters werden in Verbindung mit einer vorhanden Umgebungskarte verwendet um die wahrscheinlichste Position des Roboters in der Karte zu bestimmen. \cite{arnl} 
@@ -342,7 +372,7 @@ Aria::getConfig()->parseFile (Arnl::getTypicalParamFileName() )
                           localization. This is also the maximum no of samples
                           which will be used for localization if no of samples
                           are varied along with the localization score.
-
+\paragraph{NumSamplesAtInit} Number of pose samples for MCL when initializing the robot in the Map.
 \paragraph{GridRes} 100               minimum 10,  The resolution of the occupancy grid
                           representing the map in mm. Smaller resolution
                           results in more accuracy but more computation.

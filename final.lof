@@ -14,3 +14,6 @@
 \contentsline {figure}{\numberline {7}{\ignorespaces Berechnung fuer Abbildung \ref {KDegPerMm0005}\relax }}{8}
 \contentsline {figure}{\numberline {8}{\ignorespaces Test der Berechnungen in Abbildung \ref {theta1},\ref {theta2},\ref {theta3}\relax }}{8}
 \contentsline {figure}{\numberline {9}{\ignorespaces KDegPerMm = 0.04\relax }}{8}
+\contentsline {figure}{\numberline {10}{\ignorespaces NumSamplesAtInit = 20000, StdX = 4000, StdY = 0, StdTh = 1\relax }}{9}
+\contentsline {figure}{\numberline {11}{\ignorespaces NumSamplesAtInit = 20000, StdX = 2000, StdY = 0, StdTh = 1\relax }}{9}
+\contentsline {figure}{\numberline {12}{\ignorespaces NumSamplesAtInit = 20000, StdX = 1000, StdY = 0, StdTh = 1\relax }}{9}
