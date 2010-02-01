@@ -11,7 +11,7 @@
 \contentsline {subsection}{\numberline {3.4}Partikelfilter}{3}
 \contentsline {subsection}{\numberline {3.5}Monte-Carlo-Lokalisierung}{3}
 \contentsline {section}{\numberline {4}Experimente}{4}
-\contentsline {subsection}{\numberline {4.1}globale Positionierung}{9}
+\contentsline {subsection}{\numberline {4.1}Globale Positionierung}{9}
 \contentsline {section}{\numberline {5}Nutzung der Lokalisierung in eigenen Programmen}{10}
 \contentsline {section}{\numberline {6}Zusammenfassung und Ausblick}{12}
 \contentsline {section}{\numberline {A}Appendix I}{13}

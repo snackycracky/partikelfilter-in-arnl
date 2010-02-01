@@ -263,8 +263,6 @@ Somit laesst sich der Parameter nachvollziehen. Wenn man einen Winkel $\alpha$ e
 Diese Rechnung ist nicht genau und wurde mit Rundungswerten ermittelt. 
 
 \subsection{Globale Positionierung}
-Wenn die Initiale Position des Roboters nicht bekannt ist, dann werden Samples ausgestreut. Die Menge der ausgestreuten Samples und deren Verteilung wird u.a. durch die Parameter NumSamplesAtInit, StdX, StdY und StdTh eingestellt.
-Um diese Parameter zu testen werden Extremwerte verwendet. Die Parametereinstellung in Listing \ref{stdx4000stdy0stdth1Test},\ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} soll verdeutlichen welche Auswirkungen eine Eindimensionale Ausbreitung auf der X Achse fuer Konsequenzen mit sich ziehen. In Abbildung \ref{stdx4000stdy0stdth1Test} wird dies bestaetigt.
 
 
 \begin{figure}
@@ -289,7 +287,9 @@ Um diese Parameter zu testen werden Extremwerte verwendet. Die Parametereinstell
 \end{figure}
 
 
-
+Wenn die Initiale Position des Roboters nicht bekannt ist, dann werden Samples ausgestreut. Die Menge der ausgestreuten Samples und deren Verteilung wird u.a. durch die Parameter NumSamplesAtInit, StdX, StdY und StdTh eingestellt.
+Um diese Parameter zu testen werden Extremwerte verwendet. Die Parametereinstellung in Abbildung \ref{stdx4000stdy0stdth1Test},\ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} soll verdeutlichen welche Auswirkungen eine Eindimensionale Ausbreitung auf der X Achse fuer Konsequenzen mit sich ziehen. 
+Die Streuung der Samples bei einem Wert von StdX = 4000mm ist nicht wie erwartet 4000mm in Richtung der X Achse sondern 2400mm wie in Abbildung \ref{stdx4000stdy0stdth1Test}. Der eigentliche Wirkung von StdX ist also  $\approx \left(StdX/2\right)+(\frac{StdX}{10})$ mm. Und nicht wie angenommen $StdX$ mm. In Abbildung \ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} wird dies bestaetigt.
 
 
 \section{Nutzung der Lokalisierung in eigenen Programmen}
