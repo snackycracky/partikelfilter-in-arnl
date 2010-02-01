@@ -264,15 +264,11 @@ Diese Rechnung ist nicht genau und wurde mit Rundungswerten ermittelt.
 
 \section{Nutzung der Lokalisierung in eigenen Programmen}
 
-\subsection{ARNL}
-\begin{itemize}
-\item 4 Module:
-\item BaseArnl: Infrastukture, Pfadplanung, Pfadfolgen
-\item Lokalisierung mit Sonar (SonArnl), Laserscanner (Arnl) und GPS (Mogs)
-\end{itemize}
 ARNL(Advanced Robotics Navigation and Localization System) ist eine Teilbibliothek in ARIA um Navigations und Lokalisationsschnittstellen zur Verf\"ugung zu stellen. Die Lokalisationskomponente bietet eine Schnittstelle um den angeschlossenen Roboter zu lokalisieren. Sensor und Odometriedaten des Roboters werden in Verbindung mit einer vorhanden Umgebungskarte verwendet um die wahrscheinlichste Position des Roboters in der Karte zu bestimmen. \cite{arnl} 
-Die ARNL Bibliothek beinhaltet die Klasse ArLocalizationTask. Diese Klasse kann Daten vom Laserscanner (ArSick) auswerten um die Lokalisierung durchzufuehren. Abgesehen vom ArLocalizationTask gibt es noch andere Klassen fuer die Lokalisierung. Die Elternklasse ist ArBaseLocalizationTask in der BaseARNL Bibliothek. \cite{arnl}
-Um den ArLocalizationTask zu instanzieren m\"ussen Pointer von Instanzen der Typen ArRobot, ArRangeDevice und ArMapInterface (ArMap) uerbgeben werden.
+Die ARNL Bibliothek beinhaltet Lokalisierung mit Sonar (SonArnl), Laserscanner (Arnl) und GPS (Mogs). Die Klasse ArLocalizationTask kann Daten vom Laserscanner (ArSick) auswerten um die Lokalisierung durchzufuehren. Abgesehen vom ArLocalizationTask gibt es noch andere Klassen fuer die Lokalisierung. Die Elternklasse ist ArBaseLocalizationTask in der BaseARNL Bibliothek. \cite{arnl}
+Um den ArLocalizationTask zu instanzieren m\"ussen Pointer von Instanzen der Typen ArRobot, ArRangeDevice und ArMapInterface (ArMap) uerbgeben werden. Eine Karte kann durch senorDaten erzeugt werden aber auch durch das Program Mapper3. Die Instanz von ArLocalizationTask startet einen eigenen asynchronen Hintergrund-thread um anhand des Lasersensors wiederholend den Roboter zu lokalisieren. Die Position wird anhand der Berechnungen im ArLocalizationTask neu gesetzt.
+
+
 \lstset{language=C++}
 \begin{lstlisting}
 #include "ArLocalizationTask.h"
@@ -286,7 +282,35 @@ ArMap map(fileDir);
 ArLocalizationTask locTask(&robot, firstLaser, &map);
 \end{lstlisting}
 Um eine initiale Lokalierung durchzufuehren muss die Methode localizeRobotAtHomeBlocking ohne Parameter aufgerufen werden.
+Eine Instanz von ArLocalizationManager erlaubt Ausgabedaten von verschiedenen Lokalisationsthreads zu vereinigen. Durch die Methode addLocalizationTask kann eine neue Instanz von ArBaseLocalizationTask wie z.B. ArSonarLocalizationTask oder ArLocalizationTask hinzugefuegt werden. Durch die Methode fuseTwoDistributions kann man die Daten fusionieren.
+\lstset{language=C++}
+\begin{lstlisting}
+ArLocalizationManager locManager(&robot, &arMap);
+ArLocalizationTask locTask (&robot, &sick, &arMap);
+locManager.addLocalizationTask(&locTask);
+\end{lstlisting}
 
+Die KonfigurationsDatei arnl.p ist fuer eine erfolgreiche Lokalisation notwendig. Darin befinden sich u.a. Einstellungen fuer die Monte-Carlo-Lokalisation.
+Diese Konfigurationsdatei wird durch einen Parser ausgelesen:
+
+\lstset{language=C++}
+\begin{lstlisting}
+ArArgumentParser parser(&argc, argv);
+parser.loadDefaultArguments();
+...
+// Create service that allows client to change configuration parameters in ArConfig 
+ArServerHandlerConfig handlerConfig (
+	&server, Aria::getConfig (),
+	Arnl::getTypicalDefaultParamFileName (),
+	Aria::getDirectory ()
+);
+
+// Read in parameter files.
+Aria::getConfig()->useArgumentParser(&parser);
+Aria::getConfig()->parseFile (Arnl::getTypicalParamFileName() )
+\end{lstlisting}
+
+\newpage
 
 
 
@@ -463,7 +487,6 @@ Weitere Parameter betreffen den Kalman Filter welcher nicht Bestandteil dieser A
 			\url{http://www.ais.fraunhofer.de/~delipetk}
 	
 	
-	fox 1999 mcl: efficient
 	
 	
 	\bibitem[ARNL-Ref]{arnl-ref} MobileRobots Inc, \emph{ARNL-Reference}, (1.7.0) available at 				
