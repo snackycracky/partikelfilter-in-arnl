@@ -47,28 +47,6 @@ MobileEyes kann sich mit ARIA, ArNetworking und ARNL Server verbinden und dessen
 Unter anderem kann man mit MobileEyes Bewegungskomandos an den Robotter schicken.\cite{whitbrook1}
 
 
-\subsection{ARNL}
-\begin{itemize}
-\item 4 Module:
-\item BaseArnl: Infrastukture, Pfadplanung, Pfadfolgen
-\item Lokalisierung mit Sonar (SonArnl), Laserscanner (Arnl) und GPS (Mogs)
-\end{itemize}
-ARNL(Advanced Robotics Navigation and Localization System) ist eine Teilbibliothek in ARIA um Navigations und Lokalisationsschnittstellen zur Verf\"ugung zu stellen. Die Lokalisationskomponente bietet eine Schnittstelle um den angeschlossenen Roboter zu lokalisieren. Sensor und Odometriedaten des Roboters werden in Verbindung mit einer vorhanden Umgebungskarte verwendet um die wahrscheinlichste Position des Roboters in der Karte zu bestimmen. \cite{arnl} 
-Die ARNL Bibliothek beinhaltet die Klasse ArLocalizationTask. Diese Klasse kann Daten vom Laserscanner (ArSick) auswerten um die Lokalisierung durchzufuehren. Abgesehen vom ArLocalizationTask gibt es noch andere Klassen fuer die Lokalisierung. Die Elternklasse ist ArBaseLocalizationTask in der BaseARNL Bibliothek. \cite{arnl}
-Um den ArLocalizationTask zu instanzieren m\"ussen Pointer von Instanzen der Typen ArRobot, ArRangeDevice und ArMapInterface (ArMap) uerbgeben werden.
-\lstset{language=C++}
-\begin{lstlisting}
-#include "ArLocalizationTask.h"
-...
-ArRobot robot;
-...
-ArLaser *firstLaser = robot.findLaser(1);
-...
-ArMap map(fileDir);
-...
-ArLocalizationTask locTask(&robot, firstLaser, &map);
-\end{lstlisting}
-Um eine initiale Lokalierung durchzufuehren muss die Methode localizeRobotAtHomeBlocking ohne Parameter aufgerufen werden.
 
 
 
@@ -286,13 +264,40 @@ Diese Rechnung ist nicht genau und wurde mit Rundungswerten ermittelt.
 
 \section{Nutzung der Lokalisierung in eigenen Programmen}
 
+\subsection{ARNL}
+\begin{itemize}
+\item 4 Module:
+\item BaseArnl: Infrastukture, Pfadplanung, Pfadfolgen
+\item Lokalisierung mit Sonar (SonArnl), Laserscanner (Arnl) und GPS (Mogs)
+\end{itemize}
+ARNL(Advanced Robotics Navigation and Localization System) ist eine Teilbibliothek in ARIA um Navigations und Lokalisationsschnittstellen zur Verf\"ugung zu stellen. Die Lokalisationskomponente bietet eine Schnittstelle um den angeschlossenen Roboter zu lokalisieren. Sensor und Odometriedaten des Roboters werden in Verbindung mit einer vorhanden Umgebungskarte verwendet um die wahrscheinlichste Position des Roboters in der Karte zu bestimmen. \cite{arnl} 
+Die ARNL Bibliothek beinhaltet die Klasse ArLocalizationTask. Diese Klasse kann Daten vom Laserscanner (ArSick) auswerten um die Lokalisierung durchzufuehren. Abgesehen vom ArLocalizationTask gibt es noch andere Klassen fuer die Lokalisierung. Die Elternklasse ist ArBaseLocalizationTask in der BaseARNL Bibliothek. \cite{arnl}
+Um den ArLocalizationTask zu instanzieren m\"ussen Pointer von Instanzen der Typen ArRobot, ArRangeDevice und ArMapInterface (ArMap) uerbgeben werden.
+\lstset{language=C++}
+\begin{lstlisting}
+#include "ArLocalizationTask.h"
+...
+ArRobot robot;
+...
+ArLaser *firstLaser = robot.findLaser(1);
+...
+ArMap map(fileDir);
+...
+ArLocalizationTask locTask(&robot, firstLaser, &map);
+\end{lstlisting}
+Um eine initiale Lokalierung durchzufuehren muss die Methode localizeRobotAtHomeBlocking ohne Parameter aufgerufen werden.
+
+
+
+
+\begin{comment}
 Die ArLocalizationTask-Instanz ist Teil des lokalen ArnlServers. Es besteht die Moeglichkeit einen echten Pioneer Roboter anzuschliessen oder das Programm MobileSim fuer eine Simulation des Roboters einzuschalten. 
 MobileEyes ist eine Graphische Applikation um den Roboter zu ueberwachen und zu steuern. Das Protokoll ArNetworking wird verwendet um zum Serverprogramm auf dem onboard Computer des Roboters eine Verbindung herzustellen. \\ \\
 Als Motivationsanstoss fuer eine eigene Implementierung der Lokalisation ist die Ueberlegung MobileEyes zu ersetzen und ein eigenes Programm zu schreiben.
 Hypotetisch sollen alle funktionen die MobileEyes hat auch in dem Program vorhanden sein. Es soll sich mit dem ARNLServer verbinden koennen um darueber Informationen zum Roboter schicken zu koennen und um Informationen vom Roboter zu erhalten. Zusaetzlich zu den Funktionen soll das Eigene Program ueber die Moeglichkeit verfuegen nicht systematische Odometriefehler an den Server zu schicken um die Lokalisierungsparameter zu veraendern.
 nicht systematische Fehler sind z.B. unebene Gebiete, auftauchen von unerwarteten Objekten, rutschige Untergruende die die Position beeinflussen wie z.B. ueberdrehen der Raeder, zu schnelles Drehen bei Rotation usw.\cite{Borens1996} \\ \\
 Angenommen ein Pioneer Robotter kann Oelpfuetzen durch eine Kamera erkennen oder ein Abbild einer unebenen Flaeche wahrnehmen. Diese Daten sollte der Roboter zum Server schicken. Das eigene Programm soll jetzt diese Daten verwerten koennen und die Parameter fuer Lokalisation dementprechend anpassen. Wenn der Roboter z.B. ueber eine Oelpfuetze faehrt sollen die Partikelstreuparameter wie PeturbX,PeturbY,PeturbTh sowie KMmPerMm, KDegPerDeg und KDegPerMm erhoeht werden. Wenn der Roboter ueber die Pfuetz hinweg ist, ist die Partikelwolke groesser und es ist wahrscheinlicher, das ein Sample die wirkliche Position des Roboters repraesentiert.
-
+\end{comment}
 
 \section{Zusammenfassung und Ausblick}
 
@@ -300,7 +305,7 @@ Angenommen ein Pioneer Robotter kann Oelpfuetzen durch eine Kamera erkennen oder
 %3 parameter ausreichend getestet und die anderen uebersetzt
 %mitternacht oder mittag
 %eigenes programm = mobile eyes ersetzen?
-%mailinglisten
+% mailinglisten
 
 
 %LLS = Laser Localization Score =
@@ -451,8 +456,8 @@ Angenommen ein Pioneer Robotter kann Oelpfuetzen durch eine Kamera erkennen oder
                           be usually discarded Useful in cases where robot may
                           intersect map points such as during patrolbot
                           docking
-
-
+\paragraph{Kalman Filter}
+Weitere Parameter betreffen den Kalman Filter welcher nicht Bestandteil dieser Arbeit ist. 
 
 \bibliographystyle{abbrv}
 \bibliography{main}
@@ -467,7 +472,7 @@ Angenommen ein Pioneer Robotter kann Oelpfuetzen durch eine Kamera erkennen oder
 			\url{http://www.ais.fraunhofer.de/~delipetk}
 	
 	
-	
+	fox 1999 mcl: efficient
 	
 	
 	\bibitem[ARNL-Ref]{arnl-ref} MobileRobots Inc, \emph{ARNL-Reference}, (1.7.0) available at 				

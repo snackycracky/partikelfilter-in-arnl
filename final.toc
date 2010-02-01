@@ -13,6 +13,7 @@
 \contentsline {subsection}{\numberline {3.5}Monte-Carlo-Lokalisierung}{3}
 \contentsline {section}{\numberline {4}Experimente}{4}
 \contentsline {section}{\numberline {5}Nutzung der Lokalisierung in eigenen Programmen}{10}
+\contentsline {section}{\numberline {6}Zusammenfassung und Ausblick}{10}
 \contentsline {section}{\numberline {A}Appendix I}{11}
 \contentsline {paragraph}{Map}{11}
 \contentsline {paragraph}{NumSamples}{11}
@@ -46,3 +47,4 @@
 \contentsline {paragraph}{OccThreshold}{13}
 \contentsline {paragraph}{AngleIncrement}{13}
 \contentsline {paragraph}{DiscardThreshold}{13}
+\contentsline {paragraph}{Kalman Filter}{13}
