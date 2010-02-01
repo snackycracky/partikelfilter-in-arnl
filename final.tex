@@ -290,15 +290,6 @@ Um eine initiale Lokalierung durchzufuehren muss die Methode localizeRobotAtHome
 
 
 
-\begin{comment}
-Die ArLocalizationTask-Instanz ist Teil des lokalen ArnlServers. Es besteht die Moeglichkeit einen echten Pioneer Roboter anzuschliessen oder das Programm MobileSim fuer eine Simulation des Roboters einzuschalten. 
-MobileEyes ist eine Graphische Applikation um den Roboter zu ueberwachen und zu steuern. Das Protokoll ArNetworking wird verwendet um zum Serverprogramm auf dem onboard Computer des Roboters eine Verbindung herzustellen. \\ \\
-Als Motivationsanstoss fuer eine eigene Implementierung der Lokalisation ist die Ueberlegung MobileEyes zu ersetzen und ein eigenes Programm zu schreiben.
-Hypotetisch sollen alle funktionen die MobileEyes hat auch in dem Program vorhanden sein. Es soll sich mit dem ARNLServer verbinden koennen um darueber Informationen zum Roboter schicken zu koennen und um Informationen vom Roboter zu erhalten. Zusaetzlich zu den Funktionen soll das Eigene Program ueber die Moeglichkeit verfuegen nicht systematische Odometriefehler an den Server zu schicken um die Lokalisierungsparameter zu veraendern.
-nicht systematische Fehler sind z.B. unebene Gebiete, auftauchen von unerwarteten Objekten, rutschige Untergruende die die Position beeinflussen wie z.B. ueberdrehen der Raeder, zu schnelles Drehen bei Rotation usw.\cite{Borens1996} \\ \\
-Angenommen ein Pioneer Robotter kann Oelpfuetzen durch eine Kamera erkennen oder ein Abbild einer unebenen Flaeche wahrnehmen. Diese Daten sollte der Roboter zum Server schicken. Das eigene Programm soll jetzt diese Daten verwerten koennen und die Parameter fuer Lokalisation dementprechend anpassen. Wenn der Roboter z.B. ueber eine Oelpfuetze faehrt sollen die Partikelstreuparameter wie PeturbX,PeturbY,PeturbTh sowie KMmPerMm, KDegPerDeg und KDegPerMm erhoeht werden. Wenn der Roboter ueber die Pfuetz hinweg ist, ist die Partikelwolke groesser und es ist wahrscheinlicher, das ein Sample die wirkliche Position des Roboters repraesentiert.
-\end{comment}
-
 \section{Zusammenfassung und Ausblick}
 
 
