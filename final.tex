@@ -19,7 +19,8 @@
 %\begin{abstract}
 %\end{abstract}
 
-
+\tableofcontents
+\listoftables
 
 \section{Aufgabenstellung}
 Es soll die monte-carlo-lokalisierung in Arnl untersucht werden. Durch Experimente und Recherche soll der genaue Ablauf des Partikelfilters und die Wirkung der Parameter dargestellt werden. Ausserdem soll geklaert werden wie die lokalisierung in eigenen programmen genutzt werden kann.
@@ -282,6 +283,12 @@ Die Bestaetigung liefert eine Einstellung von KDegPerMm = 0.04 welche eine $180^
 
 Somit laesst sich der Parameter nachvollziehen. Wenn man einen Winkel $\alpha$ erreichen will muss man Rechnen: $KDegPerMm = \alpha \cdot 2.22 \cdot 10^{-4}$
 Diese Rechnung ist nicht genau und wurde mit Rundungswerten ermittelt. 
+
+\section{Nutzung der Lokalisierung in eigenen Programmen}
+
+Die ArLocalizationTask-Instanz ist Teil des ArnlServers. Es besteht die Moeglichkeit einen echten Pioneer Roboter anzuschliessen oder das Programm MobileSim fuer eine Simulation des Roboters einzuschalten. 
+MobileEyes ist eine Graphische Applikation um den Roboter zu ueberwachen und zu steuern. Das Protokoll ArNetworking wird verwendet um zum ServerProgramm auf dem onboard Computer des Roboters eine Verbindung herzustellen.
+
 
 
 %LLS = Laser Localization Score =
