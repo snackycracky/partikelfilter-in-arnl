@@ -286,9 +286,21 @@ Diese Rechnung ist nicht genau und wurde mit Rundungswerten ermittelt.
 
 \section{Nutzung der Lokalisierung in eigenen Programmen}
 
-Die ArLocalizationTask-Instanz ist Teil des ArnlServers. Es besteht die Moeglichkeit einen echten Pioneer Roboter anzuschliessen oder das Programm MobileSim fuer eine Simulation des Roboters einzuschalten. 
-MobileEyes ist eine Graphische Applikation um den Roboter zu ueberwachen und zu steuern. Das Protokoll ArNetworking wird verwendet um zum ServerProgramm auf dem onboard Computer des Roboters eine Verbindung herzustellen.
+Die ArLocalizationTask-Instanz ist Teil des lokalen ArnlServers. Es besteht die Moeglichkeit einen echten Pioneer Roboter anzuschliessen oder das Programm MobileSim fuer eine Simulation des Roboters einzuschalten. 
+MobileEyes ist eine Graphische Applikation um den Roboter zu ueberwachen und zu steuern. Das Protokoll ArNetworking wird verwendet um zum Serverprogramm auf dem onboard Computer des Roboters eine Verbindung herzustellen. \\ \\
+Als Motivationsanstoss fuer eine eigene Implementierung der Lokalisation ist die Ueberlegung MobileEyes zu ersetzen und ein eigenes Programm zu schreiben.
+Hypotetisch sollen alle funktionen die MobileEyes hat auch in dem Program vorhanden sein. Es soll sich mit dem ARNLServer verbinden koennen um darueber Informationen zum Roboter schicken zu koennen und um Informationen vom Roboter zu erhalten. Zusaetzlich zu den Funktionen soll das Eigene Program ueber die Moeglichkeit verfuegen nicht systematische Odometriefehler an den Server zu schicken um die Lokalisierungsparameter zu veraendern.
+nicht systematische Fehler sind z.B. unebene Gebiete, auftauchen von unerwarteten Objekten, rutschige Untergruende die die Position beeinflussen wie z.B. ueberdrehen der Raeder, zu schnelles Drehen bei Rotation usw.\cite{Borens1996} \\ \\
+Angenommen ein Pioneer Robotter kann Oelpfuetzen durch eine Kamera erkennen oder ein Abbild einer unebenen Flaeche wahrnehmen. Diese Daten sollte der Roboter zum Server schicken. Das eigene Programm soll jetzt diese Daten verwerten koennen und die Parameter fuer Lokalisation dementprechend anpassen. Wenn der Roboter z.B. ueber eine Oelpfuetze faehrt sollen die Partikelstreuparameter wie PeturbX,PeturbY,PeturbTh sowie KMmPerMm, KDegPerDeg und KDegPerMm erhoeht werden. Wenn der Roboter ueber die Pfuetz hinweg ist, ist die Partikelwolke groesser und es ist wahrscheinlicher, das ein Sample die wirkliche Position des Roboters repraesentiert.
 
+
+\section{Zusammenfassung und Ausblick}
+
+
+%3 parameter ausreichend getestet und die anderen uebersetzt
+%mitternacht oder mittag
+%eigenes programm = mobile eyes ersetzen?
+%mailinglisten
 
 
 %LLS = Laser Localization Score =
@@ -380,17 +392,17 @@ MobileEyes ist eine Graphische Applikation um den Roboter zu ueberwachen und zu 
 \paragraph{FailedTh} 45               minimum 0,  Range of the angle in degs to distribute
                           samples after localization fails.
 
-\paragraph{PeturbX} 10                minimum 0,  After sensor correction and resampling
+\paragraph{PeturbX}\label{PeturbX} 10                minimum 0,  After sensor correction and resampling
                           the chosen pose is perturbed to generate a new
                           sample. This parameter decides the range to peturb
                           the X axis in mm.
 
-\paragraph{PeturbY} 10                minimum 0,  After sensor correction and resampling
+\paragraph{PeturbY}\label{PeturbY} 10                minimum 0,  After sensor correction and resampling
                           the chosen pose is perturbed to generate a new
                           sample. This parameter decides the range to peturb
                           the Y axis in mm.
 
-\paragraph{PeturbTh} 1                minimum 0,  After sensor correction and resampling
+\paragraph{PeturbTh}\label{PeturbTh} 1                minimum 0,  After sensor correction and resampling
                           the chosen pose is perturbed to generate a new
                           sample. This parameter decides the range to peturb
                           the angle in degs.
@@ -462,6 +474,7 @@ MobileEyes ist eine Graphische Applikation um den Roboter zu ueberwachen und zu 
 	\url{http://vigir.missouri.edu/~gdesouza/Research/MobileRobotics/Software/ARNL-SONARNL/Arnl-1.7.0+gcc41/docs/ARNL-Reference/index.html}.
 	
 	
+	\bibitem[Borens 1996]{Borens1996} Borenstein, J., Everett, H.R., Feng, L., April 1996, Where am I? Sensors and Methods for Mobile Robot Positioning. Technical Report, The University of Michigan. Seite 131 Chapter 5: Dead-Reckoning
 	
 	
 	\bibitem[Whitbrook1]{whitbrook1}
