@@ -2,50 +2,51 @@
 \contentsline {section}{\numberline {1}Aufgabenstellung}{1}
 \contentsline {section}{\numberline {2}Einf\"uhrung}{2}
 \contentsline {subsection}{\numberline {2.1}ARIA}{2}
-\contentsline {subsection}{\numberline {2.2}ArNetworking}{2}
-\contentsline {subsection}{\numberline {2.3}MobileEyes}{2}
-\contentsline {section}{\numberline {3}Theoretischer Hintergrund}{2}
-\contentsline {subsection}{\numberline {3.1}Probabilistische Lokalisierung}{2}
-\contentsline {subsection}{\numberline {3.2}Beyes Filter}{2}
-\contentsline {subsection}{\numberline {3.3}Markov-Lokalisierung}{2}
-\contentsline {subsection}{\numberline {3.4}Partikelfilter}{3}
-\contentsline {subsection}{\numberline {3.5}Monte-Carlo-Lokalisierung}{3}
-\contentsline {section}{\numberline {4}Experimente}{4}
-\contentsline {subsection}{\numberline {4.1}Globale Positionierung}{9}
-\contentsline {section}{\numberline {5}Nutzung der Lokalisierung in eigenen Programmen}{10}
-\contentsline {section}{\numberline {6}Zusammenfassung und Ausblick}{12}
-\contentsline {section}{\numberline {A}Appendix I}{13}
-\contentsline {paragraph}{Map}{13}
-\contentsline {paragraph}{NumSamples}{13}
-\contentsline {paragraph}{NumSamplesAtInit}{13}
-\contentsline {paragraph}{GridRes}{13}
-\contentsline {paragraph}{PassThreshold}{13}
-\contentsline {paragraph}{KMmPerMm}{13}
-\contentsline {paragraph}{KDegPerDeg}{13}
-\contentsline {paragraph}{KDegPerMm}{13}
-\contentsline {paragraph}{TriggerDistance}{13}
-\contentsline {paragraph}{TriggerAngle}{13}
-\contentsline {paragraph}{TriggerTimeEnabled}{13}
-\contentsline {paragraph}{TriggerTime}{13}
-\contentsline {paragraph}{IdleTimeTriggerX}{13}
-\contentsline {paragraph}{IdleTimeTriggerY}{14}
-\contentsline {paragraph}{IdleTimeTriggerTh}{14}
-\contentsline {paragraph}{RecoverOnFail}{14}
-\contentsline {paragraph}{FailedX}{14}
-\contentsline {paragraph}{FailedY}{14}
-\contentsline {paragraph}{FailedTh}{14}
-\contentsline {paragraph}{PeturbX}{14}
-\contentsline {paragraph}{PeturbY}{14}
-\contentsline {paragraph}{PeturbTh}{14}
-\contentsline {paragraph}{PeakStdX}{14}
-\contentsline {paragraph}{PeakStdY}{14}
-\contentsline {paragraph}{PeakStdTh}{14}
-\contentsline {paragraph}{PeakFactor}{14}
-\contentsline {paragraph}{StdX}{14}
-\contentsline {paragraph}{StdY}{15}
-\contentsline {paragraph}{StdTh}{15}
-\contentsline {paragraph}{SensorBelief}{15}
-\contentsline {paragraph}{OccThreshold}{15}
-\contentsline {paragraph}{AngleIncrement}{15}
-\contentsline {paragraph}{DiscardThreshold}{15}
-\contentsline {paragraph}{Kalman Filter}{15}
+\contentsline {subsection}{\numberline {2.2}ARNL}{2}
+\contentsline {subsection}{\numberline {2.3}ArNetworking}{3}
+\contentsline {subsection}{\numberline {2.4}MobileEyes}{3}
+\contentsline {section}{\numberline {3}Theoretischer Hintergrund}{3}
+\contentsline {subsection}{\numberline {3.1}Probabilistische Lokalisierung}{3}
+\contentsline {subsection}{\numberline {3.2}Markov-Lokalisierung}{3}
+\contentsline {subsection}{\numberline {3.3}Partikelfilter}{3}
+\contentsline {subsection}{\numberline {3.4}Monte-Carlo-Lokalisierung}{4}
+\contentsline {section}{\numberline {4}Experimente}{6}
+\contentsline {subsection}{\numberline {4.1}Positionsverfolgung (Tracking)}{6}
+\contentsline {subsection}{\numberline {4.2}Globale Positionierung}{11}
+\contentsline {section}{\numberline {5}Nutzung der Lokalisierung in eigenen Programmen}{12}
+\contentsline {section}{\numberline {6}Zusammenfassung und Ausblick}{15}
+\contentsline {section}{\numberline {A}Appendix I}{16}
+\contentsline {paragraph}{Map}{16}
+\contentsline {paragraph}{NumSamples}{16}
+\contentsline {paragraph}{NumSamplesAtInit}{16}
+\contentsline {paragraph}{GridRes}{16}
+\contentsline {paragraph}{PassThreshold}{16}
+\contentsline {paragraph}{KMmPerMm}{16}
+\contentsline {paragraph}{KDegPerDeg}{16}
+\contentsline {paragraph}{KDegPerMm}{16}
+\contentsline {paragraph}{TriggerDistance}{16}
+\contentsline {paragraph}{TriggerAngle}{16}
+\contentsline {paragraph}{TriggerTimeEnabled}{16}
+\contentsline {paragraph}{TriggerTime}{16}
+\contentsline {paragraph}{IdleTimeTriggerX}{16}
+\contentsline {paragraph}{IdleTimeTriggerY}{17}
+\contentsline {paragraph}{IdleTimeTriggerTh}{17}
+\contentsline {paragraph}{RecoverOnFail}{17}
+\contentsline {paragraph}{FailedX}{17}
+\contentsline {paragraph}{FailedY}{17}
+\contentsline {paragraph}{FailedTh}{17}
+\contentsline {paragraph}{PeturbX}{17}
+\contentsline {paragraph}{PeturbY}{17}
+\contentsline {paragraph}{PeturbTh}{17}
+\contentsline {paragraph}{PeakStdX}{17}
+\contentsline {paragraph}{PeakStdY}{17}
+\contentsline {paragraph}{PeakStdTh}{17}
+\contentsline {paragraph}{PeakFactor}{17}
+\contentsline {paragraph}{StdX}{17}
+\contentsline {paragraph}{StdY}{18}
+\contentsline {paragraph}{StdTh}{18}
+\contentsline {paragraph}{SensorBelief}{18}
+\contentsline {paragraph}{OccThreshold}{18}
+\contentsline {paragraph}{AngleIncrement}{18}
+\contentsline {paragraph}{DiscardThreshold}{18}
+\contentsline {paragraph}{Kalman Filter}{18}

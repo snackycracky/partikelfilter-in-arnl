@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.1.22)  1 FEB 2010 16:34
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.1.22)  3 FEB 2010 00:11
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -163,7 +163,7 @@ LaTeX Warning: Label `get0005Y' multiply defined.
 LaTeX Warning: Label `get0005Y' multiply defined.
 
 
-LaTeX Warning: Label `KDegPerMm0005Calc' multiply defined.
+Package natbib Warning: Citation `Borens1996' multiply defined.
 
 )
 \openout1 = `final.aux'.
@@ -228,50 +228,28 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@lot=\write5
 \openout5 = `final.lot'.
 
- [1
+
+<img/aria-arch.jpg, id=1, 282.05376pt x 276.03125pt>
+File: img/aria-arch.jpg Graphic file (type jpg)
+ <use img/aria-arch.jpg>
+[1
 
 {/usr/local/texlive/2009/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¼ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¼ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¶ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¶ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¶ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¼ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¶ in font cmr10!
+[2 <./img/aria-arch.jpg>] <img/markovBsp.png, id=14, 678.535pt x 388.45125pt>
+File: img/markovBsp.png Graphic file (type png)
+
+<use img/markovBsp.png>
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no œ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¼ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¼ in font cmr10!
- [2]
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¶ in font cmr10!
+
+Overfull \hbox (6.38077pt too wide) in paragraph at lines 104--105
+\OT1/cmr/m/n/10 Par-ti-kel-fil-ter wird je-der Par-ti-kel, al-so je-de da-durch
+ re-pr[]asentierte Po-se, auf ih-re Plau-si-bi-lit[]at []uberpr[]uft.
+ []
+
+[3]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no Ÿ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ž in font cmr10!
@@ -298,89 +276,83 @@ Missing character: There is no € in font cmr10!
 Missing character: There is no œ in font cmr10!
 Missing character: There is no Â in font cmr10!
 Missing character: There is no ´ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 92.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 119.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/omscmr.fd
+ (/usr/local/texlive/2009/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 92.
-Missing character: There is no Î in font cmr10!
-Missing character: There is no ¸ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ˜ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ˜ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 119.
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no œ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ˜ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no ¤ in font cmr10!
- [3]
-<img/KMmPerMmTest.jpg, id=17, 603.25375pt x 89.33376pt>
+
+<img/ablaufMCL.jpg, id=18, 478.78876pt x 582.175pt>
+File: img/ablaufMCL.jpg Graphic file (type jpg)
+ <use img/ablaufMCL.jpg>
+[4 <./img/markovBsp.png (PNG copy)>] [5 <./img/ablaufMCL.jpg>]
+<img/KMmPerMmTest.jpg, id=26, 603.25375pt x 89.33376pt>
 File: img/KMmPerMmTest.jpg Graphic file (type jpg)
 
-<use img/KMmPerMmTest.jpg> [4]
-<img/KDegPerDegTest100.jpg, id=21, 144.54pt x 114.4275pt>
+<use img/KMmPerMmTest.jpg> [6]
+Underfull \hbox (badness 10000) in paragraph at lines 182--187
+
+ []
+
+<img/KDegPerDegTest100.jpg, id=30, 144.54pt x 114.4275pt>
 File: img/KDegPerDegTest100.jpg Graphic file (type jpg)
 
 <use img/KDegPerDegTest100.jpg>
-<img/KDegPerDegTest050.jpg, id=22, 140.525pt x 111.41624pt>
+<img/KDegPerDegTest050.jpg, id=31, 140.525pt x 111.41624pt>
 File: img/KDegPerDegTest050.jpg Graphic file (type jpg)
 
 <use img/KDegPerDegTest050.jpg>
-<img/KDegPerDegTest025.jpg, id=23, 123.46124pt x 113.42375pt>
+<img/KDegPerDegTest025.jpg, id=32, 123.46124pt x 113.42375pt>
 File: img/KDegPerDegTest025.jpg Graphic file (type jpg)
 
-<use img/KDegPerDegTest025.jpg> [5 <./img/KMmPerMmTest.jpg> <./img/KDegPerDegTe
+<use img/KDegPerDegTest025.jpg> [7 <./img/KMmPerMmTest.jpg> <./img/KDegPerDegTe
 st100.jpg> <./img/KDegPerDegTest050.jpg> <./img/KDegPerDegTest025.jpg>]
-<img/KDegPerMm002.jpg, id=28, 219.82124pt x 292.09125pt>
+<img/KDegPerMm002.jpg, id=40, 219.82124pt x 292.09125pt>
 File: img/KDegPerMm002.jpg Graphic file (type jpg)
 
 <use img/KDegPerMm002.jpg>
-<img/KDegPerMm001.jpg, id=29, 370.38374pt x 281.05pt>
+<img/KDegPerMm001.jpg, id=41, 370.38374pt x 281.05pt>
 File: img/KDegPerMm001.jpg Graphic file (type jpg)
 
 <use img/KDegPerMm001.jpg>
-<img/KDegPerMm0005.jpg, id=30, 453.695pt x 242.9075pt>
+<img/KDegPerMm0005.jpg, id=42, 453.695pt x 242.9075pt>
 File: img/KDegPerMm0005.jpg Graphic file (type jpg)
 
 <use img/KDegPerMm0005.jpg>
-<img/Winkelfunktionen_einheitskreis.jpg, id=31, 210.7875pt x 180.675pt>
+<img/Winkelfunktionen_einheitskreis.jpg, id=43, 210.7875pt x 180.675pt>
 File: img/Winkelfunktionen_einheitskreis.jpg Graphic file (type jpg)
 
 <use img/Winkelfunktionen_einheitskreis.jpg>
-<img/KDegPerMm004.jpg, id=32, 256.96pt x 293.095pt>
+<img/KDegPerMm004.jpg, id=44, 256.96pt x 293.095pt>
 File: img/KDegPerMm004.jpg Graphic file (type jpg)
  <use img/KDegPerMm004.jpg>
-[6 <./img/KDegPerMm002.jpg> <./img/KDegPerMm001.jpg> <./img/KDegPerMm0005.jpg>]
-[7 <./img/Winkelfunktionen_einheitskreis.jpg>] [8 <./img/KDegPerMm004.jpg>]
-<img/stdx4000stdy0stdth1.png, id=48, 486.81876pt x 41.15375pt>
+[8 <./img/KDegPerMm002.jpg> <./img/KDegPerMm001.jpg> <./img/KDegPerMm0005.jpg>]
+[9 <./img/Winkelfunktionen_einheitskreis.jpg>] [10]
+<img/stdx4000stdy0stdth1.png, id=57, 486.81876pt x 41.15375pt>
 File: img/stdx4000stdy0stdth1.png Graphic file (type png)
 
 <use img/stdx4000stdy0stdth1.png>
-<img/stdx2000stdy0stdth1.png, id=49, 537.00626pt x 52.195pt>
+<img/stdx2000stdy0stdth1.png, id=58, 537.00626pt x 52.195pt>
 File: img/stdx2000stdy0stdth1.png Graphic file (type png)
 
 <use img/stdx2000stdy0stdth1.png>
-<img/stdx1000stdy0stdth1.png, id=50, 302.12875pt x 86.3225pt>
+<img/stdx1000stdy0stdth1.png, id=59, 302.12875pt x 86.3225pt>
 File: img/stdx1000stdy0stdth1.png Graphic file (type png)
 
-<use img/stdx1000stdy0stdth1.png> [9 <./img/stdx4000stdy0stdth1.png (PNG copy)>
- <./img/stdx2000stdy0stdth1.png (PNG copy)> <./img/stdx1000stdy0stdth1.png (PNG
- copy)>] (/usr/local/texlive/2009/texmf-dist/tex/latex/listings/lstlang1.sty
+<use img/stdx1000stdy0stdth1.png>
+<img/stdx4000stdy4000stdth30.png, id=60, 305.14pt x 294.09875pt>
+File: img/stdx4000stdy4000stdth30.png Graphic file (type png)
+
+<use img/stdx4000stdy4000stdth30.png> [11 <./img/KDegPerMm004.jpg> <./img/stdx4
+000stdy0stdth1.png (PNG copy)>]
+(/usr/local/texlive/2009/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/local/texlive/2009/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -388,33 +360,55 @@ File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/local/texlive/2009/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-)
-Overfull \hbox (64.38507pt too wide) in paragraph at lines 331--332
+) [12 <./img/stdx2000stdy0stdth1.png (PNG copy)> <./img/stdx1000stdy0stdth1.png
+ (PNG copy)>] [13 <./img/stdx4000stdy4000stdth30.png (PNG copy)>]
+Overfull \hbox (64.38507pt too wide) in paragraph at lines 369--370
 [][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[10]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 339.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 377.
 
- (/usr/local/texlive/2009/texmf-dist/tex/latex/base/omlcmr.fd
+(/usr/local/texlive/2009/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 339.
- [11]
-[12] [13] [14]
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 377.
+ [14] [15]
+[16] [17]
 No file final.bbl.
 
-Underfull \hbox (badness 10000) in paragraph at lines 522--524
+Underfull \hbox (badness 10000) in paragraph at lines 551--553
 \OT1/cmtt/m/n/10 edu / []gdesouza / Research / MobileRobotics / Software / ARNL
 -[]SONARNL / Arnl-[]1 . 7 . 0 +
  []
 
-(./final.lof [15])
+Missing character: There is no Ì in font cmr10!
+Missing character: There is no ˆ in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 558--562
+\OT1/cmtt/m/n/10 lehrveranstaltungen / vorlesungen / SS09 / Robotik % 20II _ te
+rmine / dateien / robotik _ 8 _
+ []
+
+[18]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+ (./final.lof
+Overfull \hbox (6.01968pt too wide) in paragraph at lines 4--4
+ \OT1/cmr/m/n/10 Zu-stan-des (1.) wur-de das li-nea-re Mo-dell der Steue-rungs-
+soft-wa-re ue-ber-nom-men [[]]. 
+ []
+
+)
 \tf@lof=\write6
 \openout6 = `final.lof'.
 
- [16] (./final.aux)
+
+
+Package natbib Warning: There were multiply defined citations.
+
+[19] (./final.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.74pt have occurred.
@@ -424,13 +418,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4459 strings out of 493848
- 65896 string characters out of 3149207
- 144160 words of memory out of 3000000
- 7701 multiletter control sequences out of 15000+200000
+ 4500 strings out of 493848
+ 66753 string characters out of 3149207
+ 142750 words of memory out of 3000000
+ 7738 multiletter control sequences out of 15000+200000
  7799 words of font info for 28 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 44i,9n,58p,691b,1420s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,9n,58p,695b,1111s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
@@ -445,9 +439,9 @@ ive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
 ve/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive
 /2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
 2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on final.pdf (16 pages, 375588 bytes).
+Output written on final.pdf (19 pages, 540045 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
+ 136 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

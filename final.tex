@@ -23,7 +23,7 @@
 \listoftables
 
 \section{Aufgabenstellung}
-Es soll die monte-carlo-lokalisierung in Arnl untersucht werden. Durch Experimente und Recherche soll der genaue Ablauf des Partikelfilters und die Wirkung der Parameter dargestellt werden. Ausserdem soll geklaert werden wie die lokalisierung in eigenen programmen genutzt werden kann.
+Es soll die Monte-Carlo-Lokalisierung in Arnl untersucht werden. Durch Experimente und Recherche soll der genaue Ablauf des Partikelfilters auch als MCL(Monte-Carlo-Lokalisierung) und die Wirkung der Parameter dargestellt werden. Ausserdem soll gekl\"art werden wie die Lokalisierung in eigenen Programmen genutzt werden kann.
 
 
 \section{Einf\"uhrung}\label{einfuehrung}
@@ -31,20 +31,30 @@ Es soll die monte-carlo-lokalisierung in Arnl untersucht werden. Durch Experimen
 
 
 \subsection{ARIA}
-Die C++ Bibliothek ARIA ist eine API fuer alle MobileRobots/ActivMedia Plattformen. Mit der Hilfe von ARIA kann u.a. Geschwindigkeit, Richtung oder relative Richtung entweder durch einfache oder komplexe Anweisungen kontrolliert werden.
-%ARIA folgt dem Client-Server Paradigma. Der Roboter oder der Simulator sind Server. 
-%\includegraphics{img/aria-arch.jpg}
+Die C++ Bibliothek ARIA ist eine API f\"ur alle MobileRobots/ActivMedia Plattformen. Mit der Hilfe von ARIA kann u.a. Geschwindigkeit, Richtung oder relative Richtung entweder durch einfache oder komplexe Anweisungen kontrolliert werden. Sie umfasst viele Komponenten wie z.B. ARNL in Abbildung \ref{ariaarch}
+\begin{figure}
+  \centering
+  \fbox{
+    \includegraphics{img/aria-arch.jpg}
+  }
+  \caption{ARIA Architektur}
+  \label{ariaarch}
+\end{figure}
 
 
+\subsection{ARNL}
+ARNL(Advanced Robotics Navigation and Localization System) ist eine Teilbibliothek in ARIA um Navigations und Lokalisationsschnittstellen zur Verf\"ugung zu stellen. Die Lokalisationskomponente bietet eine Schnittstelle um den angeschlossenen Roboter zu lokalisieren. Sensor und Odometriedaten des Roboters werden in Verbindung mit einer vorhanden Umgebungskarte verwendet um die wahrscheinlichste Position des Roboters in der Karte zu bestimmen. \cite{arnl} 
+Die ARNL Bibliothek beinhaltet Lokalisierung mit Sonar (SonArnl), Laserscanner (Arnl) und GPS (Mogs).
 
 \subsection{ArNetworking}
 
-ArNetworking ist eine API in ARIA um eine client-server Architektur zwischen dem Robotter(Server) und dem entfernten Rechner(Client) ueber das Netzwerk aufzubauen. Der Client berechnet Bewegungsbefehle und sendet Anfragen an den Server welche dann vom Robotter ausgefuehrt werden. Der Robotter hingegen sendet u.a. seine Odometriedaten. 
+
+ArNetworking ist eine API in ARIA um eine client-server Architektur zwischen dem Robotter(Server) und dem entfernten Rechner(Client) \"uber das Netzwerk aufzubauen. Der Client berechnet Bewegungsbefehle und sendet Anfragen an den Server welche dann vom Robotter ausgef\"uhrt werden. Der Robotter hingegen sendet u.a. seine Odometriedaten. 
 
 
 \subsection{MobileEyes}
 MobileEyes kann sich mit ARIA, ArNetworking und ARNL Server verbinden und dessen Umgebung also interne Karte anzeigen.
-Unter anderem kann man mit MobileEyes Bewegungskomandos an den Robotter schicken.\cite{whitbrook1}
+Unter anderem kann man mit MobileEyes Bewegungskomandos an den Robotter schicken.\cite{whitebrook1}
 
 
 
@@ -60,84 +70,106 @@ Das Lokalisierungsmodul von ARNL benutzt die Monte-Carlo-Lokalisierung. Diese ba
 
 
 \subsection{Probabilistische Lokalisierung}
-Um die Position eines Roboters zu berechnen, gibt es verschiedene Ansätze. Sie beruhen alle auf der Fusionierung von Daten, die durch die Odometrie und weitere Sensoren des Roboters geliefert werden. Gebräuchliche Sensoren für autonome Roboter sind Ultraschallsensoren oder Laserscanner.
-Diese Ansätze verwenden Methoden der Wahrscheinlichkeitsrechnung zur Bestimmung eine Wahrscheinlichkeitsverteilung über alle möglichen Positionen, an denen der Roboter sich befinden kann.
+Um die Position eines Roboters zu berechnen, gibt es verschiedene Ans\"atze. Sie beruhen alle auf der Fusionierung von Daten, die durch die Odometrie und weitere Sensoren des Roboters geliefert werden. Gebr\"auchliche Sensoren f\"ur autonome Roboter sind Ultraschallsensoren oder Laserscanner.
+Diese Ans\"atze verwenden Methoden der Wahrscheinlichkeitsrechnung zur Bestimmung einer Wahrscheinlichkeitsverteilung \"uber alle m\"oglichen Positionen, an denen der Roboter sich befinden kann. Dieser Ansatz ist mittels der Monte-Carlo-Method in ARNL umgesetzt.
+Der Probanbilistische Ansatz vereint relative und absolute Postionierung als Bewegungsmodellierung und Wahrnehmung der Umwelt.
 
-in ARIA umgesetzt in ARNL
-
-leistungsfähiger, verbreiteter Ansatz
-vereint relative und absolute Postionierung als
- Bewegungsmodellierung und Wahrnehmung der Umwelt
-
-\subsection{Beyes Filter}
 \subsection{Markov-Lokalisierung}
-Das Ziel der Markov Lokalisierung ist es, jeder möglichen Roboterposition einen
-Wahrscheinlichkeitswert zuzuordnen.
+Das Ziel der Markov Lokalisierung ist es, Wahrscheinlichkeiten f\"ur das Eintreten zuk\"unftiger Ereignisse anzugeben.
+Die aktuelle Position h\"angt nur von der vorhergehenden Position und dem
+Bewegungsbefehl ab und die aktuelle Beobachtung h\"angt nur von der aktuellen Position ab.
+Es ist ein zellbasiertes Verfahren bei dem jeder Zelle Wahrescheinlichkeitswert oder Belief
+zugeordnet wird. \cite{ZweigleStuttgart}
+Jede Bewegung des Roboters verschiebt die Wahrscheinlichkeiten und streut sie und jede Messung von Merkmalen der Umgebung \"andert die Wahrscheinlichkeiten.
+Wenn die Position unbekann ist erfolgt eine Gleichverteilung.
+Das Problem dabei ist, dass alle Werte(Zellen) nach jeder Bewegung neu berechnet werden muessen Siehe Abbildung \ref{MarkovLokalisierung}. Es gibt nur eine m\"ogliche Position des Robotters und eine unsicherheit wird dabei nicht repr\"asentiert.
+
+
+\begin{figure}
+  \centering
+  \fbox{
+    \includegraphics[scale=0.5]{img/markovBsp.png}
+  }
+  \caption{Markov-Lokalisierung \cite{ZweigleStuttgart}}
+  \label{MarkovLokalisierung}
+\end{figure}
+
+
+
+
+
+
+
 \subsection{Partikelfilter}
-Bei der Lösung mittels Partikel-Filern wird die Pose des Roboters über eine Partikelwolke repräsentiert. Jeder Partikel stellt eine mögliche Pose des Roboters dar. Über den Partikelfilter wird jeder Partikel, also jede dadurch repräsentierte Pose, auf ihre Plausibilität überprüft. Die Wahrscheinlichkeit plausibler Partikel wird heraufgesetzt, die Wahrscheinlichkeit wenig plausibler Partikel wird reduziert. Fallen Partikel unter einen bestimmten Wahrscheinlichkeits-Schwellwert, werden sie verworfen.
+Bei der L\"osung mittels Partikel-Filern wird die Pose des Roboters \"uber eine Partikelwolke repr\"asentiert.\cite{WIKIpartikelfilter} Jeder Partikel stellt eine m\"ogliche Pose des Roboters dar. Über den Partikelfilter wird jeder Partikel, also jede dadurch repr\"asentierte Pose, auf ihre Plausibilit\"at \"uberpr\"uft. Die Wahrscheinlichkeit plausibler Partikel wird heraufgesetzt, die Wahrscheinlichkeit wenig plausibler Partikel wird reduziert. Fallen Partikel unter einen bestimmten Wahrscheinlichkeits-Schwellwert, werden sie verworfen.
 
 \subsection{Monte-Carlo-Lokalisierung}
 Der Vorteil des MCL - Ansatzes ist, dass zur Laufzeit die Gr\"osse der
 Stichprobenmenge variabel sein kann. Je unsicherer die Roboterposition ist,
-desto größer fällt die Stichprobenmenge aus. In Analogie zur
+desto gr\"oßer f\"allt die Stichprobenmenge aus. In Analogie zur
 „Gitterbasierenden“ (grid-based) Methode, m\"usste bei einer hohen Sicherheit
 (belief) nur ein Teil des Zustandsraumes aktualisiert werden.\cite{delipetkos1}
 Der Grundgedanke bei der Monte Carlo Lokalisierung ist, das „Belief“
 (Vertrauen) mittels einer Stichprobenmenge, welche auch als „samples“ oder
 auch „particles“ bezeichnet wird, darzustellen. MCL ist ein iterativer Bayes´scher
-Filter, welcher als ein Schätzer f\"ur die zuk\"unftige Wahrscheinlichkeitsverteilung
+Filter, welcher als ein Sch\"atzer f\"ur die zuk\"unftige Wahrscheinlichkeitsverteilung
 der Roboterposition verwendet wird.
-Monte-Carlo-Lokalisierung
+Es werden mehrere Schritte immerzu durchlaufen:
 \begin{itemize}
-\item MCL erlaubt elegante Fusion der Daten verschiedener Sensorik
-\item MCL skalierbar (Partikelanzahl)
-\item MCL effizient, bspw. dynamische Anpassung der Partikelanzahl (adaptiv)
-
-\item Particle filters are an implementation of recursive Bayesian filtering
-\item They represent the posterior by a set of weighted samples.
-\item In the context of localization, the particles are propagated according to the motion model.
-\item They are then weighted according to the likelihood of the observations.
-\item In a re-sampling step, new particles are drawn with a probability proportional to the likelihood of the observation.
-Monte Carlo Localization = Markov-Lokalisierung mit Abbildung der
-\item Wahrscheinlichkeit als Samplemenge (Partikelwolke)
-\item Sample = eine Position (x,y,θ)
-\item Prognose-Schritt: jedes Sample erzeugt ein neues Sample entsprechend
-unscharfem Bewegungsmodell -> neue Samplemenge bel‘
-\item Korekktur-Schritt:
-\item  Jedes Partikel aus bel‘ erhält ein Gewicht nach dem Sensormodell (wie eine
-Fitness, Übereinstimmung mit Wahrnehmung)
-\item  neue Samplemenge bel wird durch zufällige Selektion anhand der Fitness aus
-bel‘ erzeugt
-\item  ständige Evolution einer Partikelwolke anhand von Bewegungsbefehlen und
-Sensorwahrnehmung,
+	\item 	Prognose-Schritt: jedes Sample erzeugt ein neues Sample entsprechend
+	unscharfem Bewegungsmodell. Resultat ist eine neue Samplemenge bel` 
+	\item Korrektur-Schritt:  Jedes Partikel aus bel` erh\"alt ein Gewicht nach dem Sensormodell (wie eine 	Fitness, Übereinstimmung mit Wahrnehmung)
+	\item  neue Samplemenge bel` wird durch zuf\"allige Selektion anhand der Fitness aus
+	bel‘ erzeugt.
 \end{itemize}
-\section{Experimente}
+In Abbildung \ref{ablaufMCL} ist ein Zustandsdiagramm der Berechnungsschritte des Partikelfilters. Diese Schritte sind in ARNL umgesetzt.
+Es erfolgt also eine st\"andige Evolution einer Partikelwolke anhand von Bewegungsbefehlen und
+Sensorwahrnehmung.
+Gegen\"uber der Markov Lokalisierung erlaubt die Monte-Carlo-Lokalisierung eine elegante Fusion der Daten verschiedener Sensorik, sie ist skalierbar (Partikelanzahl) und effizient, bspw. dynamische Anpassung der Partikelanzahl (adaptiv).
 
+
+
+
+
+\begin{figure}
+  \centering
+  \fbox{
+    \includegraphics[scale=0.55]{img/ablaufMCL.jpg}
+  }
+  \caption{Die Initialisierung (0.) erfolgte mit einer Gleichverteilung. Fuer die Propagation des Zustandes (1.) wurde das lineare Modell der Steuerungssoftware uebernommen \cite{Plagge}. Die Berechnung der a-posteriori-Wahrscheinlichkeit (2.) positionsabh\"angigen Parametern durchgef\"uhrt.}
+  \label{ablaufMCL}
+\end{figure}
+
+\newpage
+\section{Experimente}
+In den folgenden Experimenten werden die zwei Hauptprobleme der Lokalisierung und deren Umsetzung in ARNL untersucht: global localization and position tracking. \cite{fox1999}
+
+\subsection{Positionsverfolgung (Tracking)}
 In einem Beispielprogramm wird ARNL und ArNetworking verwendet um einen Server zu erstellen. Clients wie MobileEyes koennen sich mit diesem Server verbinden. MobileEyes sendet anfragen an den Server um den Robotter zu steuern, die aktuelle Karte abzufragen, Lokalisierungsparameter zu setzen, Sensordaten abzufragen und den Robotter manuell wieder neu zu lokalisieren.
-Die automatische lokalisierung des Robotters erfolgt durch eine Instanz von ArLocalizationTask welcher also Teil des Serverprograms ist. Wie in \ref{einfuehrung} deutlich gemacht wurde, ist das Monte-Carlo Verfahren in der Klasse ArLocalizationTask implementiert.
+Die automatische lokalisierung des Robotters erfolgt durch eine Instanz von ArLocalizationTask welcher also Teil des Serverprograms ist. Wie in Abschnitt \ref{eigenes} deutlich gemacht wird, ist das Monte-Carlo Verfahren in der Klasse ArLocalizationTask implementiert.
 Durch die Verwendung von MobileEyes kann eine Anpassung der Lokalisierungsparameter Einfluss auf den Partikelfilter genommen werden.
 Die Einstellungen befinden sich in MobileEyes unter Lokalisierungseinstellungen. Eine  liste und deren Beschreibung befinden sich in Appendix I.
-Der Monte Carlo Filter verlaesst sich unter anderem auf die Odometriedaten die von den Raedern kommen. Dabei kann bestimmt werden wie weit der Robotter gefahren ist oder wenn sich die Raeder unterschiedlich bewegen, wie weit sich der Robotter um seine Achse gedreht hat. wenn man die genaue Startposition des Robotters kennt und auch die Odometriedaten der Raeder, so kann man theoretisch die genaue Position des Robotters zum Zeitpunk t bestimmen. In der Praxis ist dies aber nur schwer zu realisieren. Die Unsicherheit
-wächst also mit zunehmender Entfernung vom Startpunkt. generell gibt es drei Odometrie Fehlerarten:
+Der Monte Carlo Filter verlaesst sich unter anderem auf die Odometriedaten die von den Raedern kommen. Dabei kann bestimmt werden wie weit der Robotter gefahren ist, wenn sich die Raeder unterschiedlich bewegen oder  wie weit sich der Robotter um seine Achse gedreht hat. Wenn man die genaue Startposition des Robotters kennt und auch die Odometriedaten der Raeder, so kann man theoretisch die genaue Position des Robotters zum Zeitpunk t bestimmen. In der Praxis ist dies aber nur schwer zu realisieren. Die Unsicherheit
+w\"achst also mit zunehmender Entfernung vom Startpunkt. generell gibt es drei Odometrie Fehlerarten:
 \begin{itemize}
-\item Entfernungsfehler: Fehler beim Zur\"ucklegen einer geraden Strecke
+\item Entfernungsfehler: Fehler beim zur\"ucklegen einer geraden Strecke
 \item Drehfehler: Fehler beim Drehen des Roboters
 \item Driftfehler: Orientierungsfehler beim Zur\"ucklegen einer geraden Strecke
 \end{itemize}
 
 Das Bewegungsmodell in ARIA/ARNL bildet genau diese Fehler ab.
-Um die Bewegungsunschaerfe zu testen muessen verschiedene Initialalparameter verwendet werden:
+Um die Bewegungsunschaerfe zu testen m\"ussen verschiedene Initialalparameter verwendet werden:
 \begin{itemize}
 \item PassThreshold muss auf 0 gesetzt werden um zu vermeiden, dass der Roboter in den Lost Modus geht
 \item Um die Partikelwolke besser sichtbar zu machen wird der Wert NumSamples auf 5000 gesetzt
-\item PeturbX, PeturbY, PeturbTh sind Paramter um neue Samples samples nach dem resampling prozess hizuzuf\"ugen. Diese Streuwerte werden auf null gesetzt um den Rechenanspruch zu verrringern.
-\item per default wird die Neuberechnung der Position erst nach einer Bewegung von 20 cm gemacht. Eine Neuberechnung soll erst nach 2m stattfinden. Somit wird der Paramter Triggerdistance auf 2000 gesetzt 
-\item die neuberechnung nach einer drehnung soll nicht erst ab 5 Grad erfolgen sondern schon ab 0 Grad. Der Paramter \textbf{TriggerAngle} wird also auf 0 gesetzt.
+\item PeturbX, PeturbY, PeturbTh sind Paramter um neue Samples nach dem resampling prozess hizuzuf\"ugen. Diese Streuwerte werden auf null gesetzt um den Rechenanspruch zu verrringern.
+\item Per default wird die Neuberechnung der Position erst nach einer Bewegung von 20 cm gemacht. Eine Neuberechnung soll erst nach 2m stattfinden. Somit wird der Paramter Triggerdistance auf 2000 gesetzt. 
+\item Die Neuberechnung nach einer Drehnung soll nicht erst ab 5 Grad erfolgen sondern schon ab 0 Grad. Der Paramter \textbf{TriggerAngle} wird also auf 0 gesetzt.
 \end{itemize}
 
-Um den Entfernungsfehlerverhaeltnissparameter zu testen wird der Drehfehlerparameter und der Driftfehler zuerst ausgeschaltet. Um den Parameter zu untersuchen wird er auf 0.5 gesetzt. Dies soll bewirken, dass die Partikelwolke sich um die H\"alfte der zurueckgelegten Strecke ausdehnt. Der Roboter wird zuerst an einem Punkt lokalisiert. Mit einem Bewegungsbefehl wird der Robotter nun 1 Meter gerade aus bewegt. Wie angenommen hat die Partikelwolke nun eine L\"ange von 50 cm. 
+Um den Entfernungsfehlerverhaeltnissparameter zu testen wird der Drehfehlerparameter und der Driftfehler zuerst ausgeschaltet. Um den Parameter zu untersuchen wird er auf 0.5 gesetzt. Dies soll bewirken, dass die Partikelwolke sich um die H\"alfte der zur\"uckgelegten Strecke ausdehnt. Der Roboter wird zuerst an einem Punkt lokalisiert. Mit einem Bewegungsbefehl wird der Robotter nun 1 Meter gerade aus bewegt. Wie angenommen hat die Partikelwolke nun eine L\"ange von 50 cm. 
 
-\begin{figure}[KMmPerMmTest]
+\begin{figure}
   \centering
   \fbox{
     \includegraphics[scale=0.55]{img/KMmPerMmTest.jpg}
@@ -147,11 +179,11 @@ Um den Entfernungsfehlerverhaeltnissparameter zu testen wird der Drehfehlerparam
 \end{figure}
 
 
-Dieser Parameter kann dazu verwendet werden um die Lokalisation in bezug auf die Oberflaechenbeschaffenheit anzupassen. In einem h\"ugligem Gel\"ande kann der Roboter eine Steigung hochfahren sich aber im eigentlichen Sinne nicht so schnell weiterbewegen wie die Odometriedaten es uebermitteln. Desshalb muss dieser Parameter erh\"oht werden.
-
-Mit dem Drehfehlerparameter kann nach der Dokumentation in Anhang \ref{KDegPerDegDoc} die Unsicherheit der Drehung beeinflusst werden. Wenn der Robotter sich z.B. auf einem leicht unebenen Untergrund dreht ist die Drehung nicht eindeutig an den Odometriedaten nachvollziehbar. 
+Dieser Parameter kann dazu verwendet werden um die Lokalisation in bezug auf die Oberflaechenbeschaffenheit anzupassen. In einem h\"ugligem Gel\"ande kann der Roboter eine Steigung hochfahren sich aber im eigentlichen Sinne nicht so schnell weiterbewegen wie die Odometriedaten es \"ubermitteln. Desshalb muss dieser Parameter angemessen erh\"oht werden.
+\\ \\
+Mit dem Drehfehlerparameter $KDegPerDeg$ kann nach der Dokumentation in Anhang \ref{KDegPerDegDoc} die Unsicherheit der Drehung beeinflusst werden. Wenn der Robotter sich z.B. auf einem leicht unebenen Untergrund dreht ist die Drehung nicht eindeutig an den Odometriedaten nachvollziehbar. 
 Um diesen zu testen wird der Parameter zuerst auf 1 gesetzt und Entfernungsfehlerverhaeltnissparameter wieder auf null.
-In Abbildung \ref{KDegPerDegTest100} wurde der Roboter um 360 Grad gedreht und dann 1cm gerade aus gefahren. Der Parameter wurde in Abbildung \ref{KDegPerDegTest050} und \ref{KDegPerDegTest025} stufenweise halbiert um den Winkel der Partikelstreuung zu erkennen. Dieser Entspricht demnach dem Verhaeltnis zwischen der Drehung in Grad und der KDegPerDeg Einstellung. Also bei einer Drehnung von 360 Grad und einer einstellung von 1 hat der Partikelfilter eine breite von auch ca. 360 Grad bei 0.5 von ca. 180 Grad und bei 0.25 von ca. 90 Grad. Wenn also der Untergrund h\"uglig ist, sollte die Unsicherheit also der KDegPerDeg Paramter hoeher eingestellt sein. 
+In Abbildung \ref{KDegPerDegTest100} wurde der Roboter um 360 Grad gedreht und dann 1cm gerade aus gefahren. Der Parameter wurde in Abbildung \ref{KDegPerDegTest050} und \ref{KDegPerDegTest025} stufenweise halbiert um den Winkel der Partikelstreuung zu erkennen. Dieser Entspricht demnach dem Verhaeltnis zwischen der Drehung in Grad und der KDegPerDeg Einstellung. Bei einer Drehnung von 360 Grad und einer Einstellung von 1 hat der Partikelfilter eine breite von auch ca. 360$^\circ$ bei 0.5 von ca. 180$^\circ$ und bei 0.25 von ca. 90$^\circ$. Wenn also der Untergrund h\"uglig ist, sollte die Unsicherheit also der KDegPerDeg Paramter hoeher eingestellt sein. 
 
 
 \begin{figure}
@@ -164,7 +196,7 @@ In Abbildung \ref{KDegPerDegTest100} wurde der Roboter um 360 Grad gedreht und d
 \end{figure}
 
 \newpage
-Der Parameter KMmPerMm betrifft die unsicherheit der Odometriedaten der Raeder. Bei einem differenziellem Antrieb koennen leichte unterschiede auftreten, wenn der Robotter sich gerade aus bewegt. Wenn der Robotter sich z.B. auf einem unebenen Boden fortbewegt, kann er nach links und rechts abdriften. Die Odometriedaten der Raeder geben aber ein stetiges geradeausfahren zurueck.
+Der Parameter $KDegPerMm$ betrifft die Unsicherheit der Odometriedaten der Raeder. Bei einem differenziellem Antrieb koennen leichte Unterschiede auftreten, wenn der Robotter sich gerade aus bewegt. Wenn der Robotter sich z.B. auf einem unebenen Boden fortbewegt, kann er nach links und rechts abdriften. Die Odometriedaten der Raeder geben aber ein stetiges geradeausfahren zur\"uck.
 
 \begin{figure}
   \centering
@@ -174,9 +206,9 @@ Der Parameter KMmPerMm betrifft die unsicherheit der Odometriedaten der Raeder. 
   \caption{KDegPerMm Parameter Test}
   \label{KDegPerMmTestFigure}
 \end{figure}
-
-Durch eine einfache Winkelfunktionsrechnung in Abbildung \ref{Winkelfunktionen} laesst sich der Winkel bestimmen. 
-Zuerst wird der mittelwert der Abweichung durch das Arithmetische Mittel bestimmt siehe Formel \ref{getY}
+In dem Experiment in Abbildung \ref{KDegPerMmTestFigure} wird der Parameter $KDegPerMm$ zuerst auf $0.02$ (Abbildung \ref{KDegPerMm002}) dann auf $0.01$ (Abbildung \ref{KDegPerMm001}) und dann auf $0.005$ (Abbildung \ref{KDegPerMm0005}) gestellt. Der Roboter wird lokalisiert und dann 1000mm gerade aus gefahren. Um die Korrektheit der Dokumentation zu ueberpruefen wird
+durch eine einfache Winkelfunktionsrechnung in Abbildung \ref{Winkelfunktionen} der Winkel errechnet. 
+Zuerst wird der Mittelwert der Abweichung durch das arithmetische Mittel bestimmt siehe Formel \ref{getY}
 
 
 \begin{figure}
@@ -196,7 +228,7 @@ Zuerst wird der mittelwert der Abweichung durch das Arithmetische Mittel bestimm
 	\begin{equation}\label{theta1}	
 		\theta_1=\sin^{-1}\left(\frac{725}{1000} \right) \cdot 2 \approx 93^\circ
 	\end{equation}	
-  \caption{Berechnung fuer Abbildung \ref{KDegPerMm002}}
+  \caption{Berechnung f\"ur Abbildung \ref{KDegPerMm002}}
   \label{KDegPerMm002Calc}
 \end{figure}
 
@@ -210,7 +242,7 @@ Zuerst wird der mittelwert der Abweichung durch das Arithmetische Mittel bestimm
 	\begin{equation}\label{theta2}	
 		\theta_2=\sin^{-1} \left( \frac{375}{1000} \right) \cdot 2 \approx 44^\circ
 	\end{equation}	
-  \caption{Berechnung fuer Abbildung \ref{KDegPerMm001}}
+  \caption{Berechnung f\"ur Abbildung \ref{KDegPerMm001}}
   \label{KDegPerMm001Calc}
 \end{figure}
 
@@ -224,11 +256,11 @@ Zuerst wird der mittelwert der Abweichung durch das Arithmetische Mittel bestimm
 	\begin{equation}\label{theta3}	
 		\theta_3=\sin^{-1} \left( \frac{195}{1000} \right) \cdot 2 \approx 23^\circ
 	\end{equation}
-  \caption{Berechnung fuer Abbildung \ref{KDegPerMm0005}}
+  \caption{Berechnung f\"ur Abbildung \ref{KDegPerMm0005}}
   \label{KDegPerMm0005Calc}
 \end{figure}
 
-Um die Rechnungen zu bestaetigen Rechnen wir den Wert aus welcher zu einem Fehlerwinkel von $180^\circ$ noetig ist und bilden dann davon das Arithmetische Mittel. Wenn dieses nicht sonderlich abweicht waren die Rechnungen richtig. Dies ist der Fall denn eine maximale Abweichung von weniger als 0.012 und eine Minimale Abweichung von 0.0009 ist anehmbar. 
+Um die Rechnungen zu bestaetigen wird der Wert ausgerechnet welcher zu einem Fehlerwinkel von $180^\circ$ noetig ist und bilden dann davon das Arithmetische Mittel. Wenn dieses nicht sonderlich abweicht waren die Rechnungen richtig. \\ Dies ist der Fall in Abbildung \ref{testCalacAll} denn eine maximale Abweichung von weniger als 0.012 und eine Minimale Abweichung von 0.0009 ist anehmbar. 
 
 \begin{figure}
 	\begin{equation}\label{get0005Y}	
@@ -247,7 +279,7 @@ Um die Rechnungen zu bestaetigen Rechnen wir den Wert aus welcher zu einem Fehle
 		\bar{x}=\frac{x_0+x_1+x_2}{3} \approx 0.04
 	\end{equation}
   \caption{Test der Berechnungen in Abbildung \ref{theta1},\ref{theta2},\ref{theta3}}
-  \label{KDegPerMm0005Calc}
+  \label{testCalacAll}
 \end{figure}
 
 Die Bestaetigung liefert eine Einstellung von KDegPerMm = 0.04 welche eine $180^\circ$ ausgedehnte Partikelwolke aufspannt siehe Abbildung \ref{KDegPerMm004Test}.
@@ -261,9 +293,13 @@ Die Bestaetigung liefert eine Einstellung von KDegPerMm = 0.04 welche eine $180^
 
 Somit laesst sich der Parameter nachvollziehen. Wenn man einen Winkel $\alpha$ erreichen will muss man Rechnen: $KDegPerMm = \alpha \cdot 2.22 \cdot 10^{-4}$
 Diese Rechnung ist nicht genau und wurde mit Rundungswerten ermittelt. 
+\newpage
 
 \subsection{Globale Positionierung}
-
+Wenn die Initiale Position des Roboters nicht bekannt ist, dann werden Samples ausgestreut. Die Menge der ausgestreuten Samples und deren Verteilung wird u.a. durch die Parameter NumSamplesAtInit, StdX, StdY und StdTh eingestellt.
+Um diese Parameter zu testen werden Extremwerte verwendet. Die Parametereinstellung in Abbildung \ref{stdx4000stdy0stdth1Test},\ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} soll verdeutlichen welche Auswirkungen eine Eindimensionale Ausbreitung auf der X Achse f\"ur Konsequenzen mit sich ziehen. 
+Die Streuung der Samples bei einem Wert von StdX = 4000mm ist nicht wie erwartet 4000mm in Richtung der X Achse sondern 2400mm wie in Abbildung \ref{stdx4000stdy0stdth1Test}. Der eigentliche Wirkung von StdX ist also  $\approx \left(StdX/2\right)+(\frac{StdX}{10})$ mm. Und nicht wie angenommen $StdX$ mm. In Abbildung \ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} wird dies bestaetigt.
+Eine grosse Ausdehnung bei der initialen Lokalisierung der Partikelwolke erfolgt durch die Einstellungen wie in Abbildung \ref{stdx4000stdy4000stdth30}
 
 \begin{figure}
 	\centering
@@ -286,17 +322,19 @@ Diese Rechnung ist nicht genau und wurde mit Rundungswerten ermittelt.
 	\label{stdx1000stdy0stdth1Test}
 \end{figure}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{img/stdx4000stdy4000stdth30.png}
+	\caption{\\ NumSamplesAtInit = 20000, \\ StdX = 4000,\\ StdY = 4000,\\ StdTh = 30}
+	\label{stdx4000stdy4000stdth30}
+\end{figure}
 
-Wenn die Initiale Position des Roboters nicht bekannt ist, dann werden Samples ausgestreut. Die Menge der ausgestreuten Samples und deren Verteilung wird u.a. durch die Parameter NumSamplesAtInit, StdX, StdY und StdTh eingestellt.
-Um diese Parameter zu testen werden Extremwerte verwendet. Die Parametereinstellung in Abbildung \ref{stdx4000stdy0stdth1Test},\ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} soll verdeutlichen welche Auswirkungen eine Eindimensionale Ausbreitung auf der X Achse fuer Konsequenzen mit sich ziehen. 
-Die Streuung der Samples bei einem Wert von StdX = 4000mm ist nicht wie erwartet 4000mm in Richtung der X Achse sondern 2400mm wie in Abbildung \ref{stdx4000stdy0stdth1Test}. Der eigentliche Wirkung von StdX ist also  $\approx \left(StdX/2\right)+(\frac{StdX}{10})$ mm. Und nicht wie angenommen $StdX$ mm. In Abbildung \ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} wird dies bestaetigt.
+\newpage
+\newpage
+\section{Nutzung der Lokalisierung in eigenen Programmen}\label{eigenes}
 
-
-\section{Nutzung der Lokalisierung in eigenen Programmen}
-
-ARNL(Advanced Robotics Navigation and Localization System) ist eine Teilbibliothek in ARIA um Navigations und Lokalisationsschnittstellen zur Verf\"ugung zu stellen. Die Lokalisationskomponente bietet eine Schnittstelle um den angeschlossenen Roboter zu lokalisieren. Sensor und Odometriedaten des Roboters werden in Verbindung mit einer vorhanden Umgebungskarte verwendet um die wahrscheinlichste Position des Roboters in der Karte zu bestimmen. \cite{arnl} 
-Die ARNL Bibliothek beinhaltet Lokalisierung mit Sonar (SonArnl), Laserscanner (Arnl) und GPS (Mogs). Die Klasse ArLocalizationTask kann Daten vom Laserscanner (ArSick) auswerten um die Lokalisierung durchzufuehren. Abgesehen vom ArLocalizationTask gibt es noch andere Klassen fuer die Lokalisierung. Die Elternklasse ist ArBaseLocalizationTask in der BaseARNL Bibliothek. \cite{arnl}
-Um den ArLocalizationTask zu instanzieren m\"ussen Pointer von Instanzen der Typen ArRobot, ArRangeDevice und ArMapInterface (ArMap) uerbgeben werden. Eine Karte kann durch senorDaten erzeugt werden aber auch durch das Program Mapper3. Die Instanz von ArLocalizationTask startet einen eigenen asynchronen Hintergrund-thread um anhand des Lasersensors wiederholend den Roboter zu lokalisieren. Die Position wird anhand der Berechnungen im ArLocalizationTask neu gesetzt.
+ Die Klasse ArLocalizationTask kann Daten vom Laserscanner (ArSick) auswerten um die Lokalisierung durchzuf\"uhren. Abgesehen vom ArLocalizationTask gibt es noch andere Klassen f\"ur die Lokalisierung. Die Elternklasse ist ArBaseLocalizationTask in der BaseARNL Bibliothek. \cite{arnl}
+Um den ArLocalizationTask zu instanzieren m\"ussen Pointer von Instanzen der Typen ArRobot, ArRangeDevice und ArMapInterface (ArMap) \"urbgeben werden. Eine Karte kann durch senorDaten erzeugt werden aber auch manuell durch das Program Mapper3. Die Instanz von ArLocalizationTask startet einen eigenen asynchronen Hintergrund-thread um anhand des Lasersensors wiederholend den Roboter zu lokalisieren. Die Position wird anhand der Berechnungen im ArLocalizationTask neu gesetzt.
 
 
 \lstset{language=C++}
@@ -311,8 +349,8 @@ ArMap map(fileDir);
 ...
 ArLocalizationTask locTask(&robot, firstLaser, &map);
 \end{lstlisting}
-Um eine initiale Lokalierung durchzufuehren muss die Methode localizeRobotAtHomeBlocking ohne Parameter aufgerufen werden.
-Eine Instanz von ArLocalizationManager erlaubt Ausgabedaten von verschiedenen Lokalisationsthreads zu vereinigen. Durch die Methode addLocalizationTask kann eine neue Instanz von ArBaseLocalizationTask wie z.B. ArSonarLocalizationTask oder ArLocalizationTask hinzugefuegt werden. Durch die Methode fuseTwoDistributions kann man die Daten fusionieren.
+Um eine initiale Lokalierung durchzuf\"uhren muss die Methode localizeRobotAtHomeBlocking ohne Parameter aufgerufen werden.
+Eine Instanz von ArLocalizationManager erlaubt Ausgabedaten von verschiedenen Lokalisationsthreads zu vereinigen. Durch die Methode addLocalizationTask kann eine neue Instanz von ArBaseLocalizationTask wie z.B. ArSonarLocalizationTask oder ArLocalizationTask hinzugef\"ugt werden. Durch die Methode fuseTwoDistributions kann man die Daten fusionieren.
 \lstset{language=C++}
 \begin{lstlisting}
 ArLocalizationManager locManager(&robot, &arMap);
@@ -320,7 +358,7 @@ ArLocalizationTask locTask (&robot, &sick, &arMap);
 locManager.addLocalizationTask(&locTask);
 \end{lstlisting}
 
-Die KonfigurationsDatei arnl.p ist fuer eine erfolgreiche Lokalisation notwendig. Darin befinden sich u.a. Einstellungen fuer die Monte-Carlo-Lokalisation.
+Die KonfigurationsDatei arnl.p ist f\"ur eine erfolgreiche Lokalisation notwendig. Darin befinden sich u.a. Einstellungen f\"ur die Monte-Carlo-Lokalisation.
 Diese Konfigurationsdatei wird durch einen Parser ausgelesen:
 
 \lstset{language=C++}
@@ -346,18 +384,9 @@ Aria::getConfig()->parseFile (Arnl::getTypicalParamFileName() )
 
 \section{Zusammenfassung und Ausblick}
 
-
-%3 parameter ausreichend getestet und die anderen uebersetzt
-%mitternacht oder mittag
-%eigenes programm = mobile eyes ersetzen?
-% mailinglisten
+%Wenn die Position des Robotters initial bekannt ist kann man durch die Odometriedaten und %geeignete Parametereinstellungen gute Lokalisierungsergebnisse erziehlen.  
 
 
-%LLS = Laser Localization Score =
-%das aktuelle maximale Gewicht, d.h.
-%wie gut stimmt das beste Sample
-%mit der Sensorwahrnehmung
-%überein, Maximum 1.0
 \newpage
 
 
@@ -516,21 +545,41 @@ Weitere Parameter betreffen den Kalman Filter welcher nicht Bestandteil dieser A
 			Ein probabilistischer Ansatz zur Lokalisierung mobiler Roboter available at S. 12
 			\url{http://www.ais.fraunhofer.de/~delipetk}
 	
-	
+	\bibitem[FOX1999]{fox1999} Monte Carlo Localization: Efficient Position Estimation for Mobile Robots. Dieter Fox,Wolfram Burgardy, Frank Dellaert, Sebastian Thrun School of Computer Science Carnegie Mellon University Pittsburgh, PA 1999
 	
 	
 	\bibitem[ARNL-Ref]{arnl-ref} MobileRobots Inc, \emph{ARNL-Reference}, (1.7.0) available at 				
 	\url{http://vigir.missouri.edu/~gdesouza/Research/MobileRobotics/Software/ARNL-SONARNL/Arnl-1.7.0+gcc41/docs/ARNL-Reference/index.html}.
 	
+	\bibitem[whitebrook2010]{whitebrook1}Programming Mobile Robots with Aria and Player Dr. Amanda Whitbrook
+	University of Nottingham
+	School of Computer Science, Springer-Verlag London Limited 2010
+	
+	\bibitem[Zweigle]{ZweigleStuttgart} Vorlesung 5
+	Lokalisierung und Mapping - Universit\"at Stuttgart
+	Institut für Parallele und Verteilte
+	Systeme (IPVS) \url{http://www.ipvs.uni-stuttgart.de/abteilungen/bv/lehre/lehrveranstaltungen/vorlesungen/SS09/Robotik%20II_termine/dateien/robotik_8_lokalisierung_2.pdf}
+	
+	
 	
 	\bibitem[Borens 1996]{Borens1996} Borenstein, J., Everett, H.R., Feng, L., April 1996, Where am I? Sensors and Methods for Mobile Robot Positioning. Technical Report, The University of Michigan. Seite 131 Chapter 5: Dead-Reckoning
 	
 	
-	\bibitem[Whitbrook1]{whitbrook1}
-		Dr. Amanda Whitbrook.
-		{\em Programming Mobile Robots with Aria and Player}.
-		Springer-Verlag London Limited , 2010, S. 50
-		\url{http://www.ais.fraunhofer.de/~delipetk}
+	\bibitem[WIKI-Partikelfilter]{WIKIpartikelfilter} Lokalisierung (Robotik) Abschnitt Partikel-Filter. Datum 2.2.2010
+	\url{http://de.wikipedia.org/w/index.php?title=Lokalisierung_(Robotik)#Partikel-Filter}
+	
+	
+	
+	
+	\bibitem[Borens 1996]{Borens1996} Borenstein, J., Everett, H.R., Feng, L., April 1996, Where am I? Sensors and Methods for Mobile Robot Positioning. Technical Report, The University of Michigan. Seite 131 Chapter 5: Dead-Reckoning
+	
+	
+	\bibitem[Plagge]{Plagge} M. Plagge. Personal communication: Pioneer baseserver, 2000.
+	
+	\bibitem[Neumann2002]{Neumann2002}
+		Kalman-Filter und Partikelfilter zur Selbstlokalisation – Ein Vergleich
+		Dirk Neumann, 2002
+		\url{http://www.allpsych.uni-giessen.de/dirk/projects/particle.pdf}
 
 \end{thebibliography}
 \listoffigures
