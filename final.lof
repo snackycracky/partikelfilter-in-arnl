@@ -1,23 +1,23 @@
 \select@language {german}
 \contentsline {figure}{\numberline {1}{\ignorespaces ARIA Architektur\relax }}{2}
 \contentsline {figure}{\numberline {2}{\ignorespaces Markov-Lokalisierung \cite {ZweigleStuttgart}\relax }}{4}
-\contentsline {figure}{\numberline {3}{\ignorespaces Die Initialisierung (0.) erfolgte mit einer Gleichverteilung. Fuer die Propagation des Zustandes (1.) wurde das lineare Modell der Steuerungssoftware uebernommen \cite {Plagge}. Die Berechnung der a-posteriori-Wahrscheinlichkeit (2.) positionsabh\"angigen Parametern durchgef\"uhrt.\relax }}{5}
-\contentsline {figure}{\numberline {4}{\ignorespaces KMmPerMm = 0.5\relax }}{7}
-\contentsline {figure}{\numberline {5}{\ignorespaces KDegPerDeg Parameter Test\relax }}{7}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {KDegPerDeg = 1}}}{7}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {KDegPerDeg = 0.5}}}{7}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {KDegPerDeg = 0.25}}}{7}
-\contentsline {figure}{\numberline {6}{\ignorespaces KDegPerMm Parameter Test\relax }}{8}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {KDegPerMm = 0.02}}}{8}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {KDegPerMm = 0.01}}}{8}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {KDegPerMm = 0.005}}}{8}
-\contentsline {figure}{\numberline {7}{\ignorespaces Winkelfunktionen im Einheitskreis \relax }}{9}
-\contentsline {figure}{\numberline {8}{\ignorespaces Berechnung f\"ur Abbildung \ref {KDegPerMm002}\relax }}{9}
-\contentsline {figure}{\numberline {9}{\ignorespaces Berechnung f\"ur Abbildung \ref {KDegPerMm001}\relax }}{9}
-\contentsline {figure}{\numberline {10}{\ignorespaces Berechnung f\"ur Abbildung \ref {KDegPerMm0005}\relax }}{10}
-\contentsline {figure}{\numberline {11}{\ignorespaces Test der Berechnungen in Abbildung \ref {theta1},\ref {theta2},\ref {theta3}\relax }}{10}
-\contentsline {figure}{\numberline {12}{\ignorespaces KDegPerMm = 0.04\relax }}{11}
-\contentsline {figure}{\numberline {13}{\ignorespaces NumSamplesAtInit = 20000, StdX = 4000, StdY = 0, StdTh = 1\relax }}{11}
-\contentsline {figure}{\numberline {14}{\ignorespaces NumSamplesAtInit = 20000, StdX = 2000, StdY = 0, StdTh = 1\relax }}{12}
-\contentsline {figure}{\numberline {15}{\ignorespaces NumSamplesAtInit = 20000, StdX = 1000, StdY = 0, StdTh = 1\relax }}{12}
+\contentsline {figure}{\numberline {3}{\ignorespaces Die Initialisierung (0.) erfolgte mit einer Gleichverteilung. Fuer die Propagation des Zustandes (1.) wurde das lineare Modell der Steuerungssoftware uebernommen \cite {Plagge}. Die Berechnung der a-posteriori-Wahrscheinlichkeit (2.) positionsabh\"angigen Parametern durchgef\"uhrt.\relax }}{6}
+\contentsline {figure}{\numberline {4}{\ignorespaces KMmPerMm = 0.5\relax }}{8}
+\contentsline {figure}{\numberline {5}{\ignorespaces KDegPerDeg Parameter Test\relax }}{9}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {KDegPerDeg = 1}}}{9}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {KDegPerDeg = 0.5}}}{9}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {KDegPerDeg = 0.25}}}{9}
+\contentsline {figure}{\numberline {6}{\ignorespaces KDegPerMm Parameter Test\relax }}{10}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {KDegPerMm = 0.02}}}{10}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {KDegPerMm = 0.01}}}{10}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {KDegPerMm = 0.005}}}{10}
+\contentsline {figure}{\numberline {7}{\ignorespaces Winkelfunktionen im Einheitskreis \relax }}{10}
+\contentsline {figure}{\numberline {8}{\ignorespaces Berechnung f\"ur Abbildung \ref {KDegPerMm002}\relax }}{11}
+\contentsline {figure}{\numberline {9}{\ignorespaces Berechnung f\"ur Abbildung \ref {KDegPerMm001}\relax }}{11}
+\contentsline {figure}{\numberline {10}{\ignorespaces Berechnung f\"ur Abbildung \ref {KDegPerMm0005}\relax }}{11}
+\contentsline {figure}{\numberline {11}{\ignorespaces Test der Berechnungen in Abbildung \ref {theta1},\ref {theta2},\ref {theta3}\relax }}{11}
+\contentsline {figure}{\numberline {12}{\ignorespaces KDegPerMm = 0.04\relax }}{12}
+\contentsline {figure}{\numberline {13}{\ignorespaces NumSamplesAtInit = 20000, StdX = 4000, StdY = 0, StdTh = 1\relax }}{12}
+\contentsline {figure}{\numberline {14}{\ignorespaces NumSamplesAtInit = 20000, StdX = 2000, StdY = 0, StdTh = 1\relax }}{13}
+\contentsline {figure}{\numberline {15}{\ignorespaces NumSamplesAtInit = 20000, StdX = 1000, StdY = 0, StdTh = 1\relax }}{13}
 \contentsline {figure}{\numberline {16}{\ignorespaces NumSamplesAtInit = 20000, StdX = 4000, StdY = 4000, StdTh = 30\relax }}{13}

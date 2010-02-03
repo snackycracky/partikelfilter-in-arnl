@@ -7,9 +7,7 @@
 \usepackage{appendix}
 \usepackage{subfig}
 \usepackage{comment}
-\oddsidemargin 0.0in 
-\evensidemargin 1.0in
-\textwidth 6.0in 
+\textwidth 5.0in 
 \DeclareMathSizes{12}{20}{14}{10}
 \title{Abschlussaufgabe V - Partikelfilter in ARNL}
 \author{Nils Petersohn}
@@ -49,12 +47,12 @@ Die ARNL Bibliothek beinhaltet Lokalisierung mit Sonar (SonArnl), Laserscanner (
 \subsection{ArNetworking}
 
 
-ArNetworking ist eine API in ARIA um eine client-server Architektur zwischen dem Robotter(Server) und dem entfernten Rechner(Client) \"uber das Netzwerk aufzubauen. Der Client berechnet Bewegungsbefehle und sendet Anfragen an den Server welche dann vom Robotter ausgef\"uhrt werden. Der Robotter hingegen sendet u.a. seine Odometriedaten. 
+ArNetworking ist eine API in ARIA um eine client-server Architektur zwischen dem Roboter(Server) und dem entfernten Rechner(Client) \"uber das Netzwerk aufzubauen. Der Client berechnet Bewegungsbefehle und sendet Anfragen an den Server welche dann vom Roboter ausgef\"uhrt werden. Der Roboter hingegen sendet u.a. seine Odometriedaten. 
 
 
 \subsection{MobileEyes}
 MobileEyes kann sich mit ARIA, ArNetworking und ARNL Server verbinden und dessen Umgebung also interne Karte anzeigen.
-Unter anderem kann man mit MobileEyes Bewegungskomandos an den Robotter schicken.\cite{whitebrook1}
+Unter anderem kann man mit MobileEyes Bewegungskomandos an den Roboter schicken.\cite{whitebrook1}
 
 
 
@@ -82,7 +80,7 @@ Es ist ein zellbasiertes Verfahren bei dem jeder Zelle Wahrescheinlichkeitswert 
 zugeordnet wird. \cite{ZweigleStuttgart}
 Jede Bewegung des Roboters verschiebt die Wahrscheinlichkeiten und streut sie und jede Messung von Merkmalen der Umgebung \"andert die Wahrscheinlichkeiten.
 Wenn die Position unbekann ist erfolgt eine Gleichverteilung.
-Das Problem dabei ist, dass alle Werte(Zellen) nach jeder Bewegung neu berechnet werden muessen Siehe Abbildung \ref{MarkovLokalisierung}. Es gibt nur eine m\"ogliche Position des Robotters und eine unsicherheit wird dabei nicht repr\"asentiert.
+Das Problem dabei ist, dass alle Werte(Zellen) nach jeder Bewegung neu berechnet werden muessen Siehe Abbildung \ref{MarkovLokalisierung}. Es gibt nur eine m\"ogliche Position des Roboters und eine unsicherheit wird dabei nicht repr\"asentiert.
 
 
 \begin{figure}
@@ -145,11 +143,11 @@ Gegen\"uber der Markov Lokalisierung erlaubt die Monte-Carlo-Lokalisierung eine 
 In den folgenden Experimenten werden die zwei Hauptprobleme der Lokalisierung und deren Umsetzung in ARNL untersucht: global localization and position tracking. \cite{fox1999}
 
 \subsection{Positionsverfolgung (Tracking)}\label{tracking}
-In einem Beispielprogramm wird ARNL und ArNetworking verwendet um einen Server zu erstellen. Clients wie MobileEyes k\"onnen sich mit diesem Server verbinden. MobileEyes sendet anfragen an den Server um den Robotter zu steuern, die aktuelle Karte abzufragen, Lokalisierungsparameter zu setzen, Sensordaten abzufragen und den Robotter manuell wieder neu zu lokalisieren.
-Die automatische lokalisierung des Robotters erfolgt durch eine Instanz von ArLocalizationTask welcher also Teil des Serverprograms ist. Wie in Abschnitt \ref{eigenes} deutlich gemacht wird, ist das Monte-Carlo Verfahren in der Klasse ArLocalizationTask implementiert.
+In einem Beispielprogramm wird ARNL und ArNetworking verwendet um einen Server zu erstellen. Clients wie MobileEyes k\"onnen sich mit diesem Server verbinden. MobileEyes sendet anfragen an den Server um den Roboter zu steuern, die aktuelle Karte abzufragen, Lokalisierungsparameter zu setzen, Sensordaten abzufragen und den Roboter manuell wieder neu zu lokalisieren.
+Die automatische lokalisierung des Roboters erfolgt durch eine Instanz von ArLocalizationTask welcher also Teil des Serverprograms ist. Wie in Abschnitt \ref{eigenes} deutlich gemacht wird, ist das Monte-Carlo Verfahren in der Klasse ArLocalizationTask implementiert.
 Durch die Verwendung von MobileEyes kann eine Anpassung der Lokalisierungsparameter Einfluss auf den Partikelfilter genommen werden.
 Die Einstellungen befinden sich in MobileEyes unter Lokalisierungseinstellungen. Eine  liste und deren Beschreibung befinden sich in Appendix I.
-Der Monte Carlo Filter verl\"asst sich unter anderem auf die Odometriedaten die von den R\"adern kommen. Dabei kann bestimmt werden wie weit der Robotter gefahren ist, wenn sich die R\"ader unterschiedlich bewegen oder  wie weit sich der Robotter um seine Achse gedreht hat. Wenn man die genaue Startposition des Robotters kennt und auch die Odometriedaten der R\"ader, so kann man theoretisch die genaue Position des Robotters zum Zeitpunk t bestimmen. In der Praxis ist dies aber nur schwer zu realisieren. Die Unsicherheit
+Der Monte Carlo Filter verl\"asst sich unter anderem auf die Odometriedaten die von den R\"adern kommen. Dabei kann bestimmt werden wie weit der Roboter gefahren ist, wenn sich die R\"ader unterschiedlich bewegen oder  wie weit sich der Roboter um seine Achse gedreht hat. Wenn man die genaue Startposition des Roboters kennt und auch die Odometriedaten der R\"ader, so kann man theoretisch die genaue Position des Roboters zum Zeitpunk t bestimmen. In der Praxis ist dies aber nur schwer zu realisieren. Die Unsicherheit
 w\"achst also mit zunehmender Entfernung vom Startpunkt. generell gibt es drei Odometrie Fehlerarten:
 \begin{itemize}
 \item Entfernungsfehler: Fehler beim zur\"ucklegen einer geraden Strecke
@@ -167,7 +165,7 @@ Um die Bewegungsunsch\"arfe zu testen m\"ussen verschiedene Initialalparameter v
 \item Die Neuberechnung nach einer Drehnung soll nicht erst ab 5 Grad erfolgen sondern schon ab 0 Grad. Der Paramter \textbf{TriggerAngle} wird also auf 0 gesetzt.
 \end{itemize}
 
-Um den Entfernungsfehlerverh\"altnissparameter zu testen wird der Drehfehlerparameter und der Driftfehler zuerst ausgeschaltet. Um den Parameter zu untersuchen wird er auf 0.5 gesetzt. Dies soll bewirken, dass die Partikelwolke sich um die H\"alfte der zur\"uckgelegten Strecke ausdehnt. Der Roboter wird zuerst an einem Punkt lokalisiert. Mit einem Bewegungsbefehl wird der Robotter nun 1 Meter gerade aus bewegt. Wie angenommen hat die Partikelwolke nun eine L\"ange von 50 cm. 
+Um den Entfernungsfehlerverh\"altnissparameter zu testen wird der Drehfehlerparameter und der Driftfehler zuerst ausgeschaltet. Um den Parameter zu untersuchen wird er auf 0.5 gesetzt. Dies soll bewirken, dass die Partikelwolke sich um die H\"alfte der zur\"uckgelegten Strecke ausdehnt. Der Roboter wird zuerst an einem Punkt lokalisiert. Mit einem Bewegungsbefehl wird der Roboter nun 1 Meter gerade aus bewegt. Wie angenommen hat die Partikelwolke nun eine L\"ange von 50 cm. 
 
 \begin{figure}
   \centering
@@ -181,7 +179,7 @@ Um den Entfernungsfehlerverh\"altnissparameter zu testen wird der Drehfehlerpara
 
 Dieser Parameter kann dazu verwendet werden um die Lokalisation in bezug auf die Oberfl\"achenbeschaffenheit anzupassen. In einem h\"ugligem Gel\"ande kann der Roboter eine Steigung hochfahren sich aber im eigentlichen Sinne nicht so schnell weiterbewegen wie die Odometriedaten es \"ubermitteln. Desshalb muss dieser Parameter angemessen erh\"oht werden.
 \\ \\
-Mit dem Drehfehlerparameter $KDegPerDeg$ kann nach der Dokumentation in Anhang \ref{KDegPerDegDoc} die Unsicherheit der Drehung beeinflusst werden. Wenn der Robotter sich z.B. auf einem leicht unebenen Untergrund dreht ist die Drehung nicht eindeutig an den Odometriedaten nachvollziehbar. 
+Mit dem Drehfehlerparameter $KDegPerDeg$ kann nach der Dokumentation in Anhang \ref{KDegPerDegDoc} die Unsicherheit der Drehung beeinflusst werden. Wenn der Roboter sich z.B. auf einem leicht unebenen Untergrund dreht ist die Drehung nicht eindeutig an den Odometriedaten nachvollziehbar. 
 Um diesen zu testen wird der Parameter zuerst auf 1 gesetzt und Entfernungsfehlerverh\"altnissparameter wieder auf null.
 In Abbildung \ref{KDegPerDegTest100} wurde der Roboter um 360 Grad gedreht und dann 1cm gerade aus gefahren. Der Parameter wurde in Abbildung \ref{KDegPerDegTest050} und \ref{KDegPerDegTest025} stufenweise halbiert um den Winkel der Partikelstreuung zu erkennen. Dieser Entspricht demnach dem Verh\"altnis zwischen der Drehung in Grad und der KDegPerDeg Einstellung. Bei einer Drehnung von 360 Grad und einer Einstellung von 1 hat der Partikelfilter eine breite von auch ca. 360$^\circ$ bei 0.5 von ca. 180$^\circ$ und bei 0.25 von ca. 90$^\circ$. Wenn also der Untergrund h\"uglig ist, sollte die Unsicherheit also der KDegPerDeg Paramter h\"oher eingestellt sein. 
 
@@ -196,7 +194,7 @@ In Abbildung \ref{KDegPerDegTest100} wurde der Roboter um 360 Grad gedreht und d
 \end{figure}
 
 \newpage
-Der Parameter $KDegPerMm$ betrifft die Unsicherheit der Odometriedaten der R\"ader. Bei einem differenziellem Antrieb k\"onnen leichte Unterschiede auftreten, wenn der Robotter sich gerade aus bewegt. Wenn der Robotter sich z.B. auf einem unebenen Boden fortbewegt, kann er nach links und rechts abdriften. Die Odometriedaten der R\"ader geben aber ein stetiges geradeausfahren zur\"uck.
+Der Parameter $KDegPerMm$ betrifft die Unsicherheit der Odometriedaten der R\"ader. Bei einem differenziellem Antrieb k\"onnen leichte Unterschiede auftreten, wenn der Roboter sich gerade aus bewegt. Wenn der Roboter sich z.B. auf einem unebenen Boden fortbewegt, kann er nach links und rechts abdriften. Die Odometriedaten der R\"ader geben aber ein stetiges geradeausfahren zur\"uck.
 
 \begin{figure}
   \centering
@@ -364,8 +362,7 @@ Diese Konfigurationsdatei wird durch einen Parser ausgelesen:
 \begin{lstlisting}
 ArArgumentParser parser(&argc, argv);
 parser.loadDefaultArguments();
-...
-// Create service that allows client to change configuration parameters in ArConfig 
+... 
 ArServerHandlerConfig handlerConfig (
 	&server, Aria::getConfig (),
 	Arnl::getTypicalDefaultParamFileName (),
@@ -376,9 +373,6 @@ ArServerHandlerConfig handlerConfig (
 Aria::getConfig()->useArgumentParser(&parser);
 Aria::getConfig()->parseFile (Arnl::getTypicalParamFileName() )
 \end{lstlisting}
-
-
-\newpage
 
 
 
@@ -451,11 +445,8 @@ Diese Einstellung wurde auch getestet. Jedoch wurde der Roboter immer wieder in 
 \paragraph{PeakStdX,PeakStdY,PeakStdTh} 10               minimum 0,  Eine weiter einstellung um die gr\"osse der Streuung (gr\"osse der Ellipse) zu beeinflussen
 
 
-\paragraph{PeakFactor} 1e-06          range [0, 1],  When a no of samples have non zero
-                          probabilities such as when there is ambiguities in a
-                          corridor. This is the threshold below the maximum
-                          probablity to be considered a valid hypothesis.
-Wenn manche Partikel eine Wahrschinlichkeit ungleich null haben dann ist diese Einstellung der Schwellwert fuer eine valide Hypothese ansonsten ist die Hypothese nicht valide und wird verworfen. Der Schwellwert bezieht sich auf die maximale Wahrscheinlichkeit LLS
+\paragraph{PeakFactor} 1e-06          range [0, 1], 
+Wenn manche Partikel eine Wahrscheinlichkeit ungleich null haben dann ist diese Einstellung der Schwellwert fuer eine valide Hypothese ansonsten ist die Hypothese nicht valide und wird verworfen. Der Schwellwert bezieht sich auf die maximale Wahrscheinlichkeit LLS
 
 
 \paragraph{StdX} 400                  minimum 0,  Die gausssche Wahrscheinlichkeitsverteilung bei dem Beginn der Lokalisierung ($\sigma$) in Richtung der X-Achse. Diese Parameter wurde in Abschnitt \ref{globalPos} behandelt.

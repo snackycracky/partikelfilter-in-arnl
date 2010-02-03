@@ -8,12 +8,12 @@
 \contentsline {section}{\numberline {3}Theoretischer Hintergrund}{3}
 \contentsline {subsection}{\numberline {3.1}Probabilistische Lokalisierung}{3}
 \contentsline {subsection}{\numberline {3.2}Markov-Lokalisierung}{3}
-\contentsline {subsection}{\numberline {3.3}Partikelfilter}{3}
+\contentsline {subsection}{\numberline {3.3}Partikelfilter}{4}
 \contentsline {subsection}{\numberline {3.4}Monte-Carlo-Lokalisierung}{4}
-\contentsline {section}{\numberline {4}Experimente}{6}
-\contentsline {subsection}{\numberline {4.1}Positionsverfolgung (Tracking)}{6}
-\contentsline {subsection}{\numberline {4.2}Globale Positionierung}{11}
-\contentsline {section}{\numberline {5}Nutzung der Lokalisierung in eigenen Programmen}{12}
+\contentsline {section}{\numberline {4}Experimente}{7}
+\contentsline {subsection}{\numberline {4.1}Positionsverfolgung (Tracking)}{7}
+\contentsline {subsection}{\numberline {4.2}Globale Positionierung}{12}
+\contentsline {section}{\numberline {5}Nutzung der Lokalisierung in eigenen Programmen}{14}
 \contentsline {section}{\numberline {6}Zusammenfassung}{15}
 \contentsline {section}{\numberline {A}Appendix I}{16}
 \contentsline {paragraph}{Parametername Standartwert Minimumwert, Erkl\"arung}{16}
@@ -27,8 +27,8 @@
 \contentsline {paragraph}{KDegPerMm}{16}
 \contentsline {paragraph}{TriggerDistance}{16}
 \contentsline {paragraph}{TriggerAngle}{16}
-\contentsline {paragraph}{TriggerTimeEnabled}{16}
-\contentsline {paragraph}{TriggerTime}{16}
+\contentsline {paragraph}{TriggerTimeEnabled}{17}
+\contentsline {paragraph}{TriggerTime}{17}
 \contentsline {paragraph}{IdleTimeTriggerX}{17}
 \contentsline {paragraph}{IdleTimeTriggerY}{17}
 \contentsline {paragraph}{IdleTimeTriggerTh}{17}
@@ -38,10 +38,10 @@
 \contentsline {paragraph}{FailedTh}{17}
 \contentsline {paragraph}{PeturbX}{17}
 \contentsline {paragraph}{PeturbY}{17}
-\contentsline {paragraph}{PeturbTh}{17}
-\contentsline {paragraph}{PeakStdX,PeakStdY,PeakStdTh}{17}
-\contentsline {paragraph}{PeakFactor}{17}
-\contentsline {paragraph}{StdX}{17}
+\contentsline {paragraph}{PeturbTh}{18}
+\contentsline {paragraph}{PeakStdX,PeakStdY,PeakStdTh}{18}
+\contentsline {paragraph}{PeakFactor}{18}
+\contentsline {paragraph}{StdX}{18}
 \contentsline {paragraph}{StdY}{18}
 \contentsline {paragraph}{StdTh}{18}
 \contentsline {paragraph}{SensorBelief}{18}
