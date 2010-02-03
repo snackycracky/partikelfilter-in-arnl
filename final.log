@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.1.22)  3 FEB 2010 01:32
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.1.22)  3 FEB 2010 01:37
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -381,12 +381,9 @@ s / Software /
  []
 
 [18]
-Missing character: There is no Ì in font cmr10!
-Missing character: There is no ˆ in font cmr10!
-
 Underfull \hbox (badness 1418) in paragraph at lines 486--490
-\OT1/cmr/m/n/10 sti-tut fur Par-al-le-le und Ver-teil-te Sy-ste-me (IPVS) $\OT1
-/cmtt/m/n/10 http : / / www . ipvs .
+\OT1/cmr/m/n/10 sti-tut f[]ur Par-al-le-le und Ver-teil-te Sy-ste-me (IPVS) $\O
+T1/cmtt/m/n/10 http : / / www . ipvs .
  []
 
 
@@ -460,7 +457,7 @@ ive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
 ve/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive
 /2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
 2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on final.pdf (20 pages, 541172 bytes).
+Output written on final.pdf (20 pages, 541142 bytes).
 PDF statistics:
  139 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
