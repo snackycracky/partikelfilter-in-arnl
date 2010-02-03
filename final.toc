@@ -14,8 +14,9 @@
 \contentsline {subsection}{\numberline {4.1}Positionsverfolgung (Tracking)}{6}
 \contentsline {subsection}{\numberline {4.2}Globale Positionierung}{11}
 \contentsline {section}{\numberline {5}Nutzung der Lokalisierung in eigenen Programmen}{12}
-\contentsline {section}{\numberline {6}Zusammenfassung und Ausblick}{15}
+\contentsline {section}{\numberline {6}Zusammenfassung}{15}
 \contentsline {section}{\numberline {A}Appendix I}{16}
+\contentsline {paragraph}{Parametername Standartwert Minimumwert, Erkl\"arung}{16}
 \contentsline {paragraph}{Map}{16}
 \contentsline {paragraph}{NumSamples}{16}
 \contentsline {paragraph}{NumSamplesAtInit}{16}
@@ -28,7 +29,7 @@
 \contentsline {paragraph}{TriggerAngle}{16}
 \contentsline {paragraph}{TriggerTimeEnabled}{16}
 \contentsline {paragraph}{TriggerTime}{16}
-\contentsline {paragraph}{IdleTimeTriggerX}{16}
+\contentsline {paragraph}{IdleTimeTriggerX}{17}
 \contentsline {paragraph}{IdleTimeTriggerY}{17}
 \contentsline {paragraph}{IdleTimeTriggerTh}{17}
 \contentsline {paragraph}{RecoverOnFail}{17}
@@ -38,15 +39,10 @@
 \contentsline {paragraph}{PeturbX}{17}
 \contentsline {paragraph}{PeturbY}{17}
 \contentsline {paragraph}{PeturbTh}{17}
-\contentsline {paragraph}{PeakStdX}{17}
-\contentsline {paragraph}{PeakStdY}{17}
-\contentsline {paragraph}{PeakStdTh}{17}
+\contentsline {paragraph}{PeakStdX,PeakStdY,PeakStdTh}{17}
 \contentsline {paragraph}{PeakFactor}{17}
 \contentsline {paragraph}{StdX}{17}
 \contentsline {paragraph}{StdY}{18}
 \contentsline {paragraph}{StdTh}{18}
 \contentsline {paragraph}{SensorBelief}{18}
-\contentsline {paragraph}{OccThreshold}{18}
-\contentsline {paragraph}{AngleIncrement}{18}
-\contentsline {paragraph}{DiscardThreshold}{18}
 \contentsline {paragraph}{Kalman Filter}{18}

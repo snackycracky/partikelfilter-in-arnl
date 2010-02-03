@@ -12,7 +12,7 @@
 \textwidth 6.0in 
 \DeclareMathSizes{12}{20}{14}{10}
 \title{Abschlussaufgabe V - Partikelfilter in ARNL}
-\author{Nils Petersohn, Matrikel: 20022749}
+\author{Nils Petersohn}
 \date{3. Feb. 2010}
 \begin{document}
 \maketitle
@@ -21,7 +21,7 @@
 
 \tableofcontents
 \listoftables
-
+ 
 \section{Aufgabenstellung}
 Es soll die Monte-Carlo-Lokalisierung in Arnl untersucht werden. Durch Experimente und Recherche soll der genaue Ablauf des Partikelfilters auch als MCL(Monte-Carlo-Lokalisierung) und die Wirkung der Parameter dargestellt werden. Ausserdem soll gekl\"art werden wie die Lokalisierung in eigenen Programmen genutzt werden kann.
 
@@ -144,12 +144,12 @@ Gegen\"uber der Markov Lokalisierung erlaubt die Monte-Carlo-Lokalisierung eine 
 \section{Experimente}
 In den folgenden Experimenten werden die zwei Hauptprobleme der Lokalisierung und deren Umsetzung in ARNL untersucht: global localization and position tracking. \cite{fox1999}
 
-\subsection{Positionsverfolgung (Tracking)}
-In einem Beispielprogramm wird ARNL und ArNetworking verwendet um einen Server zu erstellen. Clients wie MobileEyes koennen sich mit diesem Server verbinden. MobileEyes sendet anfragen an den Server um den Robotter zu steuern, die aktuelle Karte abzufragen, Lokalisierungsparameter zu setzen, Sensordaten abzufragen und den Robotter manuell wieder neu zu lokalisieren.
+\subsection{Positionsverfolgung (Tracking)}\label{tracking}
+In einem Beispielprogramm wird ARNL und ArNetworking verwendet um einen Server zu erstellen. Clients wie MobileEyes k\"onnen sich mit diesem Server verbinden. MobileEyes sendet anfragen an den Server um den Robotter zu steuern, die aktuelle Karte abzufragen, Lokalisierungsparameter zu setzen, Sensordaten abzufragen und den Robotter manuell wieder neu zu lokalisieren.
 Die automatische lokalisierung des Robotters erfolgt durch eine Instanz von ArLocalizationTask welcher also Teil des Serverprograms ist. Wie in Abschnitt \ref{eigenes} deutlich gemacht wird, ist das Monte-Carlo Verfahren in der Klasse ArLocalizationTask implementiert.
 Durch die Verwendung von MobileEyes kann eine Anpassung der Lokalisierungsparameter Einfluss auf den Partikelfilter genommen werden.
 Die Einstellungen befinden sich in MobileEyes unter Lokalisierungseinstellungen. Eine  liste und deren Beschreibung befinden sich in Appendix I.
-Der Monte Carlo Filter verlaesst sich unter anderem auf die Odometriedaten die von den Raedern kommen. Dabei kann bestimmt werden wie weit der Robotter gefahren ist, wenn sich die Raeder unterschiedlich bewegen oder  wie weit sich der Robotter um seine Achse gedreht hat. Wenn man die genaue Startposition des Robotters kennt und auch die Odometriedaten der Raeder, so kann man theoretisch die genaue Position des Robotters zum Zeitpunk t bestimmen. In der Praxis ist dies aber nur schwer zu realisieren. Die Unsicherheit
+Der Monte Carlo Filter verl\"asst sich unter anderem auf die Odometriedaten die von den R\"adern kommen. Dabei kann bestimmt werden wie weit der Robotter gefahren ist, wenn sich die R\"ader unterschiedlich bewegen oder  wie weit sich der Robotter um seine Achse gedreht hat. Wenn man die genaue Startposition des Robotters kennt und auch die Odometriedaten der R\"ader, so kann man theoretisch die genaue Position des Robotters zum Zeitpunk t bestimmen. In der Praxis ist dies aber nur schwer zu realisieren. Die Unsicherheit
 w\"achst also mit zunehmender Entfernung vom Startpunkt. generell gibt es drei Odometrie Fehlerarten:
 \begin{itemize}
 \item Entfernungsfehler: Fehler beim zur\"ucklegen einer geraden Strecke
@@ -158,7 +158,7 @@ w\"achst also mit zunehmender Entfernung vom Startpunkt. generell gibt es drei O
 \end{itemize}
 
 Das Bewegungsmodell in ARIA/ARNL bildet genau diese Fehler ab.
-Um die Bewegungsunschaerfe zu testen m\"ussen verschiedene Initialalparameter verwendet werden:
+Um die Bewegungsunsch\"arfe zu testen m\"ussen verschiedene Initialalparameter verwendet werden:
 \begin{itemize}
 \item PassThreshold muss auf 0 gesetzt werden um zu vermeiden, dass der Roboter in den Lost Modus geht
 \item Um die Partikelwolke besser sichtbar zu machen wird der Wert NumSamples auf 5000 gesetzt
@@ -167,7 +167,7 @@ Um die Bewegungsunschaerfe zu testen m\"ussen verschiedene Initialalparameter ve
 \item Die Neuberechnung nach einer Drehnung soll nicht erst ab 5 Grad erfolgen sondern schon ab 0 Grad. Der Paramter \textbf{TriggerAngle} wird also auf 0 gesetzt.
 \end{itemize}
 
-Um den Entfernungsfehlerverhaeltnissparameter zu testen wird der Drehfehlerparameter und der Driftfehler zuerst ausgeschaltet. Um den Parameter zu untersuchen wird er auf 0.5 gesetzt. Dies soll bewirken, dass die Partikelwolke sich um die H\"alfte der zur\"uckgelegten Strecke ausdehnt. Der Roboter wird zuerst an einem Punkt lokalisiert. Mit einem Bewegungsbefehl wird der Robotter nun 1 Meter gerade aus bewegt. Wie angenommen hat die Partikelwolke nun eine L\"ange von 50 cm. 
+Um den Entfernungsfehlerverh\"altnissparameter zu testen wird der Drehfehlerparameter und der Driftfehler zuerst ausgeschaltet. Um den Parameter zu untersuchen wird er auf 0.5 gesetzt. Dies soll bewirken, dass die Partikelwolke sich um die H\"alfte der zur\"uckgelegten Strecke ausdehnt. Der Roboter wird zuerst an einem Punkt lokalisiert. Mit einem Bewegungsbefehl wird der Robotter nun 1 Meter gerade aus bewegt. Wie angenommen hat die Partikelwolke nun eine L\"ange von 50 cm. 
 
 \begin{figure}
   \centering
@@ -179,11 +179,11 @@ Um den Entfernungsfehlerverhaeltnissparameter zu testen wird der Drehfehlerparam
 \end{figure}
 
 
-Dieser Parameter kann dazu verwendet werden um die Lokalisation in bezug auf die Oberflaechenbeschaffenheit anzupassen. In einem h\"ugligem Gel\"ande kann der Roboter eine Steigung hochfahren sich aber im eigentlichen Sinne nicht so schnell weiterbewegen wie die Odometriedaten es \"ubermitteln. Desshalb muss dieser Parameter angemessen erh\"oht werden.
+Dieser Parameter kann dazu verwendet werden um die Lokalisation in bezug auf die Oberfl\"achenbeschaffenheit anzupassen. In einem h\"ugligem Gel\"ande kann der Roboter eine Steigung hochfahren sich aber im eigentlichen Sinne nicht so schnell weiterbewegen wie die Odometriedaten es \"ubermitteln. Desshalb muss dieser Parameter angemessen erh\"oht werden.
 \\ \\
 Mit dem Drehfehlerparameter $KDegPerDeg$ kann nach der Dokumentation in Anhang \ref{KDegPerDegDoc} die Unsicherheit der Drehung beeinflusst werden. Wenn der Robotter sich z.B. auf einem leicht unebenen Untergrund dreht ist die Drehung nicht eindeutig an den Odometriedaten nachvollziehbar. 
-Um diesen zu testen wird der Parameter zuerst auf 1 gesetzt und Entfernungsfehlerverhaeltnissparameter wieder auf null.
-In Abbildung \ref{KDegPerDegTest100} wurde der Roboter um 360 Grad gedreht und dann 1cm gerade aus gefahren. Der Parameter wurde in Abbildung \ref{KDegPerDegTest050} und \ref{KDegPerDegTest025} stufenweise halbiert um den Winkel der Partikelstreuung zu erkennen. Dieser Entspricht demnach dem Verhaeltnis zwischen der Drehung in Grad und der KDegPerDeg Einstellung. Bei einer Drehnung von 360 Grad und einer Einstellung von 1 hat der Partikelfilter eine breite von auch ca. 360$^\circ$ bei 0.5 von ca. 180$^\circ$ und bei 0.25 von ca. 90$^\circ$. Wenn also der Untergrund h\"uglig ist, sollte die Unsicherheit also der KDegPerDeg Paramter hoeher eingestellt sein. 
+Um diesen zu testen wird der Parameter zuerst auf 1 gesetzt und Entfernungsfehlerverh\"altnissparameter wieder auf null.
+In Abbildung \ref{KDegPerDegTest100} wurde der Roboter um 360 Grad gedreht und dann 1cm gerade aus gefahren. Der Parameter wurde in Abbildung \ref{KDegPerDegTest050} und \ref{KDegPerDegTest025} stufenweise halbiert um den Winkel der Partikelstreuung zu erkennen. Dieser Entspricht demnach dem Verh\"altnis zwischen der Drehung in Grad und der KDegPerDeg Einstellung. Bei einer Drehnung von 360 Grad und einer Einstellung von 1 hat der Partikelfilter eine breite von auch ca. 360$^\circ$ bei 0.5 von ca. 180$^\circ$ und bei 0.25 von ca. 90$^\circ$. Wenn also der Untergrund h\"uglig ist, sollte die Unsicherheit also der KDegPerDeg Paramter h\"oher eingestellt sein. 
 
 
 \begin{figure}
@@ -196,7 +196,7 @@ In Abbildung \ref{KDegPerDegTest100} wurde der Roboter um 360 Grad gedreht und d
 \end{figure}
 
 \newpage
-Der Parameter $KDegPerMm$ betrifft die Unsicherheit der Odometriedaten der Raeder. Bei einem differenziellem Antrieb koennen leichte Unterschiede auftreten, wenn der Robotter sich gerade aus bewegt. Wenn der Robotter sich z.B. auf einem unebenen Boden fortbewegt, kann er nach links und rechts abdriften. Die Odometriedaten der Raeder geben aber ein stetiges geradeausfahren zur\"uck.
+Der Parameter $KDegPerMm$ betrifft die Unsicherheit der Odometriedaten der R\"ader. Bei einem differenziellem Antrieb k\"onnen leichte Unterschiede auftreten, wenn der Robotter sich gerade aus bewegt. Wenn der Robotter sich z.B. auf einem unebenen Boden fortbewegt, kann er nach links und rechts abdriften. Die Odometriedaten der R\"ader geben aber ein stetiges geradeausfahren zur\"uck.
 
 \begin{figure}
   \centering
@@ -260,7 +260,7 @@ Zuerst wird der Mittelwert der Abweichung durch das arithmetische Mittel bestimm
   \label{KDegPerMm0005Calc}
 \end{figure}
 
-Um die Rechnungen zu bestaetigen wird der Wert ausgerechnet welcher zu einem Fehlerwinkel von $180^\circ$ noetig ist und bilden dann davon das Arithmetische Mittel. Wenn dieses nicht sonderlich abweicht waren die Rechnungen richtig. \\ Dies ist der Fall in Abbildung \ref{testCalacAll} denn eine maximale Abweichung von weniger als 0.012 und eine Minimale Abweichung von 0.0009 ist anehmbar. 
+Um die Rechnungen zu best\"atigen wird der Wert ausgerechnet welcher zu einem Fehlerwinkel von $180^\circ$ n\"otig ist und bilden dann davon das Arithmetische Mittel. Wenn dieses nicht sonderlich abweicht waren die Rechnungen richtig. \\ Dies ist der Fall in Abbildung \ref{testCalacAll} denn eine maximale Abweichung von weniger als 0.012 und eine Minimale Abweichung von 0.0009 ist anehmbar. 
 
 \begin{figure}
 	\begin{equation}\label{get0005Y}	
@@ -282,7 +282,7 @@ Um die Rechnungen zu bestaetigen wird der Wert ausgerechnet welcher zu einem Feh
   \label{testCalacAll}
 \end{figure}
 
-Die Bestaetigung liefert eine Einstellung von KDegPerMm = 0.04 welche eine $180^\circ$ ausgedehnte Partikelwolke aufspannt siehe Abbildung \ref{KDegPerMm004Test}.
+Die Best\"atigung liefert eine Einstellung von KDegPerMm = 0.04 welche eine $180^\circ$ ausgedehnte Partikelwolke aufspannt siehe Abbildung \ref{KDegPerMm004Test}.
 
 \begin{figure}
 	\centering
@@ -291,14 +291,14 @@ Die Bestaetigung liefert eine Einstellung von KDegPerMm = 0.04 welche eine $180^
 	  \label{KDegPerMm004Test}
 \end{figure}
 
-Somit laesst sich der Parameter nachvollziehen. Wenn man einen Winkel $\alpha$ erreichen will muss man Rechnen: $KDegPerMm = \alpha \cdot 2.22 \cdot 10^{-4}$
+Somit l\"asst sich der Parameter nachvollziehen. Wenn man einen Winkel $\alpha$ erreichen will muss man Rechnen: $KDegPerMm = \alpha \cdot 2.22 \cdot 10^{-4}$
 Diese Rechnung ist nicht genau und wurde mit Rundungswerten ermittelt. 
 \newpage
 
-\subsection{Globale Positionierung}
+\subsection{Globale Positionierung}\label{globalPos}
 Wenn die Initiale Position des Roboters nicht bekannt ist, dann werden Samples ausgestreut. Die Menge der ausgestreuten Samples und deren Verteilung wird u.a. durch die Parameter NumSamplesAtInit, StdX, StdY und StdTh eingestellt.
 Um diese Parameter zu testen werden Extremwerte verwendet. Die Parametereinstellung in Abbildung \ref{stdx4000stdy0stdth1Test},\ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} soll verdeutlichen welche Auswirkungen eine Eindimensionale Ausbreitung auf der X Achse f\"ur Konsequenzen mit sich ziehen. 
-Die Streuung der Samples bei einem Wert von StdX = 4000mm ist nicht wie erwartet 4000mm in Richtung der X Achse sondern 2400mm wie in Abbildung \ref{stdx4000stdy0stdth1Test}. Der eigentliche Wirkung von StdX ist also  $\approx \left(StdX/2\right)+(\frac{StdX}{10})$ mm. Und nicht wie angenommen $StdX$ mm. In Abbildung \ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} wird dies bestaetigt.
+Die Streuung der Samples bei einem Wert von StdX = 4000mm ist nicht wie erwartet 4000mm in Richtung der X Achse sondern 2400mm wie in Abbildung \ref{stdx4000stdy0stdth1Test}. Der eigentliche Wirkung von StdX ist also  $\approx \left(StdX/2\right)+(\frac{StdX}{10})$ mm. Und nicht wie angenommen $StdX$ mm. In Abbildung \ref{stdx2000stdy0stdth1Test},\ref{stdx1000stdy0stdth1Test} wird dies best\"atigt.
 Eine grosse Ausdehnung bei der initialen Lokalisierung der Partikelwolke erfolgt durch die Einstellungen wie in Abbildung \ref{stdx4000stdy4000stdth30}
 
 \begin{figure}
@@ -332,7 +332,6 @@ Eine grosse Ausdehnung bei der initialen Lokalisierung der Partikelwolke erfolgt
 \newpage
 \newpage
 \section{Nutzung der Lokalisierung in eigenen Programmen}\label{eigenes}
-
  Die Klasse ArLocalizationTask kann Daten vom Laserscanner (ArSick) auswerten um die Lokalisierung durchzuf\"uhren. Abgesehen vom ArLocalizationTask gibt es noch andere Klassen f\"ur die Lokalisierung. Die Elternklasse ist ArBaseLocalizationTask in der BaseARNL Bibliothek. \cite{arnl}
 Um den ArLocalizationTask zu instanzieren m\"ussen Pointer von Instanzen der Typen ArRobot, ArRangeDevice und ArMapInterface (ArMap) \"urbgeben werden. Eine Karte kann durch senorDaten erzeugt werden aber auch manuell durch das Program Mapper3. Die Instanz von ArLocalizationTask startet einen eigenen asynchronen Hintergrund-thread um anhand des Lasersensors wiederholend den Roboter zu lokalisieren. Die Position wird anhand der Berechnungen im ArLocalizationTask neu gesetzt.
 
@@ -378,16 +377,16 @@ Aria::getConfig()->useArgumentParser(&parser);
 Aria::getConfig()->parseFile (Arnl::getTypicalParamFileName() )
 \end{lstlisting}
 
+
 \newpage
 
 
 
 \section{Zusammenfassung}
 
-Die Experimente haben gezeigt, dass der Partikelfilter gut in ARNL umgesetzt ist. Viele Einstellungsm\"oglichkeiten bei MobileEyes machen eine gute Lokalisierung m\"oglich. Jedoch erkennt die Lokalisierung manche Hindernisse falsch. Durch die Verwendung der Monte-Carlo-Lokalisierung sinkt die Hardwareanforderung drastisch und es werden schnelle und gute Ergebnisse erziehlt. Jedoch ist die Dokumentation unzureichend, weil wichtige Klassen nicht unter der Open Source Lizenz stehen
-
-
-%Wenn die Position des Robotters initial bekannt ist kann man durch die Odometriedaten und %geeignete Parametereinstellungen gute Lokalisierungsergebnisse erziehlen.  
+Die Experimente haben gezeigt, dass der Partikelfilter gut in ARNL umgesetzt ist. Viele Einstellungsm\"oglichkeiten bei MobileEyes machen eine gute Lokalisierung m\"oglich. Durch die Verwendung der Monte-Carlo-Lokalisierung sinkt die Hardwareanforderung drastisch und es werden schnelle und gute Ergebnisse erziehlt. Eine genaue Analyse der Funktion ist nur duch reverse Engeneering m\"oglich, denn wichtige Klassen stehen nicht unter der Open Source Lizenz. Auch ist die Dokumentation unzureichend und das verwendete Englisch ist nicht nativ was den Analyseprozess zus\"atzlich erschwert hat. 
+Dennoch kann mit dem umgesetzten Lokalisationsmodul in ARIA gut gearbeitet werden.
+In ARIA sind die Methodennamen sind verst\"andlich und aussagekr\"aftig. Daher ist eine intuitive Benutzung gegeben.
 
 
 \newpage
@@ -396,143 +395,78 @@ Die Experimente haben gezeigt, dass der Partikelfilter gut in ARNL umgesetzt ist
 \appendix
 \section{Appendix I}
 
+\paragraph{Parametername Standartwert Minimumwert, Erkl\"arung}
+
 \paragraph{Map}          Karte der Umgebung um zu Navigieren. 
 
-\paragraph{NumSamples} 2000           minumum 0,  No of pose samples for MCL. The larger
-                          this number, the more computation will localization
-                          take. Too low a number will cause the robot to lose
-                          localization. This is also the maximum no of samples
-                          which will be used for localization if no of samples
-                          are varied along with the localization score.
-\paragraph{NumSamplesAtInit} Number of pose samples for MCL when initializing the robot in the Map.
-\paragraph{GridRes} 100               minimum 10,  The resolution of the occupancy grid
-                          representing the map in mm. Smaller resolution
-                          results in more accuracy but more computation.
+\paragraph{NumSamples} 2000           minumum 0,  Die (maximale) Anzahl der Partikel wird hier festgelegt. Je h\"oher dieser Wert ist desto mehr Rechenleistung wird ben\"otigt. In dieser Arbeit wurde in einem Bereich von 5000-20000 Partikel gearbeitet.
 
-\paragraph{PassThreshold} 0.2         range [0, 1],  After MCL sensor correction, the
-                          sample with the maximum probablity will have a score
-                          based on the match between sensor and the map
-                          points. This is the minimum score out of 1.0 to be
-                          considered localized.
+\paragraph{NumSamplesAtInit} Wenn der Roboter in der Karte neu initialisiert wird, dann bedeutet ein Wert von 0, dass $NumSamples$ Partikel benutzt werden. Bei den Experimenten wurde ein Wert von ca. 20000 eingestellt um die Initiale Partikelanzahl vorzugeben. Bei der Initialisierung wird somit eine Gleichverteilung von 20000 Samples ausgef\"uhrt
 
-\paragraph{KMmPerMm} 0.05             minimum 0,  When the robot moves linearly, the error
-                          in distance is proportional to the distance moved.
-                          This error is is given as a fraction in mm per mm
+\paragraph{GridRes} 100               minimum 10,  Die Aufl\"osung der Gitter in MobileEyes. Der Standartwert wurde bei den Experimenten verwendet.
 
-\paragraph{KDegPerDeg}\label{KDegPerDegDoc} 0.05           minimum 0,  When the robot rotates, the error in the
-                          angle is proportional to the angle turned. This is
-                          expressed as a fraction in degs per deg.
+\paragraph{PassThreshold} 0.2         range [0, 1],  
+Wenn die LLS unter diesen Wert f\"allt, dann befindet sich der Roboter im `Lost' Zustand. Bei den meisten Experimenten wurde dies mit einem Wert von 0 vermieden.
+LLS = Laser Localization Score = das aktuelle maximale Gewicht, d.h. wie gut stimmt das beste Sample mit der Sensorwahrnehmung \"uberein, Maximum 1.0 
 
-\paragraph{KDegPerMm} 0.0025          minimum 0,  When the robot moves linearly it can
-                          also affect its orientation. This drift can be
-                          expressed as a fraction in degs per mm.
 
-\paragraph{TriggerDistance} 200       minimum 0,  Since MCL localization is
-                          computationally expensive, it is triggered only when
-                          the robot has moved this far in mm.
+\paragraph{KMmPerMm} 0.05             minimum 0,  Entfernungsfehler in mm per mm. Wurde in Abschnitt \ref{tracking} erkl\"art.
 
-\paragraph{TriggerAngle} 5            minimum 0,  Since MCL localization is
-                          computationally expensive, it is triggered only when
-                          the robot has rotated this far in degs.
+\paragraph{KDegPerDeg}\label{KDegPerDegDoc} 0.05           minimum 0,  Drehfehler in Grad per DrehungsGrad.Wurde in Abschnitt \ref{tracking} erkl\"art.
+\paragraph{KDegPerMm} 0.0025          minimum 0, Driftfehler in Grad per mm.
+Wurde in Abschnitt \ref{tracking} erkl\"art.
 
-\paragraph{TriggerTimeEnabled} false  This flag will decide if the localization will be
-                          called every 'TriggerTime' msecs. Once this flag is
-                          true the IdleTimeTrigger* parameters will take
-                          effect. This feature is meant to take care of cases
-                          when the robot has not moved much for a time and the
-                          position should be refined .
+\paragraph{TriggerDistance} 200       minimum 0,  Lokalisierung wird erst nach einer gefahrenen Strecke von $TriggerDistance$ durchgefuehrt. Der Standartwert wurde bei den Experimenten verwendet.
 
-\paragraph{TriggerTime} 10000         minimum 1500,  Once the TriggerTimeFlag is set to
-                          true this parameter will decide how long the robot
-                          has been idle in milli seconds before it starts a
-                          localization near the last known robot pose.
+\paragraph{TriggerAngle} 5            minimum 0,  Lokalisierung wird erst nach einer Drehung  von $TriggerAngle$ durchgefuehrt. Gemessen in Grad.
 
-\paragraph{IdleTimeTriggerX} 200      minimum 0,  When localization is triggered by idle
-                          time this parameter decides the range of the samples
-                          in X coords in mm.
+\paragraph{TriggerTimeEnabled} false  
 
-\paragraph{IdleTimeTriggerY} 200      minimum 0,  When localization is triggered by idle
-                          time this parameter decides the range of the samples
-                          in Y coords in mm.
+Die Lokalisierung soll nicht nach einer abgefahrenen Strecke oder einer bestimmten Drehung erfolgen sondern nach einem Zeitintervall $TriggerTime$
+Diese Einstellung wurde auch getestet. Jedoch wurde der Roboter immer wieder in den `Lost' Zustand gebracht und neu Lokalisiert. Daher war diese Einstellung war f\"ur die Experimente nicht verwendbar.
 
-\paragraph{IdleTimeTriggerTh} 15      minimum 0,  When localization is triggered by idle
-                          time this parameter decides the range of the samples
-                          in Theta coords in degs.
+\paragraph{TriggerTime} 10000         minimum 1500,  Zeitinterval in msec f\"ur den Lokalisierungstrigger.
 
-\paragraph{RecoverOnFail} false       If localization fails, this flag will decide if a
-                          static localization is attempted around last known
-                          robot pose. Such a reinitialization can cause the
-                          robot to be hopelessly lost if the actual robot is
-                          very different from its known pose
+\paragraph{IdleTimeTriggerX} 200      minimum 0,  Streuung der Samples auf der X Achse in mm wenn der Lokalisierungstrigger eingeschaltet ist.
 
-\paragraph{FailedX} 300               minimum 0,  Range of the box in the X axis in mm to
-                          distribute samples after localization fails.
+\paragraph{IdleTimeTriggerY} 200      minimum 0,  Streuung der Samples auf der Y Achse in mm wenn der Lokalisierungstrigger eingeschaltet ist.
 
-\paragraph{FailedY} 300               minimum 0,  Range of the box in the Y axis in mm to
-                          distribute samples after localization fails.
+\paragraph{IdleTimeTriggerTh} 15      minimum 0,  Ausrichtung der Samples ($\theta$) in Grad.
 
-\paragraph{FailedTh} 45               minimum 0,  Range of the angle in degs to distribute
-                          samples after localization fails.
+\paragraph{RecoverOnFail} false       Bei einer positiven Einstellung (true) wird der Roboter ,wenn er in den `Lost' Zustand uebergeht durch eine statische Reinitialisierung unter Verwendung der letzten bekannten Position neu lokalisiert. Bei den Experimenten war diese Einstellung jederzeit negativ eingestellt.
 
-\paragraph{PeturbX}\label{PeturbX} 10                minimum 0,  After sensor correction and resampling
-                          the chosen pose is perturbed to generate a new
-                          sample. This parameter decides the range to peturb
-                          the X axis in mm.
 
-\paragraph{PeturbY}\label{PeturbY} 10                minimum 0,  After sensor correction and resampling
-                          the chosen pose is perturbed to generate a new
-                          sample. This parameter decides the range to peturb
-                          the Y axis in mm.
+\paragraph{FailedX} 300               minimum 0,  Streuung der Samples auf der X Achse bei einer statische Reinitialisierung durch den `Lost' Zustand in mm.
 
-\paragraph{PeturbTh}\label{PeturbTh} 1                minimum 0,  After sensor correction and resampling
-                          the chosen pose is perturbed to generate a new
-                          sample. This parameter decides the range to peturb
-                          the angle in degs.
+\paragraph{FailedY} 300               minimum 0,  Streuung der Samples auf der Y Achse bei einer statische Reinitialisierung durch den `Lost' Zustand in mm.
 
-\paragraph{PeakStdX} 10               minimum 0,  Extent of the ellipse in the X axis in
-                          mm beyond which the sample poses will be considered
-                          multiple localizations after resampling.
+\paragraph{FailedTh} 45               minimum 0,   Streuung der Samples in einem bestimmten Bereich bei einer statische Reinitialisierung durch den `Lost' Zustand in Grad.
 
-\paragraph{PeakStdY} 10               minimum 0,  Extent of the ellipse in the X axis in
-                          mm beyond which the sample poses will be considered
-                          multiple localizations after resampling.
+\paragraph{PeturbX}\label{PeturbX} 10                minimum 0, Nachdem die Sensorwerte normalisiert wurden und der Resamplingprozess stattgefunden hat, kann durch diese Einstellung eine gr\"ossere Streuung auf der X Achse durch neue Samples vorgenommen werden. Gemessen in mm.
 
-\paragraph{PeakStdTh} 1               minimum 0,  Extent of the angle in degs beyond which
-                          the sample poses will be considered multiple
-                          localizations after resampling.
+\paragraph{PeturbY}\label{PeturbY} 10                minimum 0,   Nachdem die Sensorwerte normalisiert wurden und der Resamplingprozess stattgefunden hat, kann durch diese Einstellung eine gr\"ossere Streuung auf der Y Achse durch neue Samples vorgenommen werden. Gemessen in mm. 
+
+\paragraph{PeturbTh}\label{PeturbTh} 1                minimum 0,  Nachdem die Sensorwerte normalisiert wurden und der Resamplingprozess stattgefunden hat, kann durch diese Einstellung eine gr\"ossere Streuung in einem bestimmten Winkel vorgenommen werden.
+
+\paragraph{PeakStdX,PeakStdY,PeakStdTh} 10               minimum 0,  Eine weiter einstellung um die gr\"osse der Streuung (gr\"osse der Ellipse) zu beeinflussen
+
 
 \paragraph{PeakFactor} 1e-06          range [0, 1],  When a no of samples have non zero
                           probabilities such as when there is ambiguities in a
                           corridor. This is the threshold below the maximum
                           probablity to be considered a valid hypothesis.
+Wenn manche Partikel eine Wahrschinlichkeit ungleich null haben dann ist diese Einstellung der Schwellwert fuer eine valide Hypothese ansonsten ist die Hypothese nicht valide und wird verworfen. Der Schwellwert bezieht sich auf die maximale Wahrscheinlichkeit LLS
 
-\paragraph{StdX} 400                  minimum 0,  The standard deviation of the gaussian
-                          ellipse in X axis in mm at start of localization.
 
-\paragraph{StdY} 400                  minimum 0,  The standard deviation of the gaussian
-                          ellipse in Y axis in mm at start of localization.
+\paragraph{StdX} 400                  minimum 0,  Die gausssche Wahrscheinlichkeitsverteilung bei dem Beginn der Lokalisierung ($\sigma$) in Richtung der X-Achse. Diese Parameter wurde in Abschnitt \ref{globalPos} behandelt.
 
-\paragraph{StdTh} 30                  minimum 0,  The standard deviation of the gaussian
-                          angle in degs at start of localization.
+\paragraph{StdY} 400                  minimum 0,   Die gausssche Wahrscheinlichkeitsverteilung bei dem Beginn der Lokalisierung ($\sigma$) in Richtung der Y-Achse. Diese Parameter wurde in Abschnitt \ref{globalPos} behandelt.
 
-\paragraph{SensorBelief} 0.9          range [0, 1],  Probablility that a range reading
-                          from the laser is valid. This is used in the
-                          correction of the probablities of the samples using
-                          the sensor.
+\paragraph{StdTh} 30                  minimum 0,   Die gausssche Wahrscheinlichkeitsverteilung bei dem Beginn der Lokalisierung ($\sigma$) in Grad. Diese Parameter wurde in Abschnitt \ref{globalPos} behandelt..
 
-\paragraph{OccThreshold} 0.1          range [0, 1],  The threshold value of the occupancy
-                          grid to consider as occupied.
+\paragraph{SensorBelief} 0.9          range [0, 1],  Die Laserdaten sind zu einem gerringem Mass nicht richtig. Mit diesem Parameter kann die Glaubw\"urdikeit der Laserdaten einstellen. 
 
-\paragraph{AngleIncrement} 0          range [0, 180],  Only the laser readings which are
-                          this many degrees apart are used for the
-                          localization. The lower limit is decided by the
-                          LaserIncrement setting
 
-\paragraph{DiscardThreshold} 0.33     range [0.33, 1],  A robot sample pose lying inside
-                          an occupancy grid cell with a value above this will
-                          be usually discarded Useful in cases where robot may
-                          intersect map points such as during patrolbot
-                          docking
 \paragraph{Kalman Filter}
 Weitere Parameter betreffen den Kalman Filter welcher nicht Bestandteil dieser Arbeit ist. 
 
